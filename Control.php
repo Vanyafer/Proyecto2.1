@@ -24,7 +24,7 @@
     
 <body>
     <?php 
-    
+        require("./vistas/Compartido/Ocultar.php");
         require("./vistas/Compartido/BarraNavegacion.php");
         require($interfaz->render());
        

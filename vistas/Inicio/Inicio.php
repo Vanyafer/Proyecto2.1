@@ -27,7 +27,10 @@
 
 		    	$("#idp").val(id);
 
-
+		    	usuario = $(this).attr("idu");
+		    	direccion = "Control.php?c=Perfiles&a=Perfiles&id="+usuario;
+		    	$(".usuario").attr("href",direccion);
+		    	
 		    	usuario = $(this).attr("name");
 		    	$(".usuario").html(usuario);
 
@@ -65,7 +68,7 @@
 <div class="overlay2">
      			<input type="hidden" id="idp" name="idp">
      		<div class="PopImagen">
-     		<h1 ><a href="Perfiles.php" class="usuario"></a><samp id="Close">x</samp></h1>
+     		<h1 ><a href=""  class="usuario"></a><samp id="Close">x</samp></h1>
      		<fieldset>
      			
      			<div class="Imagen">

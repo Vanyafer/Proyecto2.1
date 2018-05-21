@@ -34,7 +34,28 @@
             return $lista;
 
 		}
+		public function Comentario($id_comentario){
+			$this->start();
+			$stmt = $this->pdo->prepare(
+                    "SELECT * FROM comentario WHERE  id_comentario = $id_comentario"
+                );
+                $stmt->execute();
+                $lista = array();
+            
+            $Comentario = $stmt->fetch(PDO::FETCH_ASSOC);
+                $Comentarios = new ComentarioModelo();
+                $Comentarios->set(
+                    $Comentario["id_comentario"],
+					$Comentario["fecha"],
+					$Comentario["contenido"],
+					$Comentario["id_usuario"],
+					$Comentario["id_publicacion"]
+					);
+                
 
+            $this->stop();
+            return $Comentarios;
+		}
 		public function Comentar(){
 			 $this->start();
 			$id_publicacion = $_POST['publicacionC'];

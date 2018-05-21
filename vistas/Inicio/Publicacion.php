@@ -9,7 +9,19 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			$id = $GLOBALS['id_p'];
 			$ini = new InicioControlador();
 			$p = $ini->Publicacion($id);
-
+			$me = new MeGustaControlador();
+			$m = $me->MeGustaConsulta($id);
+			if($m != null){
+				if($m->tipo_me_gusta==1){
+					echo "<script> 
+							document.getElementById('1').style.color = 'blue' ;</script>";
+						
+				}else{
+					echo "<script> 
+							document.getElementById('0').style.color = 'blue' ;</script>";
+				
+				}
+			}
 	
 
 		?>
@@ -35,17 +47,19 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 							
 						$us = new UsuarioControlador();
 						$u = $us->Usuario($c->id_usuario);
-
-							echo "<div class='Comentario'><a>$u->nombre_usuario</a><div class='contenido' id=$c->id_comentario>$c->contenido</div><div class='fecha'>$c->fecha</div><a href='Control.php?c=Reportar&a=Comentario' id='$c->id_comentario' class='AccionComentario'>Reportar</a></div>";
-							if($c->id_usuario == $_SESSION['id_usuario']){
-		echo "<script>
-
-		$('.AccionComentario').removeAttr('href');
-		$('.AccionComentario').addClass('EliminarComentario');
-		$('.AccionComentario').html('Eliminar comentario');
-			</script>";
-	}
+						if($c->id_usuario == $_SESSION['id_usuario']){
+							$class = "EliminarComentario";
+							$x = "Eliminar Comentario";
+							$href = "";
+		
+						}else{
+							$class = "";
+							$x = "Reportar";
+							$href = "href='Control.php?c=Reportes&a=ReportarComentario&id=$c->id_comentario'";
 						}
+						
+							echo "<div class='Comentario'><a href='Control.php?c=Perfiles&a=Perfiles&id=".$c->id_usuario."'>$u->nombre_usuario</a><div class='contenido' id=$c->id_comentario>$c->contenido</div><div class='fecha'>$c->fecha</div><a  ".$href." id='$c->id_comentario' class='AccionComentario ".$class."'>$x</a></div>";
+						}	
 					
 					?>
 
@@ -65,7 +79,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 	<div>
 		<?php  
-			echo '<a href="reportarpublicacion.php?id='.$id.'" id="Accion">Reportar publicación</p>';
+			echo '<a href="Control.php?c=Reportes&a=ReportarPublicacion&id='.$id.'" id="Accion">Reportar publicación</p>';
 		?>
 		
 	</div>
@@ -156,14 +170,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <?php
 $art = new ArtistaControlador();
 $a = $art->Artista($p->id_artista);
-
+if(isset($_SESSION['id_artista'])){
 if($p->id_artista == $_SESSION['id_artista']){
 	echo "<script>
-				$('#Accion').attr('href','Control.php?c=Inicio&a=EliminarPublicacion.php?id=".$id."');
+				$('#Accion').attr('href','Control.php?c=Inicio&a=EliminarPublicacion&id=".$id."');
 				$('#Accion').html('Eliminar publicacion');
 				
 		</script>";
 	}
-
+}
 	
 ?>

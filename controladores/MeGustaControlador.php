@@ -61,6 +61,7 @@
 					}else{
 						return null;
 					} 
+					$this->stop();
           }
 		}
 	

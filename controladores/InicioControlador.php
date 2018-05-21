@@ -53,8 +53,29 @@
                 );
               $this->stop();
               return $Publicaciones;
-              //include ("./vistas/Incio/Publicacion.php");
 		}
+        public function PublicacionInfo($id_publicacion){
+            $this->start();
+                $stmt = $this->pdo->prepare(
+                    "SELECT * FROM publicacion WHERE id_publicacion = $id_publicacion"
+                );
+                $stmt->execute();
+                $Publicacion = $stmt->fetch(PDO::FETCH_ASSOC);
+                $Publicaciones = new PublicacionModelo();
+                $Publicaciones->set(
+                    $Publicacion["id_publicacion"],
+                    $Publicacion["fecha"],
+                    $Publicacion["contenido_explicito"],
+                    $Publicacion["contenido"],
+                    $Publicacion["etiquetas"],
+                    $Publicacion["privacidad"],
+                    $Publicacion["imagen"],
+                    $Publicacion["id_artista"]
+                );
+              $this->stop();
+              return $Publicaciones;
+        }
+
 		public function Publicar(){
 			if($_SERVER['REQUEST_METHOD']=='POST'){
 
@@ -89,6 +110,35 @@
                 $this->stop();
 			}
 			 header("Location: Control.php?c=Inicio&a=Inicio");
+		}
+		public function EliminarPublicacion(){
+			$id_publicacion = $_GET['id'];
+			$this->start();
+			$stmt = $this->pdo->prepare(
+                    "SELECT * FROM comentario where id_publicacion = $id_publicacion"
+                );
+
+                $stmt->execute();
+			while($Comentario = $stmt->fetch(PDO::FETCH_ASSOC)):
+				$id_comentario = $Comentario["id_comentario"];
+              $stmt = $this->pdo->prepare(
+                    "DELETE FROM reportes_comentarios where id_comentario = $id_comentario"
+                );
+                $stmt->execute();
+            endwhile;
+            $stmt = $this->pdo->prepare(
+                    "DELETE FROM comentario where id_publicacion = $id_publicacion"
+                );
+                $stmt->execute();
+             $stmt = $this->pdo->prepare(
+                    "DELETE FROM me_gusta where id_publicacion = $id_publicacion"
+                );
+                $stmt->execute();
+              $stmt = $this->pdo->prepare(
+                    "DELETE FROM Publicacion where id_publicacion = $id_publicacion"
+                );
+                $stmt->execute();
+                header("location: Control.php?c=Inicio&a=Inicio");
 		}
 	}
 ?>
