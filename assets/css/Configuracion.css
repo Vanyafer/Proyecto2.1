@@ -1,0 +1,66 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.Configuracion{
+	margin: 50px auto;
+    width: 80%;
+    background-color: #bfe7ff;
+    border-radius: 10px 10px 10px 10px;
+    padding: 20px;
+}
+.Generales{
+	padding: 50px;
+}
+.Columna{
+	display: inline-block;
+	position: relative;
+	width: 49%;
+}
+input, select{
+
+    border-radius: 5px;
+
+    border: 1px solid #dcdcdc;
+    padding: 12px 10px;
+}
+input[type="password"],input[type="text"]
+{
+    width: 80%;
+}
+textarea{
+    border: 1px solid #dcdcdc;
+    padding: 12px 10px;
+    border-radius: 5px;
+
+    width: 90%;
+    height: 40px;
+    resize: none;
+}
+input[type="submit"] {
+    background: #219ac6;
+    border-radius: 3px;
+    color: #fff;
+    float: right;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 12px 20px;
+}
+img{
+    width: 30%;
+}
+.jscolor{
+    width: 80%;
+}
+.boton{
+    cursor: pointer;
+    background: #219ac6;
+    border-radius: 3px;
+    color: #fff;
+    float: right;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 12px 20px;
+}
+.boton:hover { background: #1c83a8; }

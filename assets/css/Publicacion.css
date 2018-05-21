@@ -1,0 +1,124 @@
+.PopImagen a{
+	text-decoration: none;
+	cursor: pointer;
+}
+.PopImagen a:hover{
+	color: #ccc;
+}
+.PopImagen {
+    position: absolute;
+    border: 1px solid #ccc;
+    z-index: 100;
+    display: block;
+    left: 10%;
+
+     -moz-box-shadow: 0px 0px 10px 1px #888888;
+    -webkit-box-shadow: 0px 0px 10px 1px #888888;
+    box-shadow: 0px 0px 10px 1px #888888;
+}
+.PopImagen h1 {
+    background-color: #219ac6;
+    border-radius: 5px 5px 0 0;
+    color: white;
+    font-size: 14px;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+.PopImagen h1 a{
+    	color: white;
+
+    }
+.PopImagen h1 samp{
+	cursor: pointer;
+	float: right;
+}
+.PopImagen fieldset {
+    border: none;
+    margin: 0;
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+ 
+}
+
+.PopImagen input[type="submit"] {
+    background: #219ac6;
+    border-radius: 3px;
+    color: #fff;
+    float: right;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.PopImagen input[type="submit"]:hover { background: #1c83a8; }
+.Contenedor{
+
+    display: flex;
+}
+.Box{
+   display: inline-block;
+	overflow: none;
+}
+.Box1{
+   display: inline-block;
+	overflow: none;
+	padding: 5px;
+}
+.Box img{
+	width: 100%;
+	
+	max-height: 500px;
+	max-width: 1400px;
+	
+}
+.Comentarios{
+margin-bottom: 10px;
+
+overflow: auto;
+max-width: 400px;
+max-height: 300px;
+}
+.Comentario{
+text-align: left;
+padding: 10px;
+max-height: 200px;
+}
+.Comentario a{
+	color: #219ac6;
+	cursor: pointer;
+
+}
+.Comentario .fecha{
+	font-size: 10px;
+	color: #aaa;
+	float: right;
+}
+.PopImagen textarea{
+    border: 1px solid #dcdcdc;
+    padding: 12px 10px;
+    border-radius: 5px;
+
+    width: 100%;
+    height: 100px;
+    resize: none;
+
+}
+.ComentarioNuevo{
+	bottom: 0;
+	display: flex;
+}
+#ComentarioN{
+	width: 100%;
+}
+.ComentarioNuevo input[type="text"]
+{
+	border-radius: 5px;
+	width: 90%;
+    border: 1px solid #dcdcdc;
+    padding: 10px 10px;
+}
+.ComentarioNuevo input[type="submit"]{
+	height: 100%;
+	width: 10%;
+}

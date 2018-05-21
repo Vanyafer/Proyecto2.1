@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+nav{
+    top: 0;
+    bottom: 0;
+    background-color: #219ac6;
+    width: 45px;
+    position: fixed;
+}
+.barra ul {
+    list-style-type: none;
+    height: 100%;
+    overflow: auto;
+}
+
+.barra a {
+    margin: 0;
+    display: block;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 18px;
+
+}
+.barra a:hover {
+    background-color: #1c83a8;
+}
+.abajo{
+    bottom: 0;
+}

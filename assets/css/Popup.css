@@ -1,0 +1,60 @@
+.popup,.popup1,.popup2{
+   display: block;
+    z-index: 100;
+    position: sticky;
+}
+.overlay,.overlay1,.overlay2,.overlayAmigo, .overlaySeguidores{
+    display: none;
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(127,127,127,0) 0%,rgba(127,127,127,0.9) 100%);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    vertical-align: middle;
+    text-align: center;
+}
+input[type="submit"] { cursor: pointer; }
+.Pop {
+    margin: 50px auto;
+    width: 400px;
+
+    border: 1px solid #ccc;
+    z-index: 100;
+    display: block;
+    position: absolute;
+    left: 30%;
+     -moz-box-shadow: 0px 0px 10px 1px #888888;
+    -webkit-box-shadow: 0px 0px 10px 1px #888888;
+    box-shadow: 0px 0px 10px 1px #888888;
+}
+.Pop h1 {
+    background-color: #219ac6;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    font-size: 14px;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.Pop fieldset {
+    border: none;
+    margin: 0;
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+    position: relative;
+}
+
+.Pop input[type="submit"] {
+    background: #219ac6;
+    border-radius: 3px;
+    color: #fff;
+    float: right;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 12px 20px;
+}
+
+.Pop input[type="submit"]:hover { background: #1c83a8; }

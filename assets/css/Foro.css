@@ -1,0 +1,85 @@
+
+.Banner{
+	margin: 50px auto;
+    width: 80%;
+    background-color: #bfe7ff;
+    border-radius: 10px;
+    padding: 20px 40px 20px 40px;
+    font-weight: bold;
+}
+
+.Boton{
+	display: inline-block;
+	padding: 15px 15px 15px 15px;
+	position:relative;
+	float: right;
+	font-weight: bold;
+    background: #219ac6;
+    border-radius: 3px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 1px 1px 3px black;
+}
+
+.Boton a{
+	color: white;
+}
+.Boton:Hover{
+	background-color:#1c83a8;
+	
+	cursor: pointer;
+}
+
+.Foros{
+	margin: 20px auto;
+    width: 85%;
+    border: 2px solid #ccc;
+    position: relative;
+}
+
+.NuevoHilo{
+	margin: 45px auto;
+    width: 85%;
+    border: 2px solid #ccc;
+    position: relative;
+}
+
+.hilosmax{
+    overflow: auto;
+    
+}
+
+.Foros p{
+	background-color: #bfe7ff;
+	padding: 5px;
+}
+
+table{
+   width: 85%
+}
+
+.cinta{
+	background-color: #ffffff;
+}
+
+.izq{
+	width: 70%;
+	text-align: center;
+}
+
+.der{
+	width: 20%;
+	text-align: center;
+}
+
+textarea{
+	resize: none;
+}
+
+
+.Medio{
+	margin: 20px auto;
+    width: 40%;
+    border: 2px solid #ccc;
+    position: relative;
+}

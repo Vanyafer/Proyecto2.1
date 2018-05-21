@@ -1,0 +1,87 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: " "; display: table; }
+.clearfix:after { clear: both; }
+.grid {
+	margin-left: 45px;
+	list-style: none;
+	padding: 0;
+
+}
+
+.grid li {
+	position: relative;
+	display: block;
+	float: left;
+	padding: 1px;
+	width: 20%;
+}
+
+.grid li.shown,
+.no-js .grid li,
+.no-cssanimations .grid li {
+	opacity: 1;
+}
+
+.grid li a,
+.grid li img {
+	outline: none;
+	border: none;
+	display: block;
+	width: 100%;
+	cursor: pointer;
+}
+
+
+/* Effect 3: Scale up */
+.grid.effect-3 li.animate {
+	-webkit-transform: scale(0.6);
+	transform: scale(0.6);
+	-webkit-animation: scaleUp 0.65s ease-in-out forwards;
+	animation: scaleUp 0.65s ease-in-out forwards;
+}
+.texto{
+	
+	padding: 10px;
+	background-color: #219ac5;
+	width: 100%;
+	
+
+}
+
+@-webkit-keyframes scaleUp {
+	0% { }
+	100% { -webkit-transform: scale(1); opacity: 1; }
+}
+
+@keyframes scaleUp {
+	0% { }
+	100% { -webkit-transform: scale(1); transform: scale(1); opacity: 1; }
+}
+@media screen and (max-width: 1500px) {
+	.grid li {
+		width: 25%;
+	}
+}
+@media screen and (max-width: 1200px) {
+	.grid li {
+		width: 33%;
+	}
+}
+@media screen and (max-width: 900px) {
+	.grid li {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.grid li {
+		width: 100%;
+	}
+}

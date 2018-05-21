@@ -1,0 +1,66 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.Perfil{
+	width: 100%;
+	text-align: center;
+	display: flex;
+	position: relative;
+	padding: 5px;
+	margin-left: 45px;
+}
+
+.Todo{
+	display: block;
+	text-align: center;
+}
+.Perfil a {
+	padding: 5px;
+	text-decoration: none;
+	color: #219ac6;
+}
+.Perfil a:hover{
+	color: #c1ebff;
+}
+.Datos{
+	margin: 10px;
+	padding: 10px;
+	width: 25%;
+	margin-left: 70px;
+}
+.Foto {
+	width: 150px;
+	line-height: 150px;
+	display: block;
+	border: 2px solid #ccc;
+	margin: auto;
+}
+.Nombre{
+	font-size: 30px;
+	display: inline-block;
+	text-align: left;
+	width: 60%;
+	padding-top: 30px;
+}
+.Opciones a{
+	display: inline-block;
+	padding: 10px;
+}
+
+.Informacion{
+	text-align: left;
+	border: 2px solid #ccc;
+	height: 120px;
+}
+.InformacionP{
+	width: 100%;
+	height: 50px;
+}
+.Informacion p{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #c1ebff;
+
+}

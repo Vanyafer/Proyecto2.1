@@ -1,0 +1,48 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.Mensajes{
+	width: 20%;
+	border: 2px solid #ccc;
+	margin: 10px;
+	display: inline-block;
+	position: relative;
+
+}
+.Mensajes p{
+	background-color:  #bfe7ff;
+	padding: 5px;
+}
+.Todos {
+	height: 530px;
+}
+.Usuarios{
+	width: 90%;
+	border: 2px solid #ccc;
+	margin: 5px auto;
+
+}
+.Usuarios p{
+	background-color:  #bfe7ff;
+	padding: 5px;
+}
+.Usuarios div{
+	height: 30px;
+}
+
+.Conversacion{
+	width: 70%;
+	border: 2px solid #ccc;
+	margin: 10px;
+	display: inline-block;
+	position: relative;
+
+}
+.Conversacion p{
+	background-color:  #bfe7ff;
+	padding: 5px;
+}
+.Conversacion div{
+	height: 530px;
+}

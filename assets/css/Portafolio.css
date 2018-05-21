@@ -1,0 +1,34 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+header{
+	margin: 10px;
+}
+header h1{
+	display: inline-block;
+	padding: 5px;
+}
+header p{
+	display: inline-block;
+	font-size: 20px;
+	padding-left: 10px;
+}
+.Descripcion{
+	width: 20%;
+	border: 2px solid #ccc;
+	margin: 10px;
+	display: inline-block;
+}
+
+.Descripcion p{
+	background-color:  #bfe7ff;
+	padding: 5px;
+}
+.Descripcion div{
+	height: 500px;
+}
+.Colecciones{
+	margin: 10px;
+	display: inline-block;
+}
