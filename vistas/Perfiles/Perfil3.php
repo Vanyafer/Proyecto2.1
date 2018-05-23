@@ -31,33 +31,16 @@ $u = $us->Usuario($id_usuario);
 <div class="Opciones">
 					
 					<a href="">Portafolio</a>
-					<a href="Seguir.php?id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
-					<a href="Amigos.php?id_usuario=<?php echo $id_usuario ?>" id="Amigo" class="Artista">Agregar Amigo</a>
+					<a href="Control.php?c=Seguidores&a=Seguir&id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
+					<a href="Control.php?c=Amigos&a=Agregar&id_usuario=<?php echo $id_usuario ?>" id="Amigo" class="Artista">Agregar Amigo</a>
 					<a href="">Enviar mensaje</a>
 					<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>">Reportar Usuario</a>
 				
 			</div>
 </div>
+
+
 <?php include "ConfiguracionPerfil.php"; ?>
-<div class="overlaySeguidores">
-     		
-<div class="Pop">
-	<fieldset>
-	<div class="Box">
-	<h1>Seguidores</h1>
-	<?php
-	$se = new SeguidoresControlador();
-	$seg = $se->ListaSeguidores();
-		foreach ($seg as $s) {
-			$us = new UsuarioControlador();
-						$u = $us->Usuario($s->id_usuario1);
-			echo "<a href='Control.php?c=Perfiles&a=Perfiles&id=$s->id_usuario1;'>$u->nombre_usuario</a> <br>";
-		}			
-	?>
-	</div>
-	<input type="submit" value="Cerrar" class="Close" id="CloseSeguidores">
-	</fieldset>
-</div>
-</div>
+
 </body>
 </html>

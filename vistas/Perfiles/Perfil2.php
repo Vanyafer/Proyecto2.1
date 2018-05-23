@@ -24,10 +24,10 @@ $u = $us->Usuario($id_usuario);
 					<div class="mensaje"><a href="">Enviar mensaje</a></div>
 					<a href="">Portafolio</a>
 					
-					<a href="Seguir.php?id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
-					<a href="Amigos.php?id_usuario=<?php echo $id_usuario ?>" id="Amigo">Agregar Amigo</a>
-					<a href="reportarusuario.php?id=<?php echo $id_usuario ?>">Reportar Usuario</a>
-				
+					<a href="">Portafolio</a>
+					<a href="Control.php?c=Seguidores&a=Seguir&id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
+					<a href="Control.php?c=Amigos&a=Agregar&id_usuario=<?php echo $id_usuario ?>" id="Amigo" class="Artista">Agregar Amigo</a>
+					<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>">Reportar Usuario</a>				
 			</div>
 		
 		
@@ -37,8 +37,9 @@ $u = $us->Usuario($id_usuario);
 		</div>
 	</div>
 
-<div class="Nombre"><?php $u->nombre_usuario; ?><hr></div>
+<div class="Nombre"><?php echo $u->nombre_usuario; ?><hr></div>
 
 </div>
+<?php include "ConfiguracionPerfil.php"; ?>
 </body>
 </html>

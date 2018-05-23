@@ -18,7 +18,6 @@
 .grid li {
 	position: relative;
 	display: block;
-	float: left;
 	padding: 1px;
 	width: 20%;
 }
@@ -37,7 +36,13 @@
 	width: 100%;
 	cursor: pointer;
 }
+.texto{
+	
+	padding: 10px;
+	width: 100%;
+	
 
+}
 
 /* Effect 3: Scale up */
 .grid.effect-3 li.animate {
@@ -46,14 +51,7 @@
 	-webkit-animation: scaleUp 0.65s ease-in-out forwards;
 	animation: scaleUp 0.65s ease-in-out forwards;
 }
-.texto{
-	
-	padding: 10px;
-	background-color: #219ac5;
-	width: 100%;
-	
 
-}
 
 @-webkit-keyframes scaleUp {
 	0% { }
@@ -78,8 +76,8 @@
 	.grid li {
 		width: 50%;
 	}
-}
 
+}
 @media screen and (max-width: 600px) {
 	.grid li {
 		width: 100%;

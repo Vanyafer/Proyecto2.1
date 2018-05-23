@@ -11,13 +11,14 @@
 $id_usuario = $_GET['id'];
 $us = new UsuarioControlador();
 $u = $us->Usuario($id_usuario);
+
 	?>
 <div class="Perfil">
 	<div class="Datos">
 		<div class="Box">
-			<div class="Foto"><img src="<?php echo $result['imagen_perfil'] ?>"></div>
+			<div class="Foto"><img src="<? ?>"></div>
 			<div class="mensaje"><a href="Mensajes.php">Enviar mensaje</a></div>
-			<a href="reportarusuario.php?id=<?php echo $id_usuario ?>">Reportar Usuario</a>
+			<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>" >Reportar Usuario</a>
 				
 		</div>
 		
@@ -27,11 +28,11 @@ $u = $us->Usuario($id_usuario);
 			<br>
 			<div class="Informacion">
 				<p>Informacion</p>
-				<div class="InformacionP"> <?php echo $result['informacion_contacto']; ?></div>
+				<div class="InformacionP"> <?php  ?></div>
 			</div>
 			<div class="Informacion">
 				<p>Informacion</p>
-				<div class="InformacionP"><?php echo $result['perfil']; ?></div>
+				<div class="InformacionP"><?php ?></div>
 			</div>
 		</div>
 		

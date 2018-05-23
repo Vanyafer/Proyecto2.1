@@ -24,10 +24,10 @@
     
 <body>
     <?php 
-        require("./vistas/Compartido/Ocultar.php");
         require("./vistas/Compartido/BarraNavegacion.php");
         require($interfaz->render());
        
+        include("./vistas/Compartido/Ocultar.php");
     ?>
 </body>
 </html>

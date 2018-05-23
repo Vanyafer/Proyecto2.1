@@ -1,4 +1,4 @@
-zz<?php 
+<?php 
 	Class MeGustaModelo{
 
         public $id_megusta;

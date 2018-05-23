@@ -1,5 +1,3 @@
-
-
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="./assets/css/BarraNavegacion.css">
@@ -32,7 +30,7 @@
 	<li><a id="reto" href="Control.php?c=Reto&a=Reto" class="icon-pen Artista"></a></li>
 	
 	<li><a href="" class="icon-newspaper"></a></li>
-	<li><a class="icon-quill Abrir" class="Artista"></a></li>
+	<li><a class="icon-quill Abrir Artista"></a></li>
 	<li><a href="Mensajes.php" class="icon-bubbles4"></a></li>
 	<li><a href="Control.php?c=UsuarioR&a=UsuarioR">U</a></li>
 	<li><a href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $id_usuario; ?>" class="icon-user"></a></li>

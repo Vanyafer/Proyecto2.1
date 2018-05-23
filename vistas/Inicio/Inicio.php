@@ -1,6 +1,4 @@
 
-
-<!DOCTYPE html>
 <html>
 <head>
 	<title>Inicio</title>
@@ -59,8 +57,11 @@
 											$a = $art->Artista($publi->id_artista);
 											$us = new UsuarioControlador();
 											$u = $us->Usuario($a->id_usuario);
+											if(isset($publi->imagen)){
            									echo "<li><a ><img src='$publi->imagen' id='$publi->id_publicacion' class='Abrir2' idu='$a->id_usuario' name='$u->nombre_usuario'></a></li>";
-												
+											}else{
+												echo "<li class='Abrir2 texto' name='$u->nombre_usuario' id='$publi->id_publicacion' idu='a->id_usuario'><a ><textbox  >$publi->contenido </textbox></a></li>";
+											}	
 											
 								}
         						?>

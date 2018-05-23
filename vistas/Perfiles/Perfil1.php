@@ -22,8 +22,8 @@ $u = $us->Usuario($id_usuario);
 			<div class="Nombre"><?php echo $u->nombre_usuario; ?></div>
 			<div class="Opciones">
 					<a href="">Portafolio</a>
-					<a href="Seguir.php?id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
-					<a href="Amigos.php?id_usuario=<?php echo $id_usuario ?>" id="Amigo">Agregar Amigo</a>
+					<a href="Control.php?c=Seguidores&a=Seguir&id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
+					<a href="Control.php?c=Amigos&a=Agregar&id_usuario=<?php echo $id_usuario ?>" id="Amigo" class="Amigo">Agregar Amigo</a>
 					<a href="">Enviar mensaje</a>
 					
 					<a href="Mensajes.php">Enviar mensaje</a>
