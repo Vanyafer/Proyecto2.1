@@ -53,32 +53,33 @@ $dia = date("d");
 					$.ajax({
 					 			type:  "POST", //método de envio
 				                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-				                url:   "Validar.php", //archivo que recibe la peticion
+				                url:   "Ajax.php?c=Usuario&a=ValidarUsuario", //archivo que recibe la peticion
 				                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-
-				                if(res == 0){
-				                    document.getElementById('valUsuario').innerHTML="Este nombre de usuario ya existe";
-				                    $("#contraV").val(0);
-				              } else {
-				              		document.getElementById('valUsuario').innerHTML="";
-				              		$("#contraV").val(1);
+				        
+				                 if(ress == 0){ 
+				                 	alert(res);
+				                 	document.getElementById('valUsuario').innerHTML="Este nombre de usuario ya existe";
+				                                    $('#usuarioV').val(0);
+				                }if(res == 1 ){
+				                	document.getElementById('valUsuario').innerHTML="";
+				                                    $('#usuarioV').val(1) ;
 				                }
-				                 
-				                }
+				            }
 				        });
 				}
 				function validarCorreo(){
 					 $.ajax({
 					 			type:  "POST", //método de envio
 				                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-				                url:   "Validar.php", //archivo que recibe la peticion
+				                url:   "Ajax.php?c=Usuario&a=ValidarCorreo", //archivo que recibe la peticion
 				                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+				             
 				                if(res == 0){
 
-				                    document.getElementById('valCorreo').ionnerHTML="Este correo ya esta registrado";
+				                    document.getElementById('valCorreo').innerHTML="Este correo ya esta registrado";
 				                    $("#correoV").val(0);
 
-				              } else {
+				              } if (res == 1) {
 				              		document.getElementById('valCorreo').innerHTML="";
 				              		$("#correoV").val(1);
 				              		
@@ -94,7 +95,7 @@ $dia = date("d");
 	<h1 id="titulo">Registrarse<hr style="color: #1c83a8;"></h1>
 	<div id="Datos">
 	<input type="hidden" id="correoV" >
-	<input type="hidden" name="" id="contraV">
+	<input type="hidden" id="usuarioV">
 	 	<form  action="usuario.php?c=Usuario&a=Registro" id="formdata" method="POST">
 				<div id="Fila">
 					<div id="Columna">
@@ -103,7 +104,7 @@ $dia = date("d");
 							<p id="valUsuario"></p>
 							<br>
 							<p>Correo:</p>
-			                <input type="email" id="Correo"value="Correo" name="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' ">
+			                <input type="email" id="Correo" value="Correo" name="Correo" id="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' ">
 			                <p id="valCorreo"></p> 
 			                <br>
 			                <p>Contrasena:</p>
@@ -120,12 +121,15 @@ $dia = date("d");
 							<p>Pais:</p>
 							<select name="Pais">
 		       					<?php
-								$consulta = mysqli_query($conexion,"SELECT * FROM pais");
-          							while ($valores = mysqli_fetch_array($consulta)) {
+								$us = new UsuarioControlador();
+								$u = $us->Pais();
+          							foreach ($u as $p) {
+          								echo "<option value=".$p->id_pais.">".$p->nombre_pais."</option>";
+          							}
 												
-           							echo "<option value=".$valores['id_pais'].">".$valores['nombre_pais']."</option>";
+           							
 													
-          								}
+          								
         						?>
 	
 		          							
@@ -244,7 +248,7 @@ $(document).ready(function(){
 					validarTerminos();
 					validarEdad();
 					z = $("#correoV").val();
-					y = $("#contraV").val();
+					y = $("#usuarioV").val();
 					//(v==1) && (w==1) && (x==1) && (y==1) && (z==1)
 					if((v==1) && (w==1) && (x==1) && (y==1) && (z==1)){
 

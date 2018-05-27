@@ -95,12 +95,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		
 			$.ajax({
 
-		    		url:'usuario.php?c=Comentario&a=Comentar',
+		    		url:'Ajax.php?c=Comentario&a=Comentar',
 		    		method:'POST',
 		    		data: $("#ComentarioN").serialize(),
 		    		 success: function(res){
 			    		 $.ajax({
-				    		url:'usuario.php?c=Inicio&a=Publicacion',
+				    		url:'Ajax.php?c=Inicio&a=Publicacion',
 				    		method:'POST',
 				    		data: $("#idp").serialize(),
 				    		 success: function(res){
@@ -117,7 +117,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		     	$('#tipoLike').val(id);
 		    	$.ajax({
 
-		    		url:'usuario.php?c=MeGusta&a=MeGusta',
+		    		url:'Ajax.php?c=MeGusta&a=MeGusta',
 		    		method:'POST',
 		    		data: $('#ComentarioN').serialize(),
 		    		 success: function(res){
@@ -145,12 +145,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		    	$("#id_c").val(id);
 				$.ajax({
 
-		    		url:'usuario.php?c=Comentario&a=EliminarComentario',
+		    		url:'Ajax.php?c=Comentario&a=EliminarComentario',
 		    		method:'POST',
 		    		data: $("#ComentarioN").serialize(),
 		    		 success: function(res){
 			    		 $.ajax({
-				    		url:'usuario.php?c=Inicio&a=Publicacion',
+				    		url:'Ajax.php?c=Inicio&a=Publicacion',
 				    		method:'POST',
 				    		data: $("#idp").serialize(),
 				    		 success: function(res){

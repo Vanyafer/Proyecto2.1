@@ -52,6 +52,8 @@
                     $Publicacion["id_artista"]
                 );
               $this->stop();
+
+              require_once "./vistas/Inicio/Publicacion.php";
               return $Publicaciones;
 		}
         public function PublicacionInfo($id_publicacion){

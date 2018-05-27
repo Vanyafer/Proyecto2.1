@@ -1,7 +1,4 @@
-<?php
-include("conexion.php");
 
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,43 +21,19 @@ include("conexion.php");
 </script>
 </head>
 <body>		
-<?php include "BarraNavegacion.php";
-$consulta=mysqli_query($conexion,"SELECT * FROM retos");
-$result=mysqli_fetch_array($consulta);
-$reto = $result['id_reto'];
-$des = $result['descripcion'];
-$fecha = $result['fecha'];
+<?php 
+	$re = new RetoControlador();
+	$r = $re->Reto();
 
-
-$artista = $_SESSION['artista'];
-
-$consulta=mysqli_query($conexion,"SELECT * FROM retos_aceptados where id_artista = $artista and id_reto = $reto");
-if(mysqli_num_rows($consulta)>0){
-	echo "<script Language='JavaScript'>
-				$(document).ready(function(){	
-					document.getElementById('subir').style.display='none';
-				});
-		</script>";
-
-	$result=mysqli_fetch_array($consulta);
-	$aceptado = $result['id_aceptado'];
-	$consulta=mysqli_query($conexion,"SELECT * FROM imagen_reto where id_aceptado= $aceptado");
-	if($consulta){	
-		$result=mysqli_fetch_array($consulta);
-	}
-
-
-}
-
- ?>
+?>
 <div class="Reto">
 	<h1>Reto</h1>
 	<div class="Fila">
-		<div class="Descripcion"><?php echo $des; ?></div>
+		<div class="Descripcion"><?php echo $r->$descripcion; ?></div>
 		<div class="Subir"  id="subir" ><a class="Abrir1">Subir</a></div>
 	</div>
 	<div class="Fila">
-		<div class="Dias"><p>Ultimo dia: <?php echo $fecha; ?></p></div>
+		<div class="Dias"><p>Ultimo dia: <?php echo $r->fecha; ?></p></div>
 		<div class="Apoyo"><a href="">ApoyoVisual</a></div>
 		<!--?php 	echo "<img src=".$result1['imagen'].">"; ?-->
 	</div>
@@ -85,9 +58,18 @@ if(mysqli_num_rows($consulta)>0){
 
 <div class="overlay1">
 	<div class="popup1">
-		    		<?php include "Subir.php"; ?>
-	
-</div>
+		<div class="Pop">
+			<h1>Subir</h1>
+			<fieldset>
+				<form enctype="multipart/form-data" action="Subir.php" method="POST">
+					<input type="hidden" name="id_reto" value="<?php echo $id_reto; ?>">
+					<input type="file" name="image">
+					<input type="submit" name="Aceptar" value="Subir">
+				</form>
+				<input type="submit" value="Cerrar" class="Close">
+			</fieldset>
+		</div>
+	</div>
 </div>
 </body>
 </html>

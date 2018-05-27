@@ -4,7 +4,22 @@
 
 
         public function __construct(){}
-
+        public function Pais(){
+            $this->start();
+                $stmt = $this->pdo->prepare("SELECT * FROM pais");
+                $stmt->execute();
+                $lista = array();
+                while($P = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    $Pais = new PaisModelo();
+                    $Pais->set(
+                        $P["id_pais"],
+                        $P["nombre_pais"]
+                    );
+                    $lista[] = $Pais;
+                }
+              $this->stop();
+            return $lista;
+        }
         public function IniciarSesion(){
 
             if(isset($_POST["Correo"])){
@@ -44,8 +59,6 @@
                 $this->stop();
            }  }
 
-       
-
         public function cerrarSesion(){
             session_destroy();
             header("Location: usuario.php");
@@ -55,7 +68,14 @@
        public function Registro(){
 
         if($_SERVER['REQUEST_METHOD']=='POST'){
-
+            $Botones = $_POST['Botones'];
+            $Texto = $_POST['Texto'];
+            $Bordes = $_POST['Bordes'];
+            $Fondo = $_POST['Fondo'];
+            $Diseno = $_POST['Diseno'];
+                $di = new DisenoControlador();
+                $d = $d->Insert($Bordes,$Texto,$Botones,$Fondo,$Diseno);
+            
         }else{
 
         }
@@ -85,33 +105,40 @@
             $this->stop();
             return $Usuarios;
         }
-        public function ValidarUsuario($nombre_usuario){
+        public function ValidarUsuario(){
+            $this->start();
+            $nombre_usuario=$_POST['Usuario'];
             if(isset($_SESSION['id_usuario'])){
+
                 return null;
             }else{
+
                  $stmt = $this->pdo->prepare(
                     "SELECT * FROM usuario WHERE  nombre_usuario = '$nombre_usuario'"
                 );
-
                 $stmt->execute();
                 if($stmt->rowCount() > 0){ 
-                    return 0;
+                    echo "0";
                 }else{
-                    return 1;
+                    echo "1";
                 }
             }
+            $this->stop();
         }
-        public function validarCorreo($correo){
+        public function ValidarCorreo(){
+            $this->start();
+            $correo=$_POST['Correo'];
               $stmt = $this->pdo->prepare(
-                    "SELECT * FROM usuario WHERE  correp = '$correo'"
+                    "SELECT * FROM usuario WHERE  correo = '$correo'"
                 );
 
                 $stmt->execute();
                 if($stmt->rowCount() > 0){ 
-                    return 0;
+                    echo "0";
                 }else{
-                    return 1;
+                    echo "1";
                 }
+            $this->stop();
         }
     }
 ?>

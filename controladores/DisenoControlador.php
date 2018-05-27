@@ -24,5 +24,20 @@
 				return $disenos;
 			
 		}
+		public function Insert($color_bordes,$color_titulos,$color_botones,$color_fondo,$tipo_perfil){
+				$this->start();
+                $stmt = $this->pdo->prepare(
+                    "INSERT INTO diseno VALUES(NULL,NULL,'$color_bordes','$color_titulos','$color_botones','$color_fondo',$tipo_perfil)"
+                );
+                $stmt->execute();
+                $stmt = $this->pdo->prepare(
+                   "SELECT MAX(id_diseno) as id FROM diseno"
+                );
+                $stmt->execute();
+                $diseno = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->stop();
+                return $diseno->id;
+
+		}
 	}
 ?>

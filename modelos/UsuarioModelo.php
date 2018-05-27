@@ -12,7 +12,7 @@
         public function __construct(){
 
         }
-
+      
         public function set( $id_usuario, $contrasena, $correo, $nombre_usuario, $bloqueado , $tipo_usuario){
             $this->id_usuario = $id_usuario;
             $this->contrasena = $contrasena;

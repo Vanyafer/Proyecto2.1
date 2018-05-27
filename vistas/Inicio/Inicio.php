@@ -33,7 +33,7 @@
 		    	$(".usuario").html(usuario);
 
 		    	$.ajax({
-		    		url:'usuario.php?c=Inicio&a=Publicacion',
+		    		url:'Ajax.php?c=Inicio&a=Publicacion',
 		    		method:'POST',
 		    		data: $("#idp").serialize(),
 		    		 success: function(res){

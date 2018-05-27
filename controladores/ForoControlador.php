@@ -5,5 +5,8 @@
  	public function Foro(){
  		
  	}
+ 	public function PublicarForo(){
+ 		
+ 	}
  }
 ?>
