@@ -21,13 +21,13 @@ $u = $us->Usuario($id_usuario);
 	<div class="Foto">Hola</div>
 		
 			<div class="Opciones">
-					<div class="mensaje"><a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>">Enviar mensaje</a></div>
+					<div class="mensaje"><a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>" id="Bandeja">Enviar mensaje</a></div>
 					<a href="">Portafolio</a>
 					
 					<a href="">Portafolio</a>
 					<a href="Control.php?c=Seguidores&a=Seguir&id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
 					<a href="Control.php?c=Amigos&a=Agregar&id_usuario=<?php echo $id_usuario ?>" id="Amigo" class="Artista">Agregar Amigo</a>
-					<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>">Reportar Usuario</a>				
+					<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>" class="Dueno">Reportar Usuario</a>				
 			</div>
 		
 		

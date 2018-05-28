@@ -4,8 +4,24 @@
 
 
         public function __construct(){}
+        public function BandejaEntrada(){
+
+        }
         public function Mensajes(){
 
+		}
+		public function MensajesNuevos(){
+			$id_usuario = $_POST["id_usuario"];
+						$Men = new MensajesControlador();
+						$me = $Men->Conversacion($id_usuario);
+		
+						foreach ($me as $m) {
+							
+						$us = new UsuarioControlador();
+						$u = $us->Usuario($m->id_usuario);
+						
+							echo "<div class='Mensaje'><a href='Control.php?c=Perfiles&a=Perfiles&id=".$m->id_usuario."'>$u->nombre_usuario</a><div class='contenido'> $m->texto</div><div class='fecha'>$m->fecha</div></div>";
+						}	
 		}
 		public function Conversacion($id_usuario2){
 						 $this->start();

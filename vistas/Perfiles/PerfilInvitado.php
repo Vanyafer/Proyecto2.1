@@ -17,8 +17,8 @@ $u = $us->Usuario($id_usuario);
 	<div class="Datos">
 		<div class="Box">
 			<div class="Foto"><img src="<? ?>"></div>
-			<div class="mensaje"><a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>">Enviar mensaje</a></div>
-			<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>" >Reportar Usuario</a>
+			<div class="mensaje"><a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>" id="Bandeja">Enviar mensaje</a></div>
+			<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>" class="Dueno">Reportar Usuario</a>
 				
 		</div>
 		

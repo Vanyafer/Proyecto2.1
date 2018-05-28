@@ -9,6 +9,7 @@
 <body>
 <div class="todo">
 <div class="Conversaciones">
+<input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
 	<p>Mensajes</p>
 	<div class="Todos">
 
@@ -73,9 +74,30 @@
 		    		method:'POST',
 		    		data: $("#Mensaje").serialize(),
 		    		 success: function(res){
-		    		 
+		    		 	$.ajax({
+
+		    		url:'Ajax.php?c=Mensajes&a=MensajesNuevos',
+		    		method:'POST',
+		    		data: $("#id_usuario").serialize(),
+		    		 success: function(res){
+		    		 	$(".Mensajes").html(res);
+		    		 }	
+		    		});
 			    		$("#Texto").val("");
 		    		 }	
 		    		});
 }
+setInterval(function(){
+
+$.ajax({
+
+		    		url:'Ajax.php?c=Mensajes&a=MensajesNuevos',
+		    		method:'POST',
+		    		data: $("#id_usuario").serialize(),
+		    		 success: function(res){
+		    		 	$(".Mensajes").html(res);
+		    		 }	
+		    		});
+
+}, 500);
 </script>

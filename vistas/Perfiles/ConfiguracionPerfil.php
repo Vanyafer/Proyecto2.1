@@ -72,6 +72,11 @@ if($id_usuario == $_SESSION['id_usuario']){
 				$('#Amigo').addClass('AbrirAmigo');
 				$('#Amigo').html('Amigos');
 		</script>";
+	echo "<script>
+			$('.Dueno').css('display','none');
+			$('#Bandeja').attr('href','Control.php?c=Mensajes&a=BandejaEntrada');
+			$('#Bandeja').html('Ver Mensajes');
+		</script>";
 }else{
 	$seguidos = $se->Siguiendo($id_usuario);
 	if($seguidos == 1){
