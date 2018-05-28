@@ -1,5 +1,5 @@
 <?php
-	class ForoModelo{
+	class ForoRespuestaModelo{
 		public $id_fororespuesta;
 		public $fecha;
 		public $contenido;

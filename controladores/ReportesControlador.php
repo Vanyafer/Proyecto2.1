@@ -34,7 +34,7 @@
                 header("Location: Control.php?c=Inicio&a=Inicio");
 	}
 		}
-		public function ReportarUsarios(){
+		public function ReportarUsuario(){
 
 			if($_SERVER['REQUEST_METHOD']=='POST'){
 				$this->start();

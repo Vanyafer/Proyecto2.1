@@ -36,7 +36,7 @@
                 $stmt->execute();
                 $diseno = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->stop();
-                return $diseno->id;
+                return $diseno["id"];
 
 		}
 	}

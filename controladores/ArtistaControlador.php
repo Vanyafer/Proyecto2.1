@@ -55,5 +55,18 @@
             $this->stop();
             return $Artistas;
  			}
+            public function Insert($Edad,$imagen,$infomracion,$tecnica,$Pais,$id_usuario,$id_diseno,$id_portafolio,$id_perfil){
+                $this->start();
+                $stmt = $this->pdo->prepare(
+                            "INSERT into artista VALUES(NULL,$Edad,'$imagen','$informacion','$tecnica',$Pais,$id_usuario,$id_diseno,$id_portafolio,$id_perfil)"
+                        );
+                        $stmt->execute();
+                         $stmt = $this->pdo->prepare(
+                            "SELECT MAX(id_artista) as id FROM artista"
+                        );
+                        $stmt->execute();
+                        $artista = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->stop();
+            }
  		}
 ?>

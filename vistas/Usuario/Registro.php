@@ -56,8 +56,7 @@ $dia = date("d");
 				                url:   "Ajax.php?c=Usuario&a=ValidarUsuario", //archivo que recibe la peticion
 				                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
 				        
-				                 if(ress == 0){ 
-				                 	alert(res);
+				                 if(res == 0){ 
 				                 	document.getElementById('valUsuario').innerHTML="Este nombre de usuario ya existe";
 				                                    $('#usuarioV').val(0);
 				                }if(res == 1 ){
@@ -96,7 +95,7 @@ $dia = date("d");
 	<div id="Datos">
 	<input type="hidden" id="correoV" >
 	<input type="hidden" id="usuarioV">
-	 	<form  action="usuario.php?c=Usuario&a=Registro" id="formdata" method="POST">
+	 	<form enctype="multipart/form-data"  action="usuario.php?c=Usuario&a=Registro" id="formdata" method="POST">
 				<div id="Fila">
 					<div id="Columna">
 							<p>Nombre de usuario:</p>
@@ -184,7 +183,7 @@ $dia = date("d");
 								<textarea name="Otro"></textarea>
 							</p>
 								<p>Foto de perfil:</p>
-								<input type="file" name="image">
+								<input type="file" name="imagenA">
 						</div>
 						<div id="Columna">
 							<h3>Escoge un diseño</h3>
@@ -227,7 +226,7 @@ $dia = date("d");
 							
 						</textarea>
 						<p>Foto de perfil:</p>
-						<input type="file" name="image">
+						<input type="file" name="imagenF">
 						<br>
 						<div class="Subir Regreso"><a>Regresar</a></div>
 						<input type="submit" value="Aceptar">
