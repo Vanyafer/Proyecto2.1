@@ -1,23 +1,23 @@
 # Proyecto2.1
 - [x]	El sistema tendrá 3 usuarios Artista, Invitado y moderador.
 - [x]	El sistema guardará toda la información en una base de datos.
-- []	El sistema notificará al usuario cuando se realice un reporte a su cuenta, cuando reciba un nuevo mensaje.
-- []	El sistema actualizara un reto cada semana.
-- []	Los retos estarán guardados en la base de datos con 3 imágenes de apoyo visual, el nombre, la descripción y la fecha que será definido por un administrador.
-- []	El sistema tendrá una cuenta regresiva automática para mostrar los días restantes de un reto que estarán guardados dentro de la base de datos.
-- []	El sistema mostrará el contenido explícito en caso de que el usuario lo solicite.
-- []	El sistema no mostrara la opción de permitir contenido explícito a usuarios menores de edad. 
-- []	El sistema pedirá un comentario en caso de que un usuario marque una publicación con No me gusta.
+- [ ]	El sistema notificará al usuario cuando se realice un reporte a su cuenta, cuando reciba un nuevo mensaje.
+- [ ]	El sistema actualizara un reto cada semana.
+- [ ]	Los retos estarán guardados en la base de datos con 3 imágenes de apoyo visual, el nombre, la descripción y la fecha que será definido por un administrador.
+- [ ]	El sistema tendrá una cuenta regresiva automática para mostrar los días restantes de un reto que estarán guardados dentro de la base de datos.
+- [ ]	El sistema mostrará el contenido explícito en caso de que el usuario lo solicite.
+- [ ]	El sistema no mostrara la opción de permitir contenido explícito a usuarios menores de edad. 
+- [ ]	El sistema pedirá un comentario en caso de que un usuario marque una publicación con No me gusta.
 - [x]	El sistema mostrará recomendaciones de usuarios a seguir basadas en técnicas de interés, país y edad.
 - [x]	El sistema controlará el acceso y lo permitirá solamente a usuarios autorizados. Los usuarios deben ingresar al sistema con un nombre de usuario y contraseña.
-- []	El sistema suspenderá la cuenta al tener 5 reportes gradualmente empezando por un día por 5 reportes, una semana por 10 reportes, un mes por 20 reportes y permanentemente al alcanzar 20 reportes.
-- []	En caso de que una cuenta sea suspendida, el sistema mostrará el motivo y se le permitirá al usuario mandar un mensaje a un moderador.
+- [ ]	El sistema suspenderá la cuenta al tener 5 reportes gradualmente empezando por un día por 5 reportes, una semana por 10 reportes, un mes por 20 reportes y permanentemente al alcanzar 20 reportes.
+- [ ]	En caso de que una cuenta sea suspendida, el sistema mostrará el motivo y se le permitirá al usuario mandar un mensaje a un moderador.
 - [x]	El sistema podrá utilizarse sin necesidad de instalar ningún software adicional además de un navegador web.
 - [x]	El sistema podrá utilizarse con los navegadores web Chrome, Firefox e Internet Explorer.
 - [x]	Cualquier intercambio de datos vía internet que realice el software se realizará por medio del protocolo http.
 
 El usuario artista podrá:
-- [x]	Subir imágenes en una publicación.
+- [x]	Subir imágenes en una publicación. 
 - [x]	La publicación podrá tener una descripción y la opción de seleccionar si es público o privado.
 - [x]	La publicación podrá ser marcada como contenido explícito (18+)
 - [x]	Borrar la publicación.
@@ -34,26 +34,26 @@ El usuario artista podrá:
 - [x]	Visualizar el reto de la semana y realizarlo o no.
 - [x]	Abrir el apoyo visual dentro del reto.
 - [x]	Subir su imagen al reto.
-- []	Una vez que suba su propia imagen podrá ver las imágenes publicadas por los demás dentro de ese reto.
-- []	Cambiar de contraseña.
-- []	Decidir si se mostrara contenido explícito (18+) dentro de las publicaciones que observara.
-- []	Ver sus reportes.
-- []	Mandar mensaje a un moderador.
+- [ ]	Una vez que suba su propia imagen podrá ver las imágenes publicadas por los demás dentro de ese reto.
+- [ ]	Cambiar de contraseña.
+- [ ]	Decidir si se mostrara contenido explícito (18+) dentro de las publicaciones que observara.
+- [ ]	Ver sus reportes.
+- [ ]	Mandar mensaje a un moderador.
 - [x]	Aceptar a otros usuarios como amigos.
 - [x]	Ver recomendaciones de usuarios.
-- []	Ver notificaciones sobre sus publicaciones y foros en lo que participa.
+- [ ]	Ver notificaciones sobre sus publicaciones y foros en lo que participa.
 - [x]	Ver publicaciones de otros usuarios en inicio
 - []	Ver su bandeja de entrada con mensajes recibidos y conversaciones completas.
 - [x/]	Ver perfiles y portafolios de otros usuarios.
 - [x]	Mandar solicitud de amigo a otro usuario.
-- []	Mandar mensajes a otros usuarios.
+- [ ]	Mandar mensajes a otros usuarios.
 - [x]	Seguir a otros usuarios.
 - [x]	Reportar usuarios.
 - [x/]	Ver su perfil y portafolio
-- []	Editar lo campos de nombre de usuario, país, edad, descripción, técnicas de interés, temas y colores de su perfil.
-- []	Subir una imagen de perfil y de fondo de perfil.
-- []	Recibir notificaciones cuando exista algún movimiento en sus publicaciones, cuando reciba una nueva solicitud de amistad y cuando tenga un nuevo seguidor.
-- []	El sistema dará una alerta en caso de que se realice un reporte sobre una publicación informando al usuario de esto y pidiendo que borre o modifique la publicación en caso de no hacerlo se borrara automáticamente en 24 horas.
+- [ ]	Editar lo campos de nombre de usuario, país, edad, descripción, técnicas de interés, temas y colores de su perfil.
+- [ ]	Subir una imagen de perfil y de fondo de perfil.
+- [ ]	Recibir notificaciones cuando exista algún movimiento en sus publicaciones, cuando reciba una nueva solicitud de amistad y cuando tenga un nuevo seguidor.
+- [ ]	El sistema dará una alerta en caso de que se realice un reporte sobre una publicación informando al usuario de esto y pidiendo que borre o modifique la publicación en caso de no hacerlo se borrara automáticamente en 24 horas.
 
 El usuario invitado podrá:
 - [x]	Reportar publicaciones de usuarios.
@@ -61,28 +61,28 @@ El usuario invitado podrá:
 - [x]	Visualizar y participar en los debates dentro del foro de Ideas.
 - [x]	Publicar un debate nuevo dentro del foro de Ideas.
 - [x]	Seleccionar debates como favoritos.
-- []	Buscar dentro de la página usuarios e imágenes.
+- [ ]	Buscar dentro de la página usuarios e imágenes.
 - [x]	Visualizar el perfil de otros usuarios.
 - [x]	Ver su perfil.
-- []	Editar lo campos de nombre de usuario, país, edad, descripción, información de contacto.
-- []	Subir una imagen de perfil.
-- []	Mandar Mensajes a otros usuarios.
-- []	Mandar mensaje al moderador.
-- []	Cambiar contraseña.
-- []	Decidir si se mostrara contenido explícito (18+) dentro de las publicaciones que observara.
-- []	Ver sus reportes.
-- []	Ver su bandeja de entrada con mensajes recibidos y conversaciones completas.
+- [ ]	Editar lo campos de nombre de usuario, país, edad, descripción, información de contacto.
+- [ ]	Subir una imagen de perfil.
+- [ ]	Mandar Mensajes a otros usuarios.
+- [ ]	Mandar mensaje al moderador.
+- [ ]	Cambiar contraseña.
+- [ ]	Decidir si se mostrara contenido explícito (18+) dentro de las publicaciones que observara.
+- [ ]	Ver sus reportes.
+- [ ]	Ver su bandeja de entrada con mensajes recibidos y conversaciones completas.
 
 El usuario moderador podrá:
-- []	Eliminar publicaciones de usuarios.
-- []	Eliminar comentarios de usuarios.
-- []	Borrar imágenes de usuarios.
+- [ ]	Eliminar publicaciones de usuarios.
+- [ ]	Eliminar comentarios de usuarios.
+- [ ]	Borrar imágenes de usuarios.
 - [x]	Visualizar los foros.
-- []	Borrar debates o comentarios dentro de estos.
+- [ ]	Borrar debates o comentarios dentro de estos.
 - [x]	Visualizar retos.
-- []	Borrar imágenes de usuarios dentro de los retos.
-- []	Buscar y revisar perfiles.
-- []	Ver los reportes generados por usuarios.
-- []	Suspender y habilitar cuentas de usuario.
-- []	Borrar reportes.
-- []	Revisar mensajes para moderación.
+- [ ]	Borrar imágenes de usuarios dentro de los retos.
+- [ ]	Buscar y revisar perfiles.
+- [ ]	Ver los reportes generados por usuarios.
+- [ ]	Suspender y habilitar cuentas de usuario.
+- [ ]	Borrar reportes.
+- [ ]	Revisar mensajes para moderación.
