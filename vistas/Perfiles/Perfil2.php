@@ -21,7 +21,7 @@ $u = $us->Usuario($id_usuario);
 	<div class="Foto">Hola</div>
 		
 			<div class="Opciones">
-					<div class="mensaje"><a href="">Enviar mensaje</a></div>
+					<div class="mensaje"><a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>">Enviar mensaje</a></div>
 					<a href="">Portafolio</a>
 					
 					<a href="">Portafolio</a>

@@ -15,7 +15,7 @@
              if($stmt->rowCount() == 0){ 
              	
              	$stmt = $this->pdo->prepare(
-                    "INSERT INTO conversacion values(NULL,$id_usuario1,$id_usuario2"
+                    "INSERT INTO conversacion values(NULL,$id_usuario1,$id_usuario2)"
                 );
             	$stmt->execute();
             	$stmt = $this->pdo->prepare(
@@ -28,8 +28,33 @@
              }else{
              	$conversacion = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->stop();
-                return $conversacion["id"];
+                return $conversacion["id_conversacion"];
              }
+        }
+        public function Conversaciones(){
+        	$this->start();
+        		$id_usuario = $_SESSION["id_usuario"];
+        		$stmt = $this->pdo->prepare(
+                    "SELECT * FROM conversacion WHERE id_usuario1 = $id_usuario or id_usuario2 = $id_usuario"
+                );
+            	$stmt->execute();
+            	$lista = array();
+            
+            while($Conversacion = $stmt->fetch(PDO::FETCH_ASSOC)):
+                $Conversaciones = new ConversacionModelo();
+                $Conversaciones->set(
+                    $Conversacion["id_conversacion"],
+					$Conversacion["id_usuario1"],
+					$Conversacion["id_usuario2"]
+					);
+                $lista[] = $Conversaciones;
+
+            endwhile;
+           
+
+            $this->stop();
+            return $lista;
+
         }
 
     }

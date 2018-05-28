@@ -33,7 +33,7 @@ $u = $us->Usuario($id_usuario);
 					<a href="">Portafolio</a>
 					<a href="Control.php?c=Seguidores&a=Seguir&id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
 					<a href="Control.php?c=Amigos&a=Agregar&id_usuario=<?php echo $id_usuario ?>" id="Amigo" class="Artista">Agregar Amigo</a>
-					<a href="">Enviar mensaje</a>
+					<a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>">Enviar mensaje</a>
 					<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>">Reportar Usuario</a>
 				
 			</div>

@@ -4,18 +4,24 @@
 
 
         public function __construct(){}
-        public function Mensajes($id_conversacion){
-			 $this->start();
+        public function Mensajes(){
+
+		}
+		public function Conversacion($id_usuario2){
+						 $this->start();
+			$co = new conversacionControlador();
+			$c = $co->Validar($id_usuario2);
+
 			$stmt = $this->pdo->prepare(
-                    "SELECT * FROM comentario WHERE  id_conversacion = $id_conversacion"
+                    "SELECT * FROM mensaje WHERE  id_conversacion = $c"
                 );
                 $stmt->execute();
                 $lista = array();
             
             while($Mensaje = $stmt->fetch(PDO::FETCH_ASSOC)):
-                $Mensajes = new MensajeModelo();
+                $Mensajes = new MensajesModelo();
                 $Mensajes->set(
-                    $Mensaje["id_mensajes"],
+                    $Mensaje["id_mensaje"],
 					$Mensaje["fecha"],
 					$Mensaje["texto"],
 					$Mensaje["id_conversacion"],
@@ -28,13 +34,13 @@
 
             $this->stop();
             return $lista;
-}
+		}
         public function Mandar(){
 			$this->start();
 
-			$text= $_POST['texto'];
+			$texto = $_POST['Texto'];
 			$id_usuario = $_SESSION['id_usuario'];
-			$id_usuario2 = $_POST['id_usuario2'];
+			$id_usuario2 = $_POST['id_usuario'];
 			$co = new conversacionControlador();
 			$c = $co->Validar($id_usuario2);
 
