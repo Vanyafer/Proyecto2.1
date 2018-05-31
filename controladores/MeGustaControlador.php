@@ -29,7 +29,7 @@
                 $stmt->execute();
                 } else{
                 		$stmt = $this->pdo->prepare(
-                    "UPDATE me_gustame_gusta set tipo_me_gusta = $tipo_me_gusta WHERE id_megusta = $MeGustas->id_megusta "
+                    "UPDATE me_gusta set tipo_me_gusta = $tipo_me_gusta WHERE id_megusta = $MeGustas->id_megusta "
                 );
                 $stmt->execute();
                 }
