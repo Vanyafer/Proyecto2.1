@@ -1,25 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Nombre de nuestra pagina</title>
-	<link rel="stylesheet" type="text/css" href="./assets/css/Diseno.css">
-	<script type="text/javascript">
 
-	function Inicio(showhide){
-	if(showhide == "show"){
-    document.getElementById('Sesion').style.visibility="visible";
-	}else if(showhide == "hide"){
-    document.getElementById('Sesion').style.visibility="hidden"; 
-	}
-	}
+	<link rel="stylesheet" type="text/css" href="./assets/css/Diseno.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/Popup.css">
+	<script src="./assets/js/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+	    $(".Close").click(function(){
+	        $(".overlay").fadeOut(400);
+	         $(".popup").fadeOut(400);
+	    });
+	    $(".Abrir").click(function(){
+	        $(".overlay").fadeIn(400);
+	        $(".popup").fadeIn(400);
+	    });
+});
 </script>
-</head>
-<body>
+
 	<nav id="Barra">
-		<a href="javascript:Inicio('show');" id="Inicio">Iniciar Sesion</a>
+		<a class="Abrir">Iniciar Sesion</a>
 	    <a href="usuario.php?c=Usuario&a=Registro">Registro</a>
 	</nav>
 
+<div class="overlay">
+	<div class="popup">
 	<div id="Sesion">
 
 	        <h1>Iniciar sesion</h1>
@@ -34,11 +36,12 @@
 	                <a href="validarContrasena">No recuerdo mi contrasena</a>
 	                <input type="submit" value="Aceptar">
 	            </form>
-	            	<input type="submit" value="Cerrar" onclick="Inicio('hide');">
+	            	<input type="submit" value="Cerrar" class="Close">
 	        </fieldset>
 
 
 	</div>
+	
+</div>
 
-</body>
-</html>
+</div>

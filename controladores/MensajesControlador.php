@@ -24,15 +24,15 @@
 						}	
 		}
 		public function Conversacion($id_usuario2){
-						 $this->start();
+			 $this->start();
 			$co = new conversacionControlador();
 			$c = $co->Validar($id_usuario2);
 
 			$stmt = $this->pdo->prepare(
                     "SELECT * FROM mensaje WHERE  id_conversacion = $c"
                 );
-                $stmt->execute();
-                $lista = array();
+            $stmt->execute();
+            $lista = array();
             
             while($Mensaje = $stmt->fetch(PDO::FETCH_ASSOC)):
                 $Mensajes = new MensajesModelo();

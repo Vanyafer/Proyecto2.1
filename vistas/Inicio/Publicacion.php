@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 							$href = "href='Control.php?c=Reportes&a=ReportarComentario&id=$c->id_comentario'";
 						}
 						
-							echo "<div class='Comentario'><a href='Control.php?c=Perfiles&a=Perfiles&id=".$c->id_usuario."'>$u->nombre_usuario</a><div class='contenido' id=$c->id_comentario>$c->contenido</div><div class='fecha'>$c->fecha</div><a  ".$href." id='$c->id_comentario' class='AccionComentario ".$class."'>$x</a></div>";
+							echo "<div class='Comentario'><a href='Control.php?c=Perfiles&a=Perfiles&id=".$c->id_usuario."' id='usuario'>$u->nombre_usuario</a><div class='contenido' id=$c->id_comentario>$c->contenido</div><div class='fecha'>$c->fecha</div><a  ".$href." id='$c->id_comentario' class='AccionComentario ".$class."'>$x</a></div>";
 						}	
 					
 					?>

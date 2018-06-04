@@ -1,18 +1,15 @@
-<?php
-include("conexion.php");
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Foro</title>
-	<link rel="stylesheet" type="text/css" href="css/Foro.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/Foro.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>		
-<?php include "BarraNavegacion.php"; ?>
 
 <div class="Banner">
-<a class="Boton" href="Nuevohilo.php">Crear nuevo hilo</a>
+<a class="Boton" href="Control.php?c=Foro&a=NuevoHilo">Crear nuevo hilo</a>
 <h1>Foro de discusión</h1>
 </div>
 
@@ -38,7 +35,7 @@ include("conexion.php");
         echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">$u->nombre_usuario</a></h3>';
     echo "</td>";
     echo '<td class="der">';
-        echo date('d-m-Y', strtotime($f->fecha]));
+        echo date('d-m-Y', strtotime($f->fecha));
     echo "</td>";
     echo '<td class="der">';
         echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">$f->titulo</a></h3>';
@@ -53,7 +50,7 @@ include("conexion.php");
 <div class="Foros" id="Ideas">
   <?php
   $For = new ForoControlador();
-  $fo = $For->ForoFavs($_SESSION['id_usuario']);
+  $fo = $For->Foros(1);
 
   echo '<table> 
   <tr>
@@ -69,13 +66,13 @@ include("conexion.php");
   
     echo "<tr>";
     echo'<td class="izq">'; 
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">$u->nombre_usuario</a></h3>';
+        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
     echo "</td>";
     echo '<td class="der">';
-        echo date('d-m-Y', strtotime($f->fecha]));
+        echo date('d-m-Y', strtotime($f->fecha));
     echo "</td>";
     echo '<td class="der">';
-        echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">$f->titulo</a></h3>';
+        echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">'.$f->titulo.'</a></h3>';
     echo "</td>";
     echo "</tr>";
 
@@ -86,8 +83,7 @@ include("conexion.php");
 
 <div class="Foros" id="Objetos">
   <?php
-  $For = new ForoControlador();
-  $fo = $For->ForoFavs($_SESSION['id_usuario']);
+  $fo = $For->Foros(2);
 
   echo '<table> 
   <tr>
@@ -103,13 +99,13 @@ include("conexion.php");
   
     echo "<tr>";
     echo'<td class="izq">'; 
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">$u->nombre_usuario</a></h3>';
+        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
     echo "</td>";
     echo '<td class="der">';
-        echo date('d-m-Y', strtotime($f->fecha]));
+        echo date('d-m-Y', strtotime($f->fecha));
     echo "</td>";
     echo '<td class="der">';
-        echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">$f->titulo</a></h3>';
+        echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">'.$f->titulo.'</a></h3>';
     echo "</td>";
     echo "</tr>";
 

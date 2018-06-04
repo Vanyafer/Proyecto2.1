@@ -23,6 +23,7 @@
     <?php// require_once("vistas/Compartido/Head.php"); ?>
 <body>
     <?php 
+require("./vistas/Compartido/BarraNavegacionUsuario.php");
 require($interfaz->render());
           
     ?>

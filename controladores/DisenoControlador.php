@@ -39,5 +39,13 @@
                 return $diseno["id"];
 
 		}
+        public function Update($color_bordes,$color_titulos,$color_botones,$color_fondo,$tipo_perfil){
+            $this->start();
+                $stmt = $this->pdo->prepare(
+                    "INSERT INTO diseno VALUES(NULL,NULL,'$color_bordes','$color_titulos','$color_botones','$color_fondo',$tipo_perfil)"
+                );
+                $stmt->execute();
+                $this->stop();
+        }
 	}
 ?>

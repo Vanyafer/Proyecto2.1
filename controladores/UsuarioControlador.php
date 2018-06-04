@@ -148,6 +148,36 @@
    }
 
         public function Configuracion(){
+              if($_SERVER['REQUEST_METHOD']=='POST'){
+                     $this->start();
+                    $usuario = $_POST['Usuario'];
+                    $contrasena = $_POST['Contrasena'];
+                    $Tipo = $_POST['TipoU'];
+                    $Edad = $_POST['Edad'];
+                    $Pais = $_POST['Pais'];
+                    $id_usuario = $_SESSION['id_usuario'];
+                    if(isset($_POST['Contrasena'])){
+                        $stmt = $this->pdo->prepare(
+                            "UPDATE usuario SET contrasena = sha('$contrasena'), nombre_usuario = '$usuario' where id_usuario = $id_usuario "
+                        );
+                        $stmt->execute();
+                    }else{
+                        $stmt = $this->pdo->prepare(
+                            "UPDATE usuario SET  nombre_usuario = '$usuario' where id_usuario = $id_usuario "
+                        );
+                        $stmt->execute();
+                    }
+                     $di = new DisenoControlador();
+                        $id_diseno = $di->Update($Bordes,$Texto,$Botones,$Fondo,$Diseno);
+
+
+                        $per = new PerfilControlador();
+                        $id_perfil = $per->Update($Metas,$Exper,$Otro,$Estudios);
+
+                        $ar = new ArtistaControlador();
+                        $a = $ar->Insert($Edad,$imagen,$infomracion,$tecnica,$Pais);
+
+                }
         }
         public function Usuario($id_usuario){
             $this->start();

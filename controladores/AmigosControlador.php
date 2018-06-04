@@ -1,8 +1,6 @@
 <?php 
 	Class AmigosControlador extends DBConexion{
-		public function __construct()
-		{
-		}
+	
 		public function ListaAmigos(){
 			$this->start();
 				$id_usuario = $_SESSION['id_usuario'];

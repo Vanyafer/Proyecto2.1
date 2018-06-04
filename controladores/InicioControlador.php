@@ -32,6 +32,34 @@
             //require("./vistas/Inicio/inicio.php");
             //require_once ("./vistas/Inicio/Publicacion.php");
 		}
+        public function InicioUsuario(){
+            $this->start();
+                $stmt = $this->pdo->prepare(
+                    "SELECT * FROM publicacion where contenido_explicito = 0 and privacidad = 0 and imagen is not null order by id_publicacion DESC"
+                );
+
+                $stmt->execute();
+                $lista = array();
+                while($Publicacion = $stmt->fetch(PDO::FETCH_ASSOC)):
+                $Publicaciones = new PublicacionModelo();
+                $Publicaciones->set(
+                    $Publicacion["id_publicacion"],
+                    $Publicacion["fecha"],
+                    $Publicacion["contenido_explicito"],
+                    $Publicacion["contenido"],
+                    $Publicacion["etiquetas"],
+                    $Publicacion["privacidad"],
+                    $Publicacion["imagen"],
+                    $Publicacion["id_artista"]
+                );
+                $lista[] = $Publicaciones;
+
+            endwhile;
+           
+
+            $this->stop();
+            return $lista;
+        }
 		public function Publicacion(){
 			$id_publicacion = $_POST['idp'];
 			$this->start();

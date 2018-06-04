@@ -1,7 +1,9 @@
 <?php 
 $id_forohilo = $_GET['id'];
 $Hil = new ForoControlador();
-$hi = $Hil->Hilo($id_hilo);
+$hi = $Hil->Hilo();
+$us = new UsuarioControlador();
+$u = $us->Usuario($hi->id_usuario);
  ?>
 
 <!DOCTYPE html>
@@ -19,8 +21,8 @@ $hi = $Hil->Hilo($id_hilo);
 	<th>Usuario</th>
 	</tr>
 	<tr>
-	<td class="izq">'<?php echo $hi->titulo; ?></td>
-	<td class="der">'<?php echo $hi->id_usuario; ?></td>
+	<td class="izq"><?php echo $hi->contenido; ?></td>
+	<td class="der"><?php echo $u->nombre_usuario; ?></td>
 	</tr>
 	</table>
 	</div>
@@ -28,7 +30,7 @@ $hi = $Hil->Hilo($id_hilo);
 	<div class="Foros">
 	<?php
 		$Res = new ForoControlador();
-  		$re = $Res->Respuestas($id_forohilo]); 
+  		$re = $Res->Respuestas($id_forohilo); 
 
   		echo '<table> 
   <tr>
@@ -43,10 +45,10 @@ $hi = $Hil->Hilo($id_hilo);
   
     echo "<tr>";
     echo'<td class="izq">'; 
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $r->id_usuario. '">$u->nombre_usuario</a></h3>';
+        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $r->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
     echo "</td>";
     echo '<td class="der">';
-        echo '<h3>$r->contenido</h3>';
+        echo '<h3>'.$r->contenido.'</h3>';
     echo "</td>";
     echo "</tr>";
 
@@ -63,9 +65,8 @@ $hi = $Hil->Hilo($id_hilo);
 		<input type="submit" name="" value="Responder">
 		</form>
 
-	<?php 
-		echo '<a href="Control.php?c=Foro&a=AgregarFavs&id=$id_forohilo">Agregar a Favoritos</p>';
-	 ?>
+	<a href="Control.php?c=Foro&a=AgregarFavs&id=<?php echo $id_forohilo; ?>">Agregar a Favoritos</a>
+	 
 	 </div>
 </body>
 </html>

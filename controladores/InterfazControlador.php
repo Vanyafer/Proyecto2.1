@@ -57,10 +57,10 @@
                 if(file_exists($ruta)):
                     return $ruta;
                 else:
-                    return "./vistas/Usuario/IniciarSesion.php";
+                    return "./vistas/Usuario/Inicio.php";
                 endif;
             else:
-                return "./vistas/Usuario/IniciarSesion.php";
+                return "./vistas/Usuario/Inicio.php";
             endif;
         }
 

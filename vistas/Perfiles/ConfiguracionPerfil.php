@@ -60,7 +60,7 @@
 </div>
 
 <?php
-
+if(isset($_SESSION['id_usuario'])){
 if($id_usuario == $_SESSION['id_usuario']){
 	echo "<script>
 				$('#Seguir').removeAttr('href');
@@ -98,6 +98,15 @@ if($id_usuario == $_SESSION['id_usuario']){
 		$amigo = $am->Amigo($id_usuario);
 		echo "<script>$('#Amigo').html('Solicitud pendiente'); $('#Amigo').attr('href','Control.php?c=Amigos&a=Eliminar&id=".$amigo->id_amigos."&id_usuario=".$id_usuario."');</script>";
 	}
+}
+}else{
+	echo "<script>
+			$('.Dueno').css('display','none');
+			$('#Seguir').css('display','none');
+			$('#Amigo').css('display','none');
+			$('#Bandeja').css('display','none');
+		</script>";
+
 }
 ?>
 <script type="text/javascript">

@@ -24,7 +24,6 @@ $u = $us->Usuario($id_usuario);
 					<a href="">Portafolio</a>
 					<a href="Control.php?c=Seguidores&a=Seguir&id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
 					<a href="Control.php?c=Amigos&a=Agregar&id_usuario=<?php echo $id_usuario ?>" id="Amigo" class="Amigo">Agregar Amigo</a>
-					<a href="">Enviar mensaje</a>
 					
 					<a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>" id="Bandeja">Enviar mensaje</a>
 					<a href="reportarusuario.php?id=<?php echo $id_usuario ?>" class="Dueno">Reportar Usuario</a>
@@ -38,6 +37,6 @@ $u = $us->Usuario($id_usuario);
 		</div>
 	</div>
 </div>
-<div class="Portafolio"><a href="Portafolio.php">Portafolio</a></div>
 </body>
 </html>
+<?php include "ConfiguracionPerfil.php"; ?>

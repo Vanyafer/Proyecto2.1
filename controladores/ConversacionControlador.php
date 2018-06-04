@@ -33,12 +33,12 @@
         }
         public function Conversaciones(){
         	$this->start();
-        		$id_usuario = $_SESSION["id_usuario"];
-        		$stmt = $this->pdo->prepare(
+        	$id_usuario = $_SESSION["id_usuario"];
+        	$stmt = $this->pdo->prepare(
                     "SELECT * FROM conversacion WHERE id_usuario1 = $id_usuario or id_usuario2 = $id_usuario"
-                );
-            	$stmt->execute();
-            	$lista = array();
+            );
+            $stmt->execute();
+            $lista = array();
             
             while($Conversacion = $stmt->fetch(PDO::FETCH_ASSOC)):
                 $Conversaciones = new ConversacionModelo();
