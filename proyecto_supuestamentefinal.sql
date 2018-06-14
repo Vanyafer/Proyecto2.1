@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2018 a las 07:34:14
--- Versión del servidor: 10.1.29-MariaDB
--- Versión de PHP: 7.2.0
+-- Tiempo de generación: 14-06-2018 a las 20:36:07
+-- Versión del servidor: 10.1.30-MariaDB
+-- Versión de PHP: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -35,6 +35,22 @@ CREATE TABLE `amigos` (
   `id_usuario2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Disparadores `amigos`
+--
+DELIMITER $$
+CREATE TRIGGER `noti_aceptosoli` AFTER UPDATE ON `amigos` FOR EACH ROW begin
+insert into notificaciones values (NULL, 6, "acepto tu solicitud de amistad.", NEW.id_usuario1, 0, NOW(), NEW.id_usuario1);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `noti_nuevasoli` AFTER INSERT ON `amigos` FOR EACH ROW begin
+insert into notificaciones values (NULL, 5, "desea agregarte como amigo.", NEW.id_usuario1, 0, NOW(), NEW.id_usuario1);
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -56,16 +72,45 @@ CREATE TABLE `apoyo_visual` (
 
 CREATE TABLE `artista` (
   `id_artista` int(11) NOT NULL,
-  `fn` date DEFAULT NULL,
   `imagen_perfil` varchar(200) DEFAULT NULL,
   `informacion_contacto` varchar(200) DEFAULT NULL,
   `tecnica_interes` varchar(100) DEFAULT NULL,
-  `id_pais` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `id_diseno` int(11) DEFAULT NULL,
   `id_portafolio` int(11) DEFAULT NULL,
   `id_perfil` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bloqueados`
+--
+
+CREATE TABLE `bloqueados` (
+  `id_bloqueado` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `inicio` datetime DEFAULT NULL,
+  `fin` datetime DEFAULT NULL,
+  `expirado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `bloqueados`
+--
+
+INSERT INTO `bloqueados` (`id_bloqueado`, `id_usuario`, `inicio`, `fin`, `expirado`) VALUES
+(10, 2, '2018-06-14 13:24:14', '2018-06-15 13:24:14', 0);
+
+--
+-- Disparadores `bloqueados`
+--
+DELIMITER $$
+CREATE TRIGGER `desbloquear` AFTER UPDATE ON `bloqueados` FOR EACH ROW begin
+update usuario set bloqueado = 0 where usuario.id_usuario = old.id_usuario and (old.expirado = 1);
+end
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -93,6 +138,16 @@ CREATE TABLE `comentario` (
   `id_publicacion` int(11) DEFAULT NULL,
   `ocultar` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `comentario`
+--
+DELIMITER $$
+CREATE TRIGGER `noti_comentario` AFTER INSERT ON `comentario` FOR EACH ROW begin
+insert into notificaciones values (NULL, 2, "ha comentado tu publicacion.", NEW.id_usuario, 0, NOW(), NEW.id_publicacion);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -130,7 +185,8 @@ INSERT INTO `diseno` (`id_diseno`, `imagen_fondo`, `color_bordes`, `color_titulo
 (2, NULL, '1C83A8', '1C83A8', '1C83A8', '1C83A8', 3),
 (3, NULL, '1C83A8', '1C83A8', '1C83A8', '1C83A8', 1),
 (4, NULL, '1C83A8', '1C83A8', '1C83A8', '1C83A8', 1),
-(5, NULL, '1C83A8', '1C83A8', '1C83A8', '1C83A8', 3);
+(5, NULL, '1C83A8', '1C83A8', '1C83A8', '1C83A8', 3),
+(6, NULL, '1C83A8', '1C83A8', '1C83A8', '1C83A8', 1);
 
 -- --------------------------------------------------------
 
@@ -140,11 +196,9 @@ INSERT INTO `diseno` (`id_diseno`, `imagen_fondo`, `color_bordes`, `color_titulo
 
 CREATE TABLE `fan` (
   `id_fan` int(11) NOT NULL,
-  `fn` date DEFAULT NULL,
   `imagen_perfil` varchar(200) DEFAULT NULL,
   `informacion_contacto` varchar(200) DEFAULT NULL,
   `perfil` varchar(200) DEFAULT NULL,
-  `id_pais` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -190,6 +244,16 @@ CREATE TABLE `foro_respuesta` (
   `id_usuario` int(11) DEFAULT NULL,
   `ocultar` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `foro_respuesta`
+--
+DELIMITER $$
+CREATE TRIGGER `noti_respuesta` AFTER INSERT ON `foro_respuesta` FOR EACH ROW begin
+insert into notificaciones values (NULL , 3, "ha respondido en tu hilo", NEW.id_usuario, 0, NOW(), NEW.id_forohilo);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -262,6 +326,16 @@ CREATE TABLE `me_gusta` (
   `id_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Disparadores `me_gusta`
+--
+DELIMITER $$
+CREATE TRIGGER `noti_megusta` AFTER INSERT ON `me_gusta` FOR EACH ROW begin
+insert into notificaciones values (NULL, 1, "ha evaluado tu publicacion.", NEW.id_usuario, 0, NOW(), NEW.id_publicacion);
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -282,7 +356,11 @@ CREATE TABLE `moderador` (
 CREATE TABLE `notificaciones` (
   `id_notificacion` int(11) NOT NULL,
   `tipo` int(11) DEFAULT NULL,
-  `contenido` varchar(200) DEFAULT NULL
+  `contenido` varchar(200) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `visto` int(11) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `id_evento` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -378,8 +456,19 @@ CREATE TABLE `reportes_comentarios` (
   `id_reportado` int(11) DEFAULT NULL,
   `id_reportero` int(11) DEFAULT NULL,
   `razon` varchar(50) DEFAULT NULL,
-  `estatus` int(11) DEFAULT NULL
+  `estatus` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `reportes_comentarios`
+--
+DELIMITER $$
+CREATE TRIGGER `noti_reportecom` AFTER INSERT ON `reportes_comentarios` FOR EACH ROW begin
+insert into notificaciones values (NULL, 7, "Uno de tus comentarios ha sido reportado.", NEW.id_reportero, 0, NOW(), NEW.id_reporte);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -393,8 +482,19 @@ CREATE TABLE `reportes_publicaciones` (
   `id_reportado` int(11) DEFAULT NULL,
   `id_reportero` int(11) DEFAULT NULL,
   `razon` varchar(50) DEFAULT NULL,
-  `estatus` int(11) DEFAULT NULL
+  `estatus` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `reportes_publicaciones`
+--
+DELIMITER $$
+CREATE TRIGGER `noti_reportepub` AFTER INSERT ON `reportes_publicaciones` FOR EACH ROW begin
+insert into notificaciones values (NULL, 8, "Una de tus publicaciones ha sido reportada.", NEW.id_reportero, 0, NOW(), NEW.id_reporte);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -407,8 +507,19 @@ CREATE TABLE `reportes_usuarios` (
   `id_reportado` int(11) DEFAULT NULL,
   `id_reportero` int(11) DEFAULT NULL,
   `razon` varchar(50) DEFAULT NULL,
-  `estatus` int(11) DEFAULT NULL
+  `estatus` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `reportes_usuarios`
+--
+DELIMITER $$
+CREATE TRIGGER `noti_reporteusu` AFTER INSERT ON `reportes_usuarios` FOR EACH ROW begin
+insert into notificaciones values (NULL, 9, "Tu cuenta ha sido reportada.", NEW.id_reportero, 0, NOW(), NEW.id_reporte);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -445,6 +556,16 @@ CREATE TABLE `seguidores` (
   `id_usuario1` int(11) DEFAULT NULL,
   `id_usuario2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `seguidores`
+--
+DELIMITER $$
+CREATE TRIGGER `noti_seguidor` AFTER INSERT ON `seguidores` FOR EACH ROW begin
+insert into notificaciones values (NULL, 4, "comenzo a seguirte", NEW.id_usuario1, 0, NOW(), NEW.id_usuario1);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -497,9 +618,16 @@ CREATE TABLE `usuario` (
   `contrasena` varchar(50) DEFAULT NULL,
   `correo` varchar(30) DEFAULT NULL,
   `nombre_usuario` varchar(50) DEFAULT NULL,
+  `fn` date NOT NULL,
+  `pais` int(11) DEFAULT NULL,
   `bloqueado` int(11) DEFAULT NULL,
   `tipo_usuario` int(11) DEFAULT NULL,
-  `permitir_18` int(11) DEFAULT NULL
+  `permitir_18` int(11) DEFAULT NULL,
+  `reset` varchar(50) DEFAULT NULL,
+  `auto5` int(11) NOT NULL,
+  `auto10` int(11) DEFAULT NULL,
+  `auto15` int(11) DEFAULT NULL,
+  `auto20` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -526,11 +654,16 @@ ALTER TABLE `apoyo_visual`
 --
 ALTER TABLE `artista`
   ADD PRIMARY KEY (`id_artista`),
-  ADD KEY `id_pais` (`id_pais`),
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_diseno` (`id_diseno`),
   ADD KEY `id_portafolio` (`id_portafolio`),
   ADD KEY `id_perfil` (`id_perfil`);
+
+--
+-- Indices de la tabla `bloqueados`
+--
+ALTER TABLE `bloqueados`
+  ADD PRIMARY KEY (`id_bloqueado`);
 
 --
 -- Indices de la tabla `coleccion`
@@ -567,7 +700,6 @@ ALTER TABLE `diseno`
 --
 ALTER TABLE `fan`
   ADD PRIMARY KEY (`id_fan`),
-  ADD KEY `id_pais` (`id_pais`),
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
@@ -732,7 +864,8 @@ ALTER TABLE `tipo_usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
-  ADD KEY `tipo_usuario` (`tipo_usuario`);
+  ADD KEY `tipo_usuario` (`tipo_usuario`),
+  ADD KEY `pais` (`pais`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -754,7 +887,13 @@ ALTER TABLE `apoyo_visual`
 -- AUTO_INCREMENT de la tabla `artista`
 --
 ALTER TABLE `artista`
-  MODIFY `id_artista` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_artista` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `bloqueados`
+--
+ALTER TABLE `bloqueados`
+  MODIFY `id_bloqueado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `coleccion`
@@ -766,7 +905,7 @@ ALTER TABLE `coleccion`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `conversacion`
@@ -778,7 +917,7 @@ ALTER TABLE `conversacion`
 -- AUTO_INCREMENT de la tabla `diseno`
 --
 ALTER TABLE `diseno`
-  MODIFY `id_diseno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_diseno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `fan`
@@ -832,7 +971,7 @@ ALTER TABLE `mensaje`
 -- AUTO_INCREMENT de la tabla `me_gusta`
 --
 ALTER TABLE `me_gusta`
-  MODIFY `id_megusta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_megusta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `moderador`
@@ -844,7 +983,7 @@ ALTER TABLE `moderador`
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `pais`
@@ -856,25 +995,25 @@ ALTER TABLE `pais`
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `portafolio`
 --
 ALTER TABLE `portafolio`
-  MODIFY `id_portafolio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_portafolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id_publicacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_publicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `reportes_comentarios`
 --
 ALTER TABLE `reportes_comentarios`
-  MODIFY `id_reporte` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `reportes_publicaciones`
@@ -886,7 +1025,7 @@ ALTER TABLE `reportes_publicaciones`
 -- AUTO_INCREMENT de la tabla `reportes_usuarios`
 --
 ALTER TABLE `reportes_usuarios`
-  MODIFY `id_reporte` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `retos`
@@ -922,7 +1061,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -946,7 +1085,6 @@ ALTER TABLE `apoyo_visual`
 -- Filtros para la tabla `artista`
 --
 ALTER TABLE `artista`
-  ADD CONSTRAINT `artista_ibfk_1` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id_pais`),
   ADD CONSTRAINT `artista_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   ADD CONSTRAINT `artista_ibfk_3` FOREIGN KEY (`id_diseno`) REFERENCES `diseno` (`id_diseno`),
   ADD CONSTRAINT `artista_ibfk_4` FOREIGN KEY (`id_portafolio`) REFERENCES `portafolio` (`id_portafolio`),
@@ -982,7 +1120,6 @@ ALTER TABLE `diseno`
 -- Filtros para la tabla `fan`
 --
 ALTER TABLE `fan`
-  ADD CONSTRAINT `fan_ibfk_1` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id_pais`),
   ADD CONSTRAINT `fan_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
 
 --
@@ -1056,7 +1193,53 @@ ALTER TABLE `seguidores`
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipousuario`);
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipousuario`),
+  ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`pais`) REFERENCES `pais` (`id_pais`);
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `autobloq_10reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:38' ON COMPLETION NOT PRESERVE ENABLE DO begin
+update usuario join (select id_reportado, estatus from reportes_comentarios where estatus = 1 group by id_reportado having count(*) = 10 ) reportes_comentarios ON usuario.id_usuario = reportes_comentarios.id_reportado AND auto10 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto10 = 1;
+update usuario join (select id_reportado, estatus from reportes_publicaciones where estatus = 1 group by id_reportado having count(*) = 10 ) reportes_publicaciones ON usuario.id_usuario = reportes_publicaciones.id_reportado AND auto10 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto10 = 1;
+update usuario join (select id_reportado, estatus from reportes_usuarios where estatus = 1 group by id_reportado having count(*) = 10 ) reportes_usuarios ON usuario.id_usuario = reportes_usuarios.id_reportado AND auto10 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto10 = 1;
+end$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `expirar_bloqueado` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-07 13:50:54' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE bloqueados SET expirado = 1 WHERE fin < NOW()$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `autobloq_insert` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 13:47:54' ON COMPLETION NOT PRESERVE ENABLE DO begin
+insert into bloqueados values (null, (select id_usuario from usuario where auto5=1), NOW(), DATE_ADD(NOW(), INTERVAL 1 DAY), 0); 
+update usuario set auto5 = 2 where auto5 = 1;
+insert into bloqueados values (null, (select id_usuario from usuario where auto10=1), NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 0); 
+update usuario set auto10 = 2 where auto10 = 1;
+insert into bloqueados values (null, (select id_usuario from usuario where auto15=1), NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), 0); 
+update usuario set auto15 = 2 where auto15 = 1;
+insert into bloqueados values (null, (select id_usuario from usuario where auto20=1), NOW(), DATE_ADD(NOW(), INTERVAL 100 YEAR), 0); 
+update usuario set auto20 = 2 where auto20 = 1;
+end$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `autobloq_5reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:38' ON COMPLETION NOT PRESERVE ENABLE DO begin
+update usuario join (select id_reportado, estatus from reportes_comentarios where estatus = 1 group by id_reportado having count(*) = 5 ) reportes_comentarios ON usuario.id_usuario = reportes_comentarios.id_reportado AND auto5 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto5 = 1;
+update usuario join (select id_reportado, estatus from reportes_publicaciones where estatus = 1 group by id_reportado having count(*) = 5 ) reportes_publicaciones ON usuario.id_usuario = reportes_publicaciones.id_reportado AND auto5 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto5 = 1;
+update usuario join (select id_reportado, estatus from reportes_usuarios where estatus = 1 group by id_reportado having count(*) = 5 ) reportes_usuarios ON usuario.id_usuario = reportes_usuarios.id_reportado AND auto5 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto5 = 1;
+end$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `autobloq_15reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:38' ON COMPLETION NOT PRESERVE ENABLE DO begin
+update usuario join (select id_reportado, estatus from reportes_comentarios where estatus = 1 group by id_reportado having count(*) = 15 ) reportes_comentarios ON usuario.id_usuario = reportes_comentarios.id_reportado AND auto15 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto15 = 1;
+update usuario join (select id_reportado, estatus from reportes_publicaciones where estatus = 1 group by id_reportado having count(*) = 15 ) reportes_publicaciones ON usuario.id_usuario = reportes_publicaciones.id_reportado AND auto15 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto15 = 1;
+update usuario join (select id_reportado, estatus from reportes_usuarios where estatus = 1 group by id_reportado having count(*) = 15 ) reportes_usuarios ON usuario.id_usuario = reportes_usuarios.id_reportado AND auto15 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto15 = 1;
+end$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `autobloq_20reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:38' ON COMPLETION NOT PRESERVE ENABLE DO begin
+update usuario join (select id_reportado, estatus from reportes_comentarios where estatus = 1 group by id_reportado having count(*) = 20 ) reportes_comentarios ON usuario.id_usuario = reportes_comentarios.id_reportado AND auto20 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto20 = 1;
+update usuario join (select id_reportado, estatus from reportes_publicaciones where estatus = 1 group by id_reportado having count(*) = 20 ) reportes_publicaciones ON usuario.id_usuario = reportes_publicaciones.id_reportado AND auto20 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto20 = 1;
+update usuario join (select id_reportado, estatus from reportes_usuarios where estatus = 1 group by id_reportado having count(*) = 20 ) reportes_usuarios ON usuario.id_usuario = reportes_usuarios.id_reportado AND auto20 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto20 = 1;
+end$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `borrar_noti` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-07 13:50:54' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM notificaciones WHERE fecha < DATE_ADD(fecha, INTERVAL 7 DAY) AND visto=1$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
