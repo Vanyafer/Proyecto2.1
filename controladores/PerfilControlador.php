@@ -3,10 +3,10 @@
 		public function __construct()
 		{
 		}
-		public function Perfil($id_diseno){
+		public function Perfil($id_perfil){
 				$this->start();
                 $stmt = $this->pdo->prepare(
-                    "SELECT * FROM perfil where id_diseno = $id_diseno"
+                    "SELECT * FROM perfil where id_perfil = $id_perfil"
                 );
                 $stmt->execute();
                 $perfiles = new PerfilModelo;
@@ -19,7 +19,7 @@
 						$perfil['estudios']
                     );
                 $this->stop();
-				return $perfiless;
+				return $perfiles;
 			
 		}
 		public function Insert($Metas,$Exper,$Otro,$Estudios){
@@ -37,5 +37,13 @@
                 return $perfil["id"];
 
 		}
+        public function Update($Metas,$Exper,$Otro,$Estudios,$id_perfil){
+            $this->start();
+                $stmt = $this->pdo->prepare(
+                    "UPDATE perfil SET metas= '$Metas', exper = '$Exper', otro ='$Otro', estudios ='$Estudios' where id_perfil = $id_perfil)"
+                ); 
+                $stmt->execute();
+                $this->stop();
+        }
 	}
 ?>

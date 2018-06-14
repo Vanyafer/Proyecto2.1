@@ -1,9 +1,9 @@
 <?php 
-$id_forohilo = $_GET['id'];
-$Hil = new ForoControlador();
-$hi = $Hil->Hilo();
-$us = new UsuarioControlador();
-$u = $us->Usuario($hi->id_usuario);
+	$id_forohilo = $_GET['id'];
+	$Hil = new ForoControlador();
+	$hi = $Hil->Hilo();
+	$us = new UsuarioControlador();
+	$u = $us->Usuario($hi->id_usuario);
  ?>
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ $u = $us->Usuario($hi->id_usuario);
 
 	<div class="Foros">
 	<?php
-		$Res = new ForoControlador();
+		$Res = new ForoRespuestaControlador();
   		$re = $Res->Respuestas($id_forohilo); 
 
   		echo '<table> 
@@ -59,14 +59,13 @@ $u = $us->Usuario($hi->id_usuario);
 
 	<div  class="Foros">
 		<form onSubmit="Enviar(); return false" id="RespuestaN">
-		<input type="hidden" name="id_respuesta" id="id_respuesta">
 		<input type="hidden" id="id_forohilo" name="id_forohilo" value="<?php echo $id_forohilo; ?>">
 		<input type="text" name="contenido" id="contenido">
 		<input type="submit" name="" value="Responder">
 		</form>
 
-	<a href="Control.php?c=Foro&a=AgregarFavs&id=<?php echo $id_forohilo; ?>">Agregar a Favoritos</a>
-	 
+	<a href="Control.php?c=Foro&a=AgregarFavs&id=<?php echo $id_forohilo; ?>" id='fav'>Agregar a Favoritos</a>
+	<a href="" id="Accion"></a>
 	 </div>
 </body>
 </html>
@@ -76,20 +75,22 @@ $u = $us->Usuario($hi->id_usuario);
 		
 			$.ajax({
 
-		    		url:'usuario.php?c=Foro&a=Responder',
+		    		url:'usuario.php?c=ForoRespuesta&a=Responder',
 		    		method:'POST',
 		    		data: $("#RespuestaN").serialize(),
 		    		 success: function(res){
-			    		 $.ajax({
-				    		url:'Control.php?c=Foro&a=Hilo&id=',
-				    		method:'POST',
-				    		data: $("#idp").serialize(),
-				    		 success: function(res){
-				    		 	$(".Imagen").html(res);
-				    		 }	
-			    		});
-		    		 	$("#Respuesta").val("");
+			    		location.reload();
 		    		 }	
 		    		});
 }
 </script>
+<?php 
+	$fav = $Hil->ConfirmarFavs($_GET['id']);
+	if($fav == 1){
+		echo "<script>$('#fav').html('Eliminar de favoritos'); $('#fav').attr('href','Control.php?c=Foro&a=EliminarFavs&id=".$id_forohilo."');</script>";
+	}
+	if($hi->id_usuario == $_SESSION['id_usuario']){
+
+			echo "<script>$('#Accion').html('Eliminar foro'); $('#Accion').attr('href','Control.php?c=Foro&a=EliminarForoUsuario&id_f=".$id_forohilo."');</script>";
+	}
+?>

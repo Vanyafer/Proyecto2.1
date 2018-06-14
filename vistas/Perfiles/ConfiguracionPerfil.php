@@ -61,7 +61,7 @@
 
 <?php
 if(isset($_SESSION['id_usuario'])){
-if($id_usuario == $_SESSION['id_usuario']){
+if($id_usuario == $_SESSION['id_usuario']|| $_SESSION['tipo_usuario']==3 ){
 	echo "<script>
 				$('#Seguir').removeAttr('href');
 				$('#Seguir').addClass('AbrirSeguidores');
@@ -107,6 +107,12 @@ if($id_usuario == $_SESSION['id_usuario']){
 			$('#Bandeja').css('display','none');
 		</script>";
 
+}
+if($_SESSION['tipo_usuario']==3){
+	echo "<script>
+			$('#Bandeja').attr('href','Control.php?c=Reportes&a=ReportesUsuario&id_usuario=".$id_usuario."');
+			$('#Bandeja').html('Reportes Usuario');
+		</script>";
 }
 ?>
 <script type="text/javascript">

@@ -12,4 +12,10 @@
 			}
 
 }
+if($_SESSION['tipo_usuario']==3){
+	echo "<script>
+		$('#inicio').attr('href','Control.php?c=Moderador&a=Moderador');
+			$('.moderador').css('display','none');
+		</script>";
+}
 	?>

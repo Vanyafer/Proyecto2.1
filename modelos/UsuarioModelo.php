@@ -8,12 +8,13 @@
         public $nombre_usuario;
         public $bloqueado;
         public $tipo_usuario;
+        public $permitir_18;
 
         public function __construct(){
 
         }
       
-        public function set( $id_usuario, $contrasena, $correo, $nombre_usuario, $bloqueado , $tipo_usuario){
+        public function set( $id_usuario, $contrasena, $correo, $nombre_usuario, $bloqueado , $tipo_usuario, $permitir_18){
             $this->id_usuario = $id_usuario;
             $this->contrasena = $contrasena;
             $this->correo = $correo;
@@ -21,6 +22,7 @@
             $this->nombre_usuario = $nombre_usuario;
             $this->bloqueado = $bloqueado;
             $this->tipo_usuario = $tipo_usuario;
+            $this->permitir_18 = $permitir_18;
         }
 
     }

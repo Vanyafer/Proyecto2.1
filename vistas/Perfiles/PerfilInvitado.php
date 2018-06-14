@@ -18,7 +18,7 @@ $u = $us->Usuario($id_usuario);
 		<div class="Box">
 			<div class="Foto"><img src="<? ?>"></div>
 			<div class="mensaje"><a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>" id="Bandeja">Enviar mensaje</a></div>
-			<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>" class="Dueno">Reportar Usuario</a>
+			<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>" class="Dueno " id="Moderador">Reportar Usuario</a>
 				
 		</div>
 		
@@ -38,7 +38,9 @@ $u = $us->Usuario($id_usuario);
 		
 		
 	</div>
+<?php include "ConfiguracionPerfil.php"; 
 
+?>
 
 
 </div>

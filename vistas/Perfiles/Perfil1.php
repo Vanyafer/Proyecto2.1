@@ -26,7 +26,7 @@ $u = $us->Usuario($id_usuario);
 					<a href="Control.php?c=Amigos&a=Agregar&id_usuario=<?php echo $id_usuario ?>" id="Amigo" class="Amigo">Agregar Amigo</a>
 					
 					<a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>" id="Bandeja">Enviar mensaje</a>
-					<a href="reportarusuario.php?id=<?php echo $id_usuario ?>" class="Dueno">Reportar Usuario</a>
+					<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>" class="Dueno">Reportar Usuario</a>
 				
 			</div>
 		</div>

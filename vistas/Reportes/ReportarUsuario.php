@@ -8,7 +8,7 @@ $u = $us->Usuario($id_usuario);
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="css/Foro.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/Foro.css">
 </head>
 <body>
 	<div class="Foros">
@@ -18,7 +18,7 @@ $u = $us->Usuario($id_usuario);
 	<h3>Razón:</h3>
 	<form action="Control.php?c=Reportes&a=ReportarUsuario" method="POST">
 		<p></p>
-		<input type="hidden" name="id_usuario" id="id_usuario" id="<?php echo $u->id_usuario ?>">
+		<input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $id_usuario ?>">
 		<input type="text" name="razon" id="razon">
 		<p></p>
 		<input type="submit" name="Reportar" value="Reportar">

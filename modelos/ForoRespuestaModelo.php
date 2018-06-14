@@ -14,7 +14,6 @@
         	$this->id_fororespuesta = $id_fororespuesta;
         	$this->fecha = $fecha;
         	$this->contenido = $contenido;
-        	$this->titulo = $titulo;
         	$this->id_forohilo = $id_forohilo;
             $this->id_usuario = $id_usuario;
             

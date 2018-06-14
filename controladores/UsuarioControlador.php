@@ -3,7 +3,6 @@
     Class UsuarioControlador extends DBConexion {
 
 
-        public function __construct(){}
         public function Pais(){
             $this->start();
                 $stmt = $this->pdo->prepare("SELECT * FROM pais");
@@ -28,7 +27,7 @@
                 $contrasena = $_POST["Password"];
                 
                 $stmt = $this->pdo->prepare(
-                    "SELECT * FROM usuario WHERE  correo  = '$correo' AND contrasena = sha('$contrasena')"
+                    "SELECT * FROM usuario WHERE  correo  = '$correo' AND contrasena = sha('$contrasena') AND bloqueado = 0"
                 );
 
                 $stmt->execute();
@@ -63,27 +62,28 @@
             session_destroy();
             header("Location: usuario.php");
         }
-
        public function Registro(){
 
-        if($_SERVER['REQUEST_METHOD']=='POST'){
-                     $this->start();
+            if($_SERVER['REQUEST_METHOD']=='POST'){
+                 
+                    $this->start();
                   $usuario = $_POST['Usuario'];
                     $correo = $_POST['Correo'];
                     $contrasena = $_POST['Contrasena'];
                     $Tipo = $_POST['TipoU'];
                     $Edad = $_POST['Edad'];
                     $Pais = $_POST['Pais'];
+
                    $stmt = $this->pdo->prepare(
-                            "INSERT into usuario VALUES(NULL,sha('$contrasena'),'$correo','$usuario',0,$Tipo)"
+                            "INSERT into usuario VALUES(NULL,sha('$contrasena'),'$correo','$usuario',0,$Tipo,0)"
                         );
                     $stmt->execute();
                     $stmt = $this->pdo->prepare(
                             "SELECT MAX(id_usuario) as id FROM usuario"
                         );
                     $stmt->execute();
-                     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-                     $id_usuario = $usuario["id"];
+                    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $id_usuario = $usuario["id"];
         
                     
         
@@ -142,40 +142,65 @@
         
                      $this->stop();
                         header("Location: Control.php?c=Inicio&a=Inicio");
-
-       }
-   
-   }
-
+            }
+        }
         public function Configuracion(){
               if($_SERVER['REQUEST_METHOD']=='POST'){
-                     $this->start();
+                    $this->start();
                     $usuario = $_POST['Usuario'];
                     $contrasena = $_POST['Contrasena'];
-                    $Tipo = $_POST['TipoU'];
                     $Edad = $_POST['Edad'];
                     $Pais = $_POST['Pais'];
                     $id_usuario = $_SESSION['id_usuario'];
-                    if(isset($_POST['Contrasena'])){
+                    if($contrasena != ''){
+
                         $stmt = $this->pdo->prepare(
-                            "UPDATE usuario SET contrasena = sha('$contrasena'), nombre_usuario = '$usuario' where id_usuario = $id_usuario "
+                            "UPDATE usuario SET contrasena = sha('$contrasena') where id_usuario = $id_usuario "
                         );
                         $stmt->execute();
-                    }else{
-                        $stmt = $this->pdo->prepare(
+
+                    }
+                      $stmt = $this->pdo->prepare(
                             "UPDATE usuario SET  nombre_usuario = '$usuario' where id_usuario = $id_usuario "
                         );
                         $stmt->execute();
+                    if($_FILES["imagenA"]["name"]==''){
+                        $imagen = null;
+                    }else{
+                        $folder="./Imagenes/imgPerfil/";
+                        $tmp_name = $_FILES["imageAn"]["tmp_name"];
+                        move_uploaded_file( $tmp_name,"$folder".$_FILES["imagenA"]["name"]);
+                        $imagen = $folder.$_FILES["imagenA"]["name"];
                     }
-                     $di = new DisenoControlador();
-                        $id_diseno = $di->Update($Bordes,$Texto,$Botones,$Fondo,$Diseno);
+                    if($_SESSION['tipo_usuario']==1){
+                        $informacion = $_POST['InformacionA'];
+                        $tecnica = $_POST['Tecnica'];
+                        $Metas = $_POST['Metas'];
+                        $Estudios = $_POST['Estudios'];
+                        $Exper = $_POST['Exper'];
+                        $Otro = $_POST['Otro'];
+                        $Botones = $_POST['Botones'];
+                        $Texto = $_POST['Texto'];
+                        $Bordes = $_POST['Bordes'];
+                        $Fondo = $_POST['Fondo'];
+                        $Diseno = $_POST['Diseno'];
+
+                    $artista = new ArtistaControlador();
+                    $a = $artista->ArtistaUsuario($id_usuario);
+
+                    $artista->Update($Edad,$imagen,$informacion,$tecnica,$Pais,$a->id_artista);
+
+                    $di = new DisenoControlador();
+                    $di->Update($Bordes,$Texto,$Botones,$Fondo,$Diseno,$a->id_diseno);
 
 
-                        $per = new PerfilControlador();
-                        $id_perfil = $per->Update($Metas,$Exper,$Otro,$Estudios);
+                    $per = new PerfilControlador();
+                    $per->Update($Metas,$Exper,$Otro,$Estudios,$a->id_perfil);
 
-                        $ar = new ArtistaControlador();
-                        $a = $ar->Insert($Edad,$imagen,$infomracion,$tecnica,$Pais);
+                }else{
+
+                }
+                   $this->stop();                     
 
                 }
         }
@@ -194,7 +219,8 @@
                         $Usuario["correo"],
                         $Usuario["nombre_usuario"],
                         $Usuario["bloqueado"],
-                        $Usuario["tipo_usuario"]
+                        $Usuario["tipo_usuario"],
+                        $Usuario["permitir_18"]
                     );
 
            
@@ -206,8 +232,16 @@
             $this->start();
             $nombre_usuario=$_POST['Usuario'];
             if(isset($_SESSION['id_usuario'])){
-
-                return null;
+                $id_usuario = $_SESSION['id_usuario'];
+                 $stmt = $this->pdo->prepare(
+                    "SELECT * FROM usuario WHERE  nombre_usuario = '$nombre_usuario' and id_usuario != $id_usuario"
+                );
+                $stmt->execute();
+                if($stmt->rowCount() > 0){ 
+                    echo "0";
+                }else{
+                    echo "1";
+                }
             }else{
 
                  $stmt = $this->pdo->prepare(
@@ -235,6 +269,30 @@
                 }else{
                     echo "1";
                 }
+            $this->stop();
+        }
+        public function ValidarContrasena(){
+            $this->start();
+            $contrasena =$_POST['ContraA'];
+            $id_usuario = $_SESSION['id_usuario'];
+              $stmt = $this->pdo->prepare(
+                    "SELECT * FROM usuario WHERE  contrasena =  sha('$contrasena') and id_usuario = $id_usuario"
+                );
+
+                $stmt->execute();
+                if($stmt->rowCount() > 0){ 
+                    echo "0";
+                }else{
+                    echo "1";
+                }
+            $this->stop();
+        }
+        public function CambiarContrasena($idk){
+            $this->start();
+                $stmt = $this->pdo->prepare(
+                            "UPDATE usuario SET contrasena = sha('$contrasena') where idk  = $idk "
+                        );
+                        $stmt->execute();
             $this->stop();
         }
     }

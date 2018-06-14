@@ -29,16 +29,16 @@
     
     $us = new UsuarioControlador();
     $u = $us->Usuario($f->id_usuario);
-  
+    $fa = $For->HiloContenido($f->id_forohilo);
     echo "<tr>";
     echo'<td class="izq">'; 
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">$u->nombre_usuario</a></h3>';
+       echo '<h3><a href="Control.php?c=Foro&a=Hilo&id='.$fa->id_forohilo.'">'.$fa->titulo.'</a></h3>';
     echo "</td>";
     echo '<td class="der">';
-        echo date('d-m-Y', strtotime($f->fecha));
+        echo date('d-m-Y', strtotime($fa->fecha));
     echo "</td>";
     echo '<td class="der">';
-        echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">$f->titulo</a></h3>';
+        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id='.$fa->id_usuario.'">'.$u->nombre_usuario.'</a></h3>';
     echo "</td>";
     echo "</tr>";
 
@@ -66,13 +66,15 @@
   
     echo "<tr>";
     echo'<td class="izq">'; 
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
+      echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">'.$f->titulo.'</a></h3>';
     echo "</td>";
     echo '<td class="der">';
         echo date('d-m-Y', strtotime($f->fecha));
     echo "</td>";
     echo '<td class="der">';
-        echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">'.$f->titulo.'</a></h3>';
+
+        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
+      
     echo "</td>";
     echo "</tr>";
 
@@ -99,13 +101,14 @@
   
     echo "<tr>";
     echo'<td class="izq">'; 
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
+        echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">'.$f->titulo.'</a></h3>';
+        
     echo "</td>";
     echo '<td class="der">';
         echo date('d-m-Y', strtotime($f->fecha));
     echo "</td>";
     echo '<td class="der">';
-        echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">'.$f->titulo.'</a></h3>';
+        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
     echo "</td>";
     echo "</tr>";
 

@@ -1,53 +1,62 @@
+<?php 
+$dia = date("d");
+					$mes = date("m");
+					$ano = date("Y");
+					$fecha = "2004-".$mes."-".$dia;
+?>
 
-<!DOCTYPE html>
-<html>
-<head>
 	<title>Configuraciones</title>
 	<link rel="stylesheet" type="text/css" href="./assets/css/Configuracion.css">
-	<script src="jscolor/jscolor.js"></script>
-	<script src="js/jquery.min.js"></script>
+	<script src="./assets/jscolor/jscolor.js"></script>
+	<script src="./assets/js/jquery.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript">
 	function validarContrasena(){
-			var Contrasena = document.getElementById("Contrasena").value;
-				var Contrasena1 = document.getElementById("Contrasena1").value;
-				if(Contrasena.length < 8 || Contrasena.match(/[A-Z]/) == null || Contrasena.match(/[0-9]/) == null){
-					document.getElementById('valContra').innerHTML="*La contrase;a debe de tener minimo 8 carateres, un numero y una mayuscula";
-				}else{
-					document.getElementById('valContra').innerHTML="";
-					if(Contrasena1 != Contrasena){
-						document.getElementById('valCon').innerHTML='*Las contrasenas no coinciden';
+					var Contrasena = document.getElementById("Contrasena").value;
+								var Contrasena1 = document.getElementById("Contrasena1").value;
+								if(Contrasena.length < 8 || Contrasena.match(/[A-Z]/) == null || Contrasena.match(/[0-9]/) == null){
+									document.getElementById('valContra').innerHTML="*La contraseña debe de tener minimo 8 carateres, un número y una mayúscula";
+									x=0
+								}else{
+									document.getElementById('valContra').innerHTML="";
+									if(Contrasena1 != Contrasena){
+										document.getElementById('valCon').innerHTML='*Las contraseñas no coinciden';
+										x=0;
+
+									}else{
+										document.getElementById('valCon').innerHTML="";
+										x=1;
+									}
+								}
+
+				}
+	function validarUsuario(){
+		$.ajax({
+		 			type:  "POST", //método de envio
+	                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
+	                url:   "Ajax.php?c=Usuario&a=ValidarUsuario", //archivo que recibe la peticion
+	                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+	        
+	                 if(res == 0){ 
+	                 	document.getElementById('valUsuario').innerHTML="Este nombre de usuario ya existe";
+	                                    $('#usuarioV').val(0);
+	                }if(res == 1 ){
+	                	document.getElementById('valUsuario').innerHTML="";
+	                                    $('#usuarioV').val(1) ;
+	                }
+	            }
+	        });
+	}
+function validarEdad(){
+					if($("#Edad").val()!=""){
+						$("#valEdad").html("");
+						v = 1;
 					}else{
-						document.getElementById('valCon').innerHTML="";
+						$("#valEdad").html("Introduce una fecha");
+						v = 0;
 					}
 				}
 
-}
-function validarUsuario(){
-
-	$.ajax({
-	 			type:  "POST", //método de envio
-                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-                url:   "ValidarU.php", //archivo que recibe la peticion
-                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-
-                if(res == 0){
-                    document.getElementById('valUsuario').innerHTML="Este nombre de usuario ya existe";
-              } else {
-              		document.getElementById('valUsuario').innerHTML="";
-              	
-                }
-                       
-                }
-        });
-}
-
-function Aceptar(){
-
-	validarUsuario();
-	validarContrasena();
-			
-	}
 
 </script>
 <script type="text/javascript">
@@ -56,76 +65,70 @@ function Aceptar(){
 	        $(".overlay2").fadeOut(400);
 	         $(".popup2").fadeOut(400);
 	    });
-	    $(".Abrir2").click(function(){
-	    		validarUsuario();
-	    		$(".overlay2").fadeIn(400);
-	        	$(".popup2").fadeIn(400);
-
-	    	
-	    });
+	    
 });
 </script>
-</head>
-<body>
+
 
 <?php 
-include "BarraNavegacion.php"; 
-$usuario = $_SESSION['id_usuario'];
-$consulta=mysqli_query($conexion,"SELECT * FROM usuario where id_usuario = $usuario");
-$result=mysqli_fetch_array($consulta);
-$nombre = $result['nombre_usuario'];
-$contrasena = $result['contrasena'];
-if($_SESSION['tipo_usuario']==1){
-	$consultaArtista=mysqli_query($conexion,"SELECT * FROM artista where id_usuario = $usuario");
-$resultArtista=mysqli_fetch_array($consultaArtista);
-$artista = $resultArtista['id_artista'];
-$perfil = $resultArtista['id_perfil'];
-$diseno = $resultArtista['id_diseno'];
-$consultaPerfil=mysqli_query($conexion,"SELECT * FROM perfil where id_perfil = $perfil");
-$resultPerfil=mysqli_fetch_array($consultaPerfil);
+	$id_usuario = $_SESSION['id_usuario'];
+	$us = new UsuarioControlador();
+	$u = $us->Usuario($id_usuario);
+	if($_SESSION['tipo_usuario']==1){	
+		
+		$id_artista = $_SESSION['id_artista'];
+		$ar = new ArtistaControlador();
+		$a = $ar->Artista($id_artista);
 
-$consultaDiseno=mysqli_query($conexion,"SELECT * FROM diseno where id_diseno = $diseno");
-$resultDiseno=mysqli_fetch_array($consultaDiseno);
-}if($_SESSION['tipo_usuario']==2){	
-	$consulta=mysqli_query($conexion,"SELECT * FROM fan where id_usuario = $usuario");
-	$result=mysqli_fetch_array($consulta);
+		$di = new DisenoControlador();
+		$d = $di->Diseno($a->id_diseno);
 
-}
+		$pe = new PerfilControlador();
+		$p = $pe->Perfil($a->id_perfil);
+
+	}if($_SESSION['tipo_usuario']==2){	
+		$Fan = new FanControlador();
+		$f = $Fan->Fan($id_usuario);
+
+	}
 
 ?>
 <div class="Configuracion">
-<!--form enctype="multipart/form-data" action="Contrasena.php" method="POST"-->
+	<input type="hidden" id="usuarioV">
+<form id="formdata" >
 	<div class="General">
 							<h1>Configuraciones</h1>
 							<p>Nombre de usuario:</p>
-								<input type="text" id="Usuario" value="<?php echo $nombre; ?>"></p>
+								<input type="text" name="Usuario" id="Usuario" value="<?php echo $u->nombre_usuario; ?>"></p>
+								<p id="valUsuario"></p>
 								<br>
 							<div class="Columna">
 								
 			                	<br>
 			                	<p>Contrasena:</p>
-			                	<input type="password" id="Contrasena" value="<?php echo $contrasena; ?>">
-			                	<p id="Contra"></p>
+			                	<input type="password" id="Contrasena" name="Contrasena" >
+			                	<p id="valContra"></p>
 			                	<br>
 			                	<p>Confirme contrasena:</p>
-				                <input type="password" id="Contrasena1" value="<?php echo $contrasena; ?>" >
-				                <p id="Con"></p>
+				                <input type="password" id="Contrasena1"  >
+				                <p id="valCon"></p>
 							</div>
 							<div class="Columna">
 								<p>Pais:</p>
 								<select name="Pais">
 									<?php
-								$consulta = mysqli_query($conexion,"SELECT * FROM pais");
-          							while ($valores = mysqli_fetch_array($consulta)) {
-												
-           							echo "<option value=".$valores['id_pais'].">".$valores['nombre_pais']."</option>";
-													
-          								}
+										$us = new UsuarioControlador();
+										$u = $us->Pais();
+          							foreach ($u as $pa) {
+          								echo "<option value=".$pa->id_pais.">".$pa->nombre_pais."</option>";
+          							}
         						?>
+	
 			       				</select>
 								<br>
 								<p>Fecha de nacimiento:</p>
-								<input type="date" name="Edad" value="<?php echo $resultArtista['fn'];?>">
+								<input type="date" name="Edad" id="Edad" max="<?php echo $fecha; ?>" value="<?php echo $a->fn;?>">
+								<p id="valEdad"></p>
 								<br>
 							</div>
 			                <br>
@@ -135,37 +138,41 @@ $resultDiseno=mysqli_fetch_array($consultaDiseno);
 		
 							<h1>Editar Perfil</h1>
 							<div>
+								Informacion:<br>
+								<textarea name="InformacionA"><?php echo $a->informacion_contacto?></textarea>
+							</div>
+							<div>
 								Tecnica de interes:<br>
-								<textarea name="Tecnica"><?php echo $resultArtista['tecnica_interes'];?></textarea>
+								<textarea name="Tecnica"><?php echo $a->tecnica_interes ?></textarea>
 							</div>
 							<div>
 								Metas:<br>
-								<textarea name="Metas"><?php echo $resultPerfil['metas']; ?></textarea>
+								<textarea name="Metas"><?php echo $p->metas; ?></textarea>
 							</div>
 							<div>
 								Estudios:<br>
-								<textarea name="Estudios"><?php echo $resultPerfil['estudios']; ?></textarea>
+								<textarea name="Estudios"><?php echo $p->estudios; ?></textarea>
 							</div>
 							<div>
 								Tiempo como Artista:<br>
-								<textarea name="Exper"><?php echo $resultPerfil['exper']; ?></textarea>
+								<textarea name="Exper"><?php echo $p->exper; ?></textarea>
 							</div>
 							<div>
 								Algo mas para compartir:<br>
-								<textarea name="Otro"><?php echo $resultPerfil['otro']; ?></textarea>
+								<textarea name="Otro"><?php echo $p->otro; ?></textarea>
 							</div>
 							<div class="Columna">
 								<p>Foto de perfil:</p>
-								<input type="file" name="perfil">
+								<input type="file" name="imagenA" value="<?php echo $a->imagen;?>">
 							</div>
-							<div class="Columna">
+							<!--div class="Columna">
 								<p>Foto de fondo:</p>
 								<input type="file" name="perfil">
-							</div>
+							</div-->
 							<h3>Escoge un diseño</h3>
-							<img src="imagenes/Perfil1.jpg"><input type="radio" name="Diseno">
-							<img src="imagenes/Perfil2.jpg"><input type="radio" name="Diseno">
-							<img src="imagenes/Perfil3.jpg"><input type="radio" name="Diseno">	
+							<img src="imagenes/Perfil1.jpg"><input type="radio" name="Diseno" id="Diseno1" value="1">
+							<img src="imagenes/Perfil2.jpg"><input type="radio" name="Diseno" id="Diseno2" value="2">
+							<img src="imagenes/Perfil3.jpg"><input type="radio" name="Diseno" id="Diseno3" value="3">	
 							<h3>Paleta de colores:</h3>
 							<div><input type="radio" name="TipoP"> Blanco/Negro <br>
 							<input type="radio" name="TipoP"> Frio <br>
@@ -173,28 +180,27 @@ $resultDiseno=mysqli_fetch_array($consultaDiseno);
 							<input type="radio" name="TipoP"> Personalizado </div>	
 							<div class="Columna">
 									<p>Color de Bordes:</p>
-									 <input class="jscolor" value="<?php echo $resultDiseno['color_bordes']; ?>">
+									 <input class="jscolor" name="Bordes" value="<?php echo $d->color_bordes; ?>">
 									<p>Color Texto:</p>
-									 <input class="jscolor" value="<?php echo $resultDiseno['color_titulos']; ?>">
+									 <input class="jscolor" name="Texto" value="<?php echo $d->color_titulos; ?>">
 								</div>
 								<div class="Columna">
 									<p>Color de Fondo:</p>
-									<input class="jscolor" value="<?php echo $resultDiseno['color_fondo']; ?>">
+									<input class="jscolor" name="Fondo" value="<?php echo $d->color_fondo; ?>">
 									<p>Color de botones:</p>
-									<input class="jscolor" value="<?php echo $resultDiseno['color_botones']; ?>">
+									<input class="jscolor" name="Botones" value="<?php echo $d->color_botones; ?>">
 
 								</div>		
-
-						<a class="Abrir2 boton">Aceptar</a>
+						<a class="boton Aceptar">Aceptar</a>
 	</div>
 	<div class="Fan" id="Fan">
 						<p>Informacion de contacto</p>
-						<textarea name="DatosFan"><?php echo $result['informacion_contacto']; ?>
+						<textarea name="DatosFan"><?php echo $f->informacion_contacto; ?>
 						</textarea>
 						<p>Perfil:</p>
-						<textarea name="PerfilFan"><?php echo $result['perfil']; ?></textarea>
+						<textarea name="PerfilFan"><?php echo $f->perfil; ?></textarea>
 						<p>Foto de perfil:</p>
-						<input type="file" name="perfil">
+						<input type="file" name="imagenF">
 						<br>
 						<input type="submit" name="subir" value="Aceptar">
 						
@@ -204,45 +210,63 @@ $resultDiseno=mysqli_fetch_array($consultaDiseno);
 				<div class="Pop">
 					<h1>Confirmar contraseña actual</h1>
 					<fieldset>
-							<input type="password" name="submit" value="contrasena">
-							<input type="submit" name="Aceptar" value="Subir">
-						</form>
-						<input type="submit" value="Cerrar" class="Close">
+							<input type="password" name="ContraA" >
+							<p id="ContraA"></p>
+							<a class ="boton Contra"> Aceptar </a>
+						<n>
+						<a class="boton Close">Cerrar</a>
 					</fieldset>
 				</div>
 		
 		</div>
 	</div>
+	</form>
 
 </div>	
-</body>
-</html>
 <script type="text/javascript">
 	$(document).ready(function(){
 			
-	    	$("#Usuario").change(function(){
-  
-				alert("Hola");
-				$.ajax({
-				 			type:  "POST", //método de envio
-			                data: $("#Datos").serialize(), //datos que se envian a traves de ajax
-			                url:   "ValidarUsuario.php", //archivo que recibe la peticion
-			                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-			                alert(res);
-			                if(res == 0){
-			                    document.getElementById('valUsuario').innerHTML="Este nombre de usuario ya existe";
-			              } else {
-			              		document.getElementById('valUsuario').innerHTML="";
-			              	
-			                }
-			                       
-			                }
-			        });
-		   
-		});
-		$('#Diseno<?php echo $resultDiseno['tipo_perfil'];?>').attr('checked', true);
+	    $(".Aceptar").click(function(){
+
+					//validarContrasena();
+					validarUsuario();
+					validarEdad();
+					y = $("#usuarioV").val();
+
+					//(v==1) && (w==1) && (x==1) && (y==1) && (z==1)
+					if((v==1) && (y==1)){
+						$(".overlay2").fadeIn(400);
+	        			$(".popup2").fadeIn(400);
+		  			}
+		    });
+
+	    $(".Contra").click(function(){
+				
+					$.ajax({
+		 			type:  "POST", //método de envio
+	                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
+	                url:   "Ajax.php?c=Usuario&a=ValidarContrasena", //archivo que recibe la peticion
+	                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+	        			
+	                 	if(res == 1){ 
+	                 	document.getElementById('ContraA').innerHTML="La contrasena es incorrecta";
+	                 	}
+	                 	if( res== 0){
+	                 		$.ajax({
+				 					type:  "POST", //método de envio
+					                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
+					                url:   "Ajax.php?c=Usuario&a=Configuracion", //archivo que recibe la peticion
+					                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+					        		location.reload();
+					            	}
+			        		});
+	                 	}
+	            	}
+	        	});
+		    });
+		$('#Diseno<?php echo $d->tipo_perfil;?>').attr('checked', true);
 });
-+</script>
+</script>
 	<?php
 			if($_SESSION['tipo_usuario']==1){
 				echo "<script Language='JavaScript'>
