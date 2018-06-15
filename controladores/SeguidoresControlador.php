@@ -28,6 +28,30 @@
 			return $lista;
 
 		}
+        public function ListaSiguiendo(){
+            $this->start();
+                $id_usuario = $_SESSION['id_usuario'];
+                $stmt = $this->pdo->prepare(
+                    "SELECT * FROM seguidores where id_usuario1 = $id_usuario"
+                );
+
+                $stmt->execute();
+                $lista = array();
+                while($Seguidor = $stmt->fetch(PDO::FETCH_ASSOC)):
+                $Seguidores = new SeguidoresModelo();
+                $Seguidores->set(
+                    $Seguidor["id_seguidores"],
+                    $Seguidor["id_usuario1"],
+                    $Seguidor["id_usuario2"]
+                );
+                $lista[] = $Seguidores;
+
+            endwhile;
+           
+
+            $this->stop();
+            return $lista;
+        }
         public function Siguiendo($id_usuario2){
             $this->start();
                 $id_usuario1 = $_SESSION['id_usuario'];

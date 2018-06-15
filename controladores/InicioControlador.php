@@ -12,35 +12,39 @@
                      $listaU[$con] = $_SESSION['id_artista'];
 
                    }
-               /* foreach ($am as $a) {
+                foreach ($am as $a) {
                     $con++;
                     $artista = new ArtistaControlador();
                    if($a->id_usuario1 == $_SESSION['id_usuario']){
-                        $ar = $artista->Artista($a->id_usuario2);
+                        $ar = $artista->ArtistaUsuario($a->id_usuario2);
                         $listaU[$con] = $ar->id_usuario;
                    }
                    if($a->id_usuario1 == $_SESSION['id_usuario']){
-                        $ar = $artista->Artista($a->id_usuario2);
+                        $ar = $artista->ArtistaUsuario($a->id_usuario2);
                         $listaU[$con] = $ar->id_usuario;
                    }
 
-                }*/
+                }
                 $Seguidores = new SeguidoresControlador();
-                $se  = $Seguidores->ListaSeguidores();
+                $se  = $Seguidores->ListaSiguiendo();
                 foreach ($se as $s) {
                         $con++;
                         $artista = new ArtistaControlador();
-                        $ar = $artista->Artista($s->id_usuario2);
-                        $listaU[$con] = $ar->id_usuario;
-                        echo "----------------".$s->id_usuario2;
+                        $ar = $artista->ArtistaUsuario($s->id_usuario2);
+                        $listaU[$con] = $ar->id_artista;
                    
                 }
-                $x = implode(",", $listaU);
-                echo "-----------------------".$x;
-                $stmt = $this->pdo->prepare(
-                    "SELECT * FROM publicacion where ocultar = 0 and id_artista in ($x) order by id_publicacion DESC"
+                 $x = implode(",", $listaU);
+                $Usuarios = new UsuarioControlador();
+                $u = $Usuarios->Usuario($_SESSION['id_usuario']);
+                if($u->permitir_18==1){
+                     $c = "0,1";
+                }else{
+                     $c = "0";
+                }
+               $stmt = $this->pdo->prepare(
+                    "SELECT * FROM publicacion where ocultar = 0 and id_artista in ($x) and contenido_explicito in ($c) order by id_publicacion DESC"
                 );
-
                 $stmt->execute();
 
                 $lista = array();
@@ -73,7 +77,7 @@
         public function InicioUsuario(){
             $this->start();
                 $stmt = $this->pdo->prepare(
-                    "SELECT * FROM publicacion where contenido_explicito = 0 and privacidad = 0 and imagen is not null order by id_publicacion DESC"
+                    "SELECT * FROM publicacion where contenido_explicito = 0 and privacidad = 0 and imagen is not null and contenido_explicito = 0 order by id_publicacion DESC"
                 );
 
                 $stmt->execute();

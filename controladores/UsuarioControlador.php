@@ -295,5 +295,39 @@
                         $stmt->execute();
             $this->stop();
         }
+        public function MayoriaEdad(){
+            $this->start();
+                $stmt = $this->pdo->prepare(
+                            "SELECT * from  usuario where contenido_explicito = 0"
+                        );
+                $stmt->execute();
+
+            $thid->stop();
+
+        }
+        public function ContenidoOculto(){
+              $this->start();
+                $stmt = $this->pdo->prepare(
+                            "SELECT * from  usuario where  permitir_18 = 1"
+                        );
+                $stmt->execute();
+                $lista = array();
+                while($Usuario = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    $Usuarios = new UsuarioModelo;
+                    
+                    $Usuarios->set(
+                        $Usuario["id_usuario"],
+                        $Usuario["contrasena"],
+                        $Usuario["correo"],
+                        $Usuario["nombre_usuario"],
+                        $Usuario["bloqueado"],
+                        $Usuario["tipo_usuario"],
+                        $Usuario["permitir_18"]
+                    );
+                    $lista[] = $Usuarios;
+                }
+            $thid->stop();
+            return $lista;
+        }
     }
 ?>
