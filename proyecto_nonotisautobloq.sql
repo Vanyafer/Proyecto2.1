@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2018 a las 20:36:07
+-- Tiempo de generación: 18-06-2018 a las 21:28:07
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.2
 
@@ -34,22 +34,6 @@ CREATE TABLE `amigos` (
   `id_usuario1` int(11) DEFAULT NULL,
   `id_usuario2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Disparadores `amigos`
---
-DELIMITER $$
-CREATE TRIGGER `noti_aceptosoli` AFTER UPDATE ON `amigos` FOR EACH ROW begin
-insert into notificaciones values (NULL, 6, "acepto tu solicitud de amistad.", NEW.id_usuario1, 0, NOW(), NEW.id_usuario1);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `noti_nuevasoli` AFTER INSERT ON `amigos` FOR EACH ROW begin
-insert into notificaciones values (NULL, 5, "desea agregarte como amigo.", NEW.id_usuario1, 0, NOW(), NEW.id_usuario1);
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -100,7 +84,8 @@ CREATE TABLE `bloqueados` (
 --
 
 INSERT INTO `bloqueados` (`id_bloqueado`, `id_usuario`, `inicio`, `fin`, `expirado`) VALUES
-(10, 2, '2018-06-14 13:24:14', '2018-06-15 13:24:14', 0);
+(10, 2, '2018-06-14 13:24:14', '2018-06-15 13:24:14', 1),
+(11, 3, '2018-06-18 09:40:57', '2018-06-19 09:40:57', 0);
 
 --
 -- Disparadores `bloqueados`
@@ -138,16 +123,6 @@ CREATE TABLE `comentario` (
   `id_publicacion` int(11) DEFAULT NULL,
   `ocultar` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Disparadores `comentario`
---
-DELIMITER $$
-CREATE TRIGGER `noti_comentario` AFTER INSERT ON `comentario` FOR EACH ROW begin
-insert into notificaciones values (NULL, 2, "ha comentado tu publicacion.", NEW.id_usuario, 0, NOW(), NEW.id_publicacion);
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -245,16 +220,6 @@ CREATE TABLE `foro_respuesta` (
   `ocultar` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Disparadores `foro_respuesta`
---
-DELIMITER $$
-CREATE TRIGGER `noti_respuesta` AFTER INSERT ON `foro_respuesta` FOR EACH ROW begin
-insert into notificaciones values (NULL , 3, "ha respondido en tu hilo", NEW.id_usuario, 0, NOW(), NEW.id_forohilo);
-END
-$$
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
@@ -326,16 +291,6 @@ CREATE TABLE `me_gusta` (
   `id_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Disparadores `me_gusta`
---
-DELIMITER $$
-CREATE TRIGGER `noti_megusta` AFTER INSERT ON `me_gusta` FOR EACH ROW begin
-insert into notificaciones values (NULL, 1, "ha evaluado tu publicacion.", NEW.id_usuario, 0, NOW(), NEW.id_publicacion);
-END
-$$
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
@@ -362,6 +317,22 @@ CREATE TABLE `notificaciones` (
   `fecha` datetime DEFAULT NULL,
   `id_evento` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `notificaciones`
+--
+
+INSERT INTO `notificaciones` (`id_notificacion`, `tipo`, `contenido`, `id_usuario`, `visto`, `fecha`, `id_evento`) VALUES
+(19, 7, 'Uno de tus comentarios ha sido reportado.', 2, 0, '2018-06-17 23:53:15', 12),
+(20, 7, 'Uno de tus comentarios ha sido reportado.', 2, 0, '2018-06-17 23:53:17', 13),
+(21, 7, 'Uno de tus comentarios ha sido reportado.', 2, 0, '2018-06-17 23:53:18', 14),
+(22, 7, 'Uno de tus comentarios ha sido reportado.', 2, 0, '2018-06-17 23:53:19', 15),
+(23, 7, 'Uno de tus comentarios ha sido reportado.', 2, 0, '2018-06-17 23:53:20', 16),
+(24, 7, 'Uno de tus comentarios ha sido reportado.', 4, 0, '2018-06-18 09:38:54', 17),
+(25, 7, 'Uno de tus comentarios ha sido reportado.', 4, 0, '2018-06-18 09:38:55', 18),
+(26, 7, 'Uno de tus comentarios ha sido reportado.', 4, 0, '2018-06-18 09:38:55', 19),
+(27, 7, 'Uno de tus comentarios ha sido reportado.', 4, 0, '2018-06-18 09:38:55', 20),
+(28, 7, 'Uno de tus comentarios ha sido reportado.', 4, 0, '2018-06-18 09:38:59', 21);
 
 -- --------------------------------------------------------
 
@@ -461,14 +432,15 @@ CREATE TABLE `reportes_comentarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Disparadores `reportes_comentarios`
+-- Volcado de datos para la tabla `reportes_comentarios`
 --
-DELIMITER $$
-CREATE TRIGGER `noti_reportecom` AFTER INSERT ON `reportes_comentarios` FOR EACH ROW begin
-insert into notificaciones values (NULL, 7, "Uno de tus comentarios ha sido reportado.", NEW.id_reportero, 0, NOW(), NEW.id_reporte);
-END
-$$
-DELIMITER ;
+
+INSERT INTO `reportes_comentarios` (`id_reporte`, `id_comentario`, `id_reportado`, `id_reportero`, `razon`, `estatus`, `fecha`) VALUES
+(17, 1, 3, 4, 'aa', 1, '2018-06-18'),
+(18, 1, 3, 4, 'aa', 1, '2018-06-18'),
+(19, 1, 3, 4, 'aa', 1, '2018-06-18'),
+(20, 1, 3, 4, 'aa', 1, '2018-06-18'),
+(21, 1, 3, 4, 'aa', 1, '2018-06-18');
 
 -- --------------------------------------------------------
 
@@ -486,16 +458,6 @@ CREATE TABLE `reportes_publicaciones` (
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Disparadores `reportes_publicaciones`
---
-DELIMITER $$
-CREATE TRIGGER `noti_reportepub` AFTER INSERT ON `reportes_publicaciones` FOR EACH ROW begin
-insert into notificaciones values (NULL, 8, "Una de tus publicaciones ha sido reportada.", NEW.id_reportero, 0, NOW(), NEW.id_reporte);
-END
-$$
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
@@ -510,16 +472,6 @@ CREATE TABLE `reportes_usuarios` (
   `estatus` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Disparadores `reportes_usuarios`
---
-DELIMITER $$
-CREATE TRIGGER `noti_reporteusu` AFTER INSERT ON `reportes_usuarios` FOR EACH ROW begin
-insert into notificaciones values (NULL, 9, "Tu cuenta ha sido reportada.", NEW.id_reportero, 0, NOW(), NEW.id_reporte);
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -556,16 +508,6 @@ CREATE TABLE `seguidores` (
   `id_usuario1` int(11) DEFAULT NULL,
   `id_usuario2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Disparadores `seguidores`
---
-DELIMITER $$
-CREATE TRIGGER `noti_seguidor` AFTER INSERT ON `seguidores` FOR EACH ROW begin
-insert into notificaciones values (NULL, 4, "comenzo a seguirte", NEW.id_usuario1, 0, NOW(), NEW.id_usuario1);
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -618,17 +560,25 @@ CREATE TABLE `usuario` (
   `contrasena` varchar(50) DEFAULT NULL,
   `correo` varchar(30) DEFAULT NULL,
   `nombre_usuario` varchar(50) DEFAULT NULL,
-  `fn` date NOT NULL,
+  `fn` date DEFAULT NULL,
   `pais` int(11) DEFAULT NULL,
   `bloqueado` int(11) DEFAULT NULL,
   `tipo_usuario` int(11) DEFAULT NULL,
   `permitir_18` int(11) DEFAULT NULL,
   `reset` varchar(50) DEFAULT NULL,
-  `auto5` int(11) NOT NULL,
+  `auto5` int(11) DEFAULT NULL,
   `auto10` int(11) DEFAULT NULL,
   `auto15` int(11) DEFAULT NULL,
   `auto20` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `contrasena`, `correo`, `nombre_usuario`, `fn`, `pais`, `bloqueado`, `tipo_usuario`, `permitir_18`, `reset`, `auto5`, `auto10`, `auto15`, `auto20`) VALUES
+(3, 'aa', 'aa', 'aa', '1999-03-16', 1, 1, 1, 1, 'aa', 2, 0, 0, 0),
+(4, 'aa', 'aa', 'aa', '1999-03-16', 1, 0, 1, 1, 'aa', 0, 0, 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -893,7 +843,7 @@ ALTER TABLE `artista`
 -- AUTO_INCREMENT de la tabla `bloqueados`
 --
 ALTER TABLE `bloqueados`
-  MODIFY `id_bloqueado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_bloqueado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `coleccion`
@@ -983,7 +933,7 @@ ALTER TABLE `moderador`
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `pais`
@@ -1013,7 +963,7 @@ ALTER TABLE `publicacion`
 -- AUTO_INCREMENT de la tabla `reportes_comentarios`
 --
 ALTER TABLE `reportes_comentarios`
-  MODIFY `id_reporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_reporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `reportes_publicaciones`
@@ -1061,7 +1011,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -1200,12 +1150,6 @@ DELIMITER $$
 --
 -- Eventos
 --
-CREATE DEFINER=`root`@`localhost` EVENT `autobloq_10reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:38' ON COMPLETION NOT PRESERVE ENABLE DO begin
-update usuario join (select id_reportado, estatus from reportes_comentarios where estatus = 1 group by id_reportado having count(*) = 10 ) reportes_comentarios ON usuario.id_usuario = reportes_comentarios.id_reportado AND auto10 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto10 = 1;
-update usuario join (select id_reportado, estatus from reportes_publicaciones where estatus = 1 group by id_reportado having count(*) = 10 ) reportes_publicaciones ON usuario.id_usuario = reportes_publicaciones.id_reportado AND auto10 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto10 = 1;
-update usuario join (select id_reportado, estatus from reportes_usuarios where estatus = 1 group by id_reportado having count(*) = 10 ) reportes_usuarios ON usuario.id_usuario = reportes_usuarios.id_reportado AND auto10 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto10 = 1;
-end$$
-
 CREATE DEFINER=`root`@`localhost` EVENT `expirar_bloqueado` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-07 13:50:54' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE bloqueados SET expirado = 1 WHERE fin < NOW()$$
 
 CREATE DEFINER=`root`@`localhost` EVENT `autobloq_insert` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 13:47:54' ON COMPLETION NOT PRESERVE ENABLE DO begin
@@ -1219,19 +1163,25 @@ insert into bloqueados values (null, (select id_usuario from usuario where auto2
 update usuario set auto20 = 2 where auto20 = 1;
 end$$
 
-CREATE DEFINER=`root`@`localhost` EVENT `autobloq_5reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:38' ON COMPLETION NOT PRESERVE ENABLE DO begin
+CREATE DEFINER=`root`@`localhost` EVENT `autobloq_5reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:39' ON COMPLETION NOT PRESERVE ENABLE DO begin
 update usuario join (select id_reportado, estatus from reportes_comentarios where estatus = 1 group by id_reportado having count(*) = 5 ) reportes_comentarios ON usuario.id_usuario = reportes_comentarios.id_reportado AND auto5 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto5 = 1;
 update usuario join (select id_reportado, estatus from reportes_publicaciones where estatus = 1 group by id_reportado having count(*) = 5 ) reportes_publicaciones ON usuario.id_usuario = reportes_publicaciones.id_reportado AND auto5 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto5 = 1;
 update usuario join (select id_reportado, estatus from reportes_usuarios where estatus = 1 group by id_reportado having count(*) = 5 ) reportes_usuarios ON usuario.id_usuario = reportes_usuarios.id_reportado AND auto5 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto5 = 1;
 end$$
 
-CREATE DEFINER=`root`@`localhost` EVENT `autobloq_15reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:38' ON COMPLETION NOT PRESERVE ENABLE DO begin
+CREATE DEFINER=`root`@`localhost` EVENT `autobloq_10reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:41' ON COMPLETION NOT PRESERVE ENABLE DO begin
+update usuario join (select id_reportado, estatus from reportes_comentarios where estatus = 1 group by id_reportado having count(*) = 10 ) reportes_comentarios ON usuario.id_usuario = reportes_comentarios.id_reportado AND auto10 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto10 = 1;
+update usuario join (select id_reportado, estatus from reportes_publicaciones where estatus = 1 group by id_reportado having count(*) = 10 ) reportes_publicaciones ON usuario.id_usuario = reportes_publicaciones.id_reportado AND auto10 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto10 = 1;
+update usuario join (select id_reportado, estatus from reportes_usuarios where estatus = 1 group by id_reportado having count(*) = 10 ) reportes_usuarios ON usuario.id_usuario = reportes_usuarios.id_reportado AND auto10 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto10 = 1;
+end$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `autobloq_15reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:43' ON COMPLETION NOT PRESERVE ENABLE DO begin
 update usuario join (select id_reportado, estatus from reportes_comentarios where estatus = 1 group by id_reportado having count(*) = 15 ) reportes_comentarios ON usuario.id_usuario = reportes_comentarios.id_reportado AND auto15 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto15 = 1;
 update usuario join (select id_reportado, estatus from reportes_publicaciones where estatus = 1 group by id_reportado having count(*) = 15 ) reportes_publicaciones ON usuario.id_usuario = reportes_publicaciones.id_reportado AND auto15 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto15 = 1;
 update usuario join (select id_reportado, estatus from reportes_usuarios where estatus = 1 group by id_reportado having count(*) = 15 ) reportes_usuarios ON usuario.id_usuario = reportes_usuarios.id_reportado AND auto15 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto15 = 1;
 end$$
 
-CREATE DEFINER=`root`@`localhost` EVENT `autobloq_20reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:38' ON COMPLETION NOT PRESERVE ENABLE DO begin
+CREATE DEFINER=`root`@`localhost` EVENT `autobloq_20reportes` ON SCHEDULE EVERY 1 SECOND STARTS '2018-06-11 12:56:45' ON COMPLETION NOT PRESERVE ENABLE DO begin
 update usuario join (select id_reportado, estatus from reportes_comentarios where estatus = 1 group by id_reportado having count(*) = 20 ) reportes_comentarios ON usuario.id_usuario = reportes_comentarios.id_reportado AND auto20 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto20 = 1;
 update usuario join (select id_reportado, estatus from reportes_publicaciones where estatus = 1 group by id_reportado having count(*) = 20 ) reportes_publicaciones ON usuario.id_usuario = reportes_publicaciones.id_reportado AND auto20 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto20 = 1;
 update usuario join (select id_reportado, estatus from reportes_usuarios where estatus = 1 group by id_reportado having count(*) = 20 ) reportes_usuarios ON usuario.id_usuario = reportes_usuarios.id_reportado AND auto20 = 0 AND bloqueado = 0 SET usuario.bloqueado=1, auto20 = 1;
