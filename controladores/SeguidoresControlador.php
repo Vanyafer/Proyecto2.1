@@ -80,7 +80,9 @@
                 );
 
                 $stmt->execute();
-
+                $Noti = new NotificacionesControlador();
+                $Noti->Insert(4,$id_usuario1,$id_usuario1,$id_usuario2);
+           // $stmt = $this->pdo->prepare(
                 header("Location: Control.php?c=Perfiles&a=Perfiles&id=$id_usuario2");
         }
         public function DejarSeguir(){

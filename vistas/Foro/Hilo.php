@@ -89,7 +89,7 @@
 	if($fav == 1){
 		echo "<script>$('#fav').html('Eliminar de favoritos'); $('#fav').attr('href','Control.php?c=Foro&a=EliminarFavs&id=".$id_forohilo."');</script>";
 	}
-	if($hi->id_usuario == $_SESSION['id_usuario']){
+	if($hi->id_usuario == $_SESSION['id_usuario'] || $_SESSION['tipo_usuario'] == 3){
 
 			echo "<script>$('#Accion').html('Eliminar foro'); $('#Accion').attr('href','Control.php?c=Foro&a=EliminarForoUsuario&id_f=".$id_forohilo."');</script>";
 	}

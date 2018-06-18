@@ -6,41 +6,15 @@
 
 
 
-			$id = $_GET['idp'];
+			$id = $_POST['idp'];
 			$ini = new InicioControlador();
 			$p = $ini->PublicacionInfo($id);
 			
 	
 
 		?>
-<script type="text/javascript">
-	
-		$(".EliminarComentario").click(function(){
-				id=$(this).attr("id");
-		    	$("#id_c").val(id);
-				$.ajax({
 
-		    		url:'Ajax.php?c=Comentario&a=EliminarComentarioUsuario',
-		    		method:'POST',
-		    		data: $("#ComentarioN").serialize(),
-		    		 success: function(res){
-			    		 $.ajax({
-				    		url:'Ajax.php?c=Inicio&a=Publicacion',
-				    		method:'POST',
-				    		data: $("#idp").serialize(),
-				    		 success: function(res){
-				    		 	$(".Imagen").html(res);
-			    		 }	
-			    		});
-		    		 	$("#Comentario").val("");
-		    		 }	
-		    		});
-				bandera = 1;
-		  });
-		
-	
 
-</script>
 
 <div class="PopImagen">
      		<h1 ><a href=""  class="usuario"></a><samp id="Close">x</samp></h1>
@@ -99,14 +73,6 @@
 				</div>
 				
 			</div>
-
-	<div>
-		<?php  
-			echo '<a id="Accion"> </a>';
-		?>
-		
-	</div>
-			
 			
 	</div>
 	</div>
@@ -119,19 +85,3 @@
 
 
 
-<?php
-
-$art = new ArtistaControlador();
-$a = $art->Artista($p->id_artista);
-
-if(isset($_SESSION['id_artista'])){
-if($p->id_artista == $_SESSION['id_artista'] || $_SESSION['tipo_usuario']==3){
-	echo "<script>
-				$('#Accion').attr('href','Control.php?c=Inicio&a=EliminarPublicacionUsuario&id=".$id."');
-				$('#Accion').html('Eliminar publicacion');
-				
-		</script>";
-	}
-}
-	
-?>

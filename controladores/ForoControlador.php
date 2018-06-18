@@ -18,7 +18,8 @@
 						$F['contenido'],
 						$F['titulo'],
 						$F['id_forotipo'],
-						$F['id_usuario']
+						$F['id_usuario'],
+						$F['ocultar']
 			                    );
               $this->stop();
           return $Foro;
@@ -37,7 +38,8 @@
 						$F['contenido'],
 						$F['titulo'],
 						$F['id_forotipo'],
-						$F['id_usuario']
+						$F['id_usuario'],
+						$F['ocultar']
 			                    );
               $this->stop();
           return $Foro;
@@ -138,7 +140,8 @@
 						$F['contenido'],
 						$F['titulo'],
 						$F['id_forotipo'],
-						$F['id_usuario']
+						$F['id_usuario'],
+						$F['ocultar']
 			                    );
                     $lista[] = $Foro;
                 }

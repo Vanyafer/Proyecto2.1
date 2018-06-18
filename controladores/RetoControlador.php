@@ -10,7 +10,7 @@
                 $stmt->execute();
                 $stmt->execute();
                 $Reto = $stmt->fetch(PDO::FETCH_ASSOC);
-                $Retos = new RetonModelo();
+                $Retos = new RetoModelo();
                 $Retos->set(
                     $Reto["id_reto"],
                     $Reto["fecha"],

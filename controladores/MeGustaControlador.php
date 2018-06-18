@@ -5,6 +5,7 @@
   			$id_publicacion = $_POST['publicacionC'];
   			$id_usuario = $_SESSION['id_usuario'];
   			$this->start();
+        $noti = new NotificacionesControlador();
   			$stmt = $this->pdo->prepare(
                       "SELECT * FROM me_gusta WHERE id_usuario = $id_usuario and id_publicacion = $id_publicacion"
                   );
@@ -33,9 +34,18 @@
                }else{
                	$stmt = $this->pdo->prepare(
                       "INSERT into me_gusta VALUES(NULL,$tipo_me_gusta,$id_publicacion,$id_usuario)"
+                      
+
                   );
+
                   $stmt->execute();
-               }
+                  $Noti = new NotificacionesControlador();
+                  $publicacion = new InicioControlador();
+                  $p = $publicacion->PublicacionInfo($id_publicacion);
+                  $ar = new ArtistaControlador();
+                  $a = $ar->Artista($p->id_artista);
+                  $Noti->Insert(1,$id_usuario,$id_publicacion,$a->id_usuario);
+           }
             $this->stop();
     }
     public function MeGustaConsulta($id_publicacion){

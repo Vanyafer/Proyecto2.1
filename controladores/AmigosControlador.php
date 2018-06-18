@@ -44,7 +44,7 @@
                     $Amigo["id_usuario1"],
                     $Amigo["id_usuario2"]
                 );
-               
+               $this->stop();
             return $Amigos;
         
         }
@@ -121,6 +121,8 @@
                 );
 
                 $stmt->execute();
+                $Noti = new NotificacionesControlador();
+                $Noti->Insert(6,$id_usuario1,$id_usuario1,$id_usuario2);
                 $this->stop();
                 header("Location: Control.php?c=Perfiles&a=Perfiles&id=$id_usuario2");
         }
@@ -145,8 +147,33 @@
                 );
 
                 $stmt->execute();
+
+                $amigo = new AmigosControlador();
+                $a = $amigo->Amistad($id_amigos);
+                $Noti = new NotificacionesControlador();
+                $Noti->Insert(5,$a->id_usuario2,$a->id_usuario2,$a->id_usuario1);
+                
+
                 $this->stop();
                 header("Location: Control.php?c=Perfiles&a=Perfiles&id=$id_usuario");
+        }
+        public function Amistad($id_amigos){
+                $this->start();
+                $stmt = $this->pdo->prepare(
+                    "SELECT * FROM amigos where id_amigos = $id_amigos"
+                );
+                $stmt->execute();
+
+                $Amigo = $stmt->fetch(PDO::FETCH_ASSOC);
+                $Amigos = new AmigosModelo();
+                $Amigos->set(
+                    $Amigo["id_amigos"],
+                    $Amigo["estado"],
+                    $Amigo["id_usuario1"],
+                    $Amigo["id_usuario2"]
+                );
+               $this->stop();
+               return $Amigos;
         }
 	}
 ?>

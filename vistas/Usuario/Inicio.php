@@ -26,14 +26,14 @@
 		    	$("#idp").val(id);
 
 		    	usuario = $(this).attr("idu");
-		    	direccion = "Control.php?c=Perfiles&a=Perfiles&id="+usuario;
+		    	direccion = "Usuario.php?c=Perfiles&a=Perfiles&id="+usuario;
 		    	$(".usuario").attr("href",direccion);
 		    	
 		    	usuario = $(this).attr("name");
 		    	$(".usuario").html(usuario);
 
 		    	$.ajax({
-		    		url:'Ajax.php?c=Inicio&a=Publicacion',
+		    		url:'Ajax.php?c=Inicio&a=PublicacionSola',
 		    		method:'POST',
 		    		data: $("#idp").serialize(),
 		    		 success: function(res){

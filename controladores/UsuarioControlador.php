@@ -75,7 +75,7 @@
                     $Pais = $_POST['Pais'];
 
                    $stmt = $this->pdo->prepare(
-                            "INSERT into usuario VALUES(NULL,sha('$contrasena'),'$correo','$usuario',0,$Tipo,0)"
+                            "INSERT into usuario VALUES(NULL,sha('$contrasena'),'$correo','$usuario','$Edad',$Pais,0,$Tipo,0,0,0,0,0,0)"
                         );
                     $stmt->execute();
                     $stmt = $this->pdo->prepare(
@@ -117,7 +117,7 @@
                         $id_perfil = $per->Insert($Metas,$Exper,$Otro,$Estudios);
 
                         $ar = new ArtistaControlador();
-                        $a = $ar->Insert($Edad,$imagen,$infomracion,$tecnica,$Pais,$id_usuario,$id_diseno,$id_portafolio,$id_perfil);
+                        $a = $ar->Insert($imagen,$informacion,$tecnica,$id_usuario,$id_diseno,$id_portafolio,$id_perfil);
                         
                         $_SESSION['id_artista'] = $a;
 
@@ -131,7 +131,7 @@
                             $imagen = $folder.$_FILES["imagenF"]["name"];
                         }
                         $fa = new FanControlador();
-                        $f = $fa->Insert($Edad, $imagenF,$DatosFan, $Perfil,$Pais, $id_usuarip);
+                        $f = $fa->Insert($imagenF,$DatosFan, $Perfil,$id_usuarip);
                         $_SESSION['id_fan'] = $f;
                     }
                         
@@ -161,7 +161,7 @@
 
                     }
                       $stmt = $this->pdo->prepare(
-                            "UPDATE usuario SET  nombre_usuario = '$usuario' where id_usuario = $id_usuario "
+                            "UPDATE usuario SET  nombre_usuario = '$usuario', fn = '$Edad', pais = $Pais where id_usuario = $id_usuario "
                         );
                         $stmt->execute();
                     if($_FILES["imagenA"]["name"]==''){
@@ -188,7 +188,7 @@
                     $artista = new ArtistaControlador();
                     $a = $artista->ArtistaUsuario($id_usuario);
 
-                    $artista->Update($Edad,$imagen,$informacion,$tecnica,$Pais,$a->id_artista);
+                    $artista->Update($imagen,$informacion,$tecnica,$a->id_artista);
 
                     $di = new DisenoControlador();
                     $di->Update($Bordes,$Texto,$Botones,$Fondo,$Diseno,$a->id_diseno);
@@ -218,9 +218,16 @@
                         $Usuario["contrasena"],
                         $Usuario["correo"],
                         $Usuario["nombre_usuario"],
+                        $Usuario["fn"],
+                        $Usuario["pais"],
                         $Usuario["bloqueado"],
                         $Usuario["tipo_usuario"],
-                        $Usuario["permitir_18"]
+                        $Usuario["permitir_18"],
+                        $Usuario["reset"],
+                        $Usuario["auto5"],
+                        $Usuario["auto10"],
+                        $Usuario["auto15"],
+                        $Usuario["auto20"]
                     );
 
            
@@ -304,30 +311,6 @@
 
             $thid->stop();
 
-        }
-        public function ContenidoOculto(){
-              $this->start();
-                $stmt = $this->pdo->prepare(
-                            "SELECT * from  usuario where  permitir_18 = 1"
-                        );
-                $stmt->execute();
-                $lista = array();
-                while($Usuario = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    $Usuarios = new UsuarioModelo;
-                    
-                    $Usuarios->set(
-                        $Usuario["id_usuario"],
-                        $Usuario["contrasena"],
-                        $Usuario["correo"],
-                        $Usuario["nombre_usuario"],
-                        $Usuario["bloqueado"],
-                        $Usuario["tipo_usuario"],
-                        $Usuario["permitir_18"]
-                    );
-                    $lista[] = $Usuarios;
-                }
-            $thid->stop();
-            return $lista;
         }
     }
 ?>

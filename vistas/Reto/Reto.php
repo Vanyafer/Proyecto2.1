@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>Reto</title>
-<link rel="stylesheet" type="text/css" href="css/Reto.css">
+<link rel="stylesheet" type="text/css" href="./assets/css/Reto.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/icomoon/style.css">
     	<script src="js/jquery.min.js"></script>
@@ -29,7 +29,7 @@
 <div class="Reto">
 	<h1>Reto</h1>
 	<div class="Fila">
-		<div class="Descripcion"><?php echo $r->$descripcion; ?></div>
+		<div class="Descripcion"><?php echo $r->descripcion; ?></div>
 		<div class="Subir"  id="subir" ><a class="Abrir1">Subir</a></div>
 	</div>
 	<div class="Fila">
@@ -51,7 +51,6 @@
 	<p>Retos Hechos</p>
 	<div class="ListaR">
 		<ul>
-		<?php echo "<img src=".$result['imagen'].">"; ?>
 		</ul>
 	</div>
 </div>

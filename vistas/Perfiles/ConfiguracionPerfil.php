@@ -99,6 +99,12 @@ if($id_usuario == $_SESSION['id_usuario']|| $_SESSION['tipo_usuario']==3 ){
 		echo "<script>$('#Amigo').html('Solicitud pendiente'); $('#Amigo').attr('href','Control.php?c=Amigos&a=Eliminar&id=".$amigo->id_amigos."&id_usuario=".$id_usuario."');</script>";
 	}
 }
+	if($_SESSION['tipo_usuario']==3){
+		echo "<script>
+				$('#Bandeja').attr('href','Control.php?c=Reportes&a=ReportesUsuario&id_usuario=".$id_usuario."');
+				$('#Bandeja').html('Reportes Usuario');
+			</script>";
+	}
 }else{
 	echo "<script>
 			$('.Dueno').css('display','none');
@@ -108,12 +114,7 @@ if($id_usuario == $_SESSION['id_usuario']|| $_SESSION['tipo_usuario']==3 ){
 		</script>";
 
 }
-if($_SESSION['tipo_usuario']==3){
-	echo "<script>
-			$('#Bandeja').attr('href','Control.php?c=Reportes&a=ReportesUsuario&id_usuario=".$id_usuario."');
-			$('#Bandeja').html('Reportes Usuario');
-		</script>";
-}
+
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){

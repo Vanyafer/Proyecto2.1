@@ -74,6 +74,7 @@ function validarEdad(){
 	$id_usuario = $_SESSION['id_usuario'];
 	$us = new UsuarioControlador();
 	$u = $us->Usuario($id_usuario);
+
 	if($_SESSION['tipo_usuario']==1){	
 		
 		$id_artista = $_SESSION['id_artista'];
@@ -95,7 +96,7 @@ function validarEdad(){
 ?>
 <div class="Configuracion">
 	<input type="hidden" id="usuarioV">
-<form id="formdata" >
+<form  id="formdata" >
 	<div class="General">
 							<h1>Configuraciones</h1>
 							<p>Nombre de usuario:</p>
@@ -118,8 +119,8 @@ function validarEdad(){
 								<select name="Pais">
 									<?php
 										$us = new UsuarioControlador();
-										$u = $us->Pais();
-          							foreach ($u as $pa) {
+										$x = $us->Pais();
+          							foreach ($x as $pa) {
           								echo "<option value=".$pa->id_pais.">".$pa->nombre_pais."</option>";
           							}
         						?>
@@ -127,7 +128,7 @@ function validarEdad(){
 			       				</select>
 								<br>
 								<p>Fecha de nacimiento:</p>
-								<input type="date" name="Edad" id="Edad" max="<?php echo $fecha; ?>" value="<?php echo $a->fn;?>">
+								<input type="date" name="Edad" id="Edad" max="<?php echo $fecha; ?>" value="<?php echo $u->fn; ?>">
 								<p id="valEdad"></p>
 								<br>
 							</div>
@@ -139,7 +140,7 @@ function validarEdad(){
 							<h1>Editar Perfil</h1>
 							<div>
 								Informacion:<br>
-								<textarea name="InformacionA"><?php echo $a->informacion_contacto?></textarea>
+								<textarea name="InformacionA"><?php echo $a->informacion_contacto ?></textarea>
 							</div>
 							<div>
 								Tecnica de interes:<br>

@@ -32,5 +32,16 @@
               $this->stop();
             return $lista;
  	}
+    public function EstatusReporte(){
+        $this->start();
+        $id_reporte = $_GET['id_reporte'];
+        $estatus = $_GET['estatus'];
+        $stmt = $this->pdo->prepare(
+                    "UPDATE reportes_usuarios set estatus = $estatus where id_reporte = $id_reporte "
+                );
+        $stmt->execute();
+        header("location: Control.php?c=Moderador&a=Moderador");
+        $this->stop();
+    }
 	}
 ?>

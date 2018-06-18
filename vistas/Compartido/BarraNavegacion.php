@@ -29,7 +29,7 @@
 	<li><a href="Control.php?c=Foro&a=Foro" class="icon-bullhorn"></a></li>
 	<li><a id="reto" href="Control.php?c=Reto&a=Reto" class="icon-pen Artista"></a></li>
 	
-	<li><a href="" class="icon-newspaper"></a></li>
+	<li><a href="Control.php?c=Notificaciones&a=Notificaciones" class="icon-newspaper"></a></li>
 	<li><a class="icon-quill Abrir Artista moderador"></a></li>
 	<li><a href="Control.php?c=Mensajes&a=BandejaEntrada" class="icon-bubbles4"></a></li>
 	<li><a href="Control.php?c=UsuarioR&a=UsuarioR">U</a></li>
