@@ -30,8 +30,8 @@
 
 	                <input type="email" name="Correo" value="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' "> 
 	                <!--input type="Text" name="Usuario" value="Usuario" onBlur="if(this.value=='')this.value='Usuario'" onFocus="if(this.value=='Usuario')this.value='' "-->
-	                <input type="password" name="Password" value="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' "> 
-	                <a href="validarContrasena">No recuerdo mi contrasena</a>
+	                <input type="password" name="Password" value="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' ">  <br>
+	                <a href="validarContrasena">No recuerdo mi contrasena</a><br>
 	                <input type="submit" value="Aceptar">
 	            </form>
 	            	<input type="submit" value="Cerrar" onclick="Inicio('hide');">

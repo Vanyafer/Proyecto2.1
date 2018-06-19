@@ -36,8 +36,8 @@
       $x = "<a href='Control.php?c=Perfiles&a=Perfiles&id=".$u->id_usuario."'>".$N->contenido."</a>";
     }
     echo "<tr>";
-    echo'<td class="izq">'; 
-        echo $x;
+    echo'<td class="izq">'; ; 
+        echo "<h4>".$x."</h4>";
     echo "</td>";
        
     echo "</tr>";

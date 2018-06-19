@@ -91,6 +91,7 @@ $dia = date("d");
 	</script>
 </head>
 <body>
+<Br>
 	<h1 id="titulo">Registrarse<hr style="color: #1c83a8;"></h1>
 	<div id="Datos">
 	<input type="hidden" id="correoV" >
@@ -229,7 +230,8 @@ $dia = date("d");
 						<input type="file" name="imagenF">
 						<br>
 						<div class="Subir Regreso"><a>Regresar</a></div>
-						<input type="submit" value="Aceptar">
+						<!-input type="submit" value="Aceptar" class="subir"-->
+						<div class="Subir"><a class="Aceptar">Siguiente</a></div>
 						<br>
 			</div>
 		</form>	
