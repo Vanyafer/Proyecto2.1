@@ -10,87 +10,10 @@ $dia = date("d");
 	<link rel="stylesheet" type="text/css" href="assets/css/Diseno.css">
 	<script src="assets/jscolor/jscolor.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
-	<script type="text/javascript">
-				function validarEdad(){
-					if($("#Edad").val()!=""){
-						$("#valEdad").html("");
-						v = 1;
-					}else{
-						$("#valEdad").html("Introduce una fecha");
-						v = 0;
-					}
-				}
-				function validarTerminos(){
-					if($("#Terminos").prop('checked')){
-						w = 1;
-						$("#valTerminos").html("");
-					}else{
-						$("#valTerminos").html("Aceptar terminos y condiciones");
-						w = 0;
-					}
-				}
-				function validarContrasena(){
-					var Contrasena = document.getElementById("Contrasena").value;
-								var Contrasena1 = document.getElementById("Contrasena1").value;
-								if(Contrasena.length < 8 || Contrasena.match(/[A-Z]/) == null || Contrasena.match(/[0-9]/) == null){
-									document.getElementById('valContra').innerHTML="*La contraseña debe de tener minimo 8 carateres, un número y una mayúscula";
-									x=0
-								}else{
-									document.getElementById('valContra').innerHTML="";
-									if(Contrasena1 != Contrasena){
-										document.getElementById('valCon').innerHTML='*Las contraseñas no coinciden';
-										x=0;
 
-									}else{
-										document.getElementById('valCon').innerHTML="";
-										x=1;
-									}
-								}
-
-				}
-				function validarUsuario(){
-
-					$.ajax({
-					 			type:  "POST", //método de envio
-				                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-				                url:   "Ajax.php?c=Usuario&a=ValidarUsuario", //archivo que recibe la peticion
-				                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-				        
-				                 if(res == 0){ 
-				                 	document.getElementById('valUsuario').innerHTML="Este nombre de usuario ya existe";
-				                                    $('#usuarioV').val(0);
-				                }if(res == 1 ){
-				                	document.getElementById('valUsuario').innerHTML="";
-				                                    $('#usuarioV').val(1) ;
-				                }
-				            }
-				        });
-				}
-				function validarCorreo(){
-					 $.ajax({
-					 			type:  "POST", //método de envio
-				                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-				                url:   "Ajax.php?c=Usuario&a=ValidarCorreo", //archivo que recibe la peticion
-				                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-				             
-				                if(res == 0){
-
-				                    document.getElementById('valCorreo').innerHTML="Este correo ya esta registrado";
-				                    $("#correoV").val(0);
-
-				              } if (res == 1) {
-				              		document.getElementById('valCorreo').innerHTML="";
-				              		$("#correoV").val(1);
-				              		
-				                }  
-				                }
-				        });
-					
-				}
-				
-	</script>
 </head>
 <body>
+<Br>
 	<h1 id="titulo">Registrarse<hr style="color: #1c83a8;"></h1>
 	<div id="Datos">
 	<input type="hidden" id="correoV" >
@@ -229,7 +152,8 @@ $dia = date("d");
 						<input type="file" name="imagenF">
 						<br>
 						<div class="Subir Regreso"><a>Regresar</a></div>
-						<input type="submit" value="Aceptar">
+						<input type="submit" value="Aceptar" class="subir">
+						<!--div class="Subir"><a class="Aceptar">Siguiente</a></div-->
 						<br>
 			</div>
 		</form>	
@@ -238,6 +162,7 @@ $dia = date("d");
 
 </body>
 </html>
+<?php include ("Validacion.php"); ?>
 <script type="text/javascript">
 $(document).ready(function(){
 	    	$(".Aceptar").click(function(){
@@ -270,6 +195,6 @@ $(document).ready(function(){
 		    	document.getElementById('Fan').style.display="none";
 		    	document.getElementById('Artista').style.display="none";
 		    });
-	
+			
 });
 </script>

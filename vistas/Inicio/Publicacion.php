@@ -204,17 +204,24 @@ if($m != null){
 							document.getElementById('0').style.color = 'blue' ;</script>";
 				
 				}
-			}
-//$art = new ArtistaControlador();
-//$a = $art->Artista($p->id_artista);
-if(isset($_SESSION['id_artista'])){
-if($p->id_artista == $_SESSION['id_artista'] || $_SESSION['tipo_usuario']==3){
+}
+
+if((isset( $_SESSION['id_artista']) && $p->id_artista == $_SESSION['id_artista']) || $_SESSION['tipo_usuario']==3){
 	echo "<script>
 				$('#Accion').attr('href','Control.php?c=Inicio&a=EliminarPublicacionUsuario&id=".$id."');
 				$('#Accion').html('Eliminar publicacion');
 				
 		</script>";
 	}
+
+if($_SESSION['tipo_usuario']==3){
+	echo "<script Language='JavaScript'>
+				$('.Like').css('display','none');
+				</script>";
+	echo "<script Language='JavaScript'>
+				$('.ComentarioNuevo').css('display','none');
+				</script>";
 }
+
 	
 ?>

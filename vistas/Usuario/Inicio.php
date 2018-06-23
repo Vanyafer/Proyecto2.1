@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>Inicio</title>
+	<!--link rel="stylesheet" type="text/css" href="./assets/css/Publicacion.css"-->
 	<link rel="stylesheet" type="text/css" href="./assets/css/InicioUsuario.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/Publicacion.css">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="./assets/js/jquery.min.js"></script>
@@ -26,14 +26,14 @@
 		    	$("#idp").val(id);
 
 		    	usuario = $(this).attr("idu");
-		    	direccion = "Control.php?c=Perfiles&a=Perfiles&id="+usuario;
+		    	direccion = "Usuario.php?c=Perfiles&a=Perfiles&id="+usuario;
 		    	$(".usuario").attr("href",direccion);
 		    	
 		    	usuario = $(this).attr("name");
 		    	$(".usuario").html(usuario);
 
 		    	$.ajax({
-		    		url:'Ajax.php?c=Inicio&a=Publicacion',
+		    		url:'Ajax.php?c=Inicio&a=PublicacionSola',
 		    		method:'POST',
 		    		data: $("#idp").serialize(),
 		    		 success: function(res){

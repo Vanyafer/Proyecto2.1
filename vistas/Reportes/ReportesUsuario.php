@@ -17,7 +17,7 @@ $con = 0;
 <h1>Reportes</h1>
 </div>
 
-<div class="Foros">
+<div class="Foros Publicacion">
   <?php
   $ReC = new ReportesPublicacionesControlador();
   $Re = $ReC->ListaPublicacionesUsuario($id_usuario);
@@ -62,7 +62,6 @@ $u = $us->Usuario($id_usuario);
   <th class="cinta">Reporte</th>
   <th class="cinta">Fecha</th>
   <th class="cinta">Comentario</th>
-  <th class="cinta">Eliminar</th>
 
   </tr>';
 
@@ -87,9 +86,6 @@ $u = $us->Usuario($id_usuario);
     echo '<td class="der">';
         echo '<h4><a class="Abrir2" name="$u->nombre_usuario" id='.$co->id_publicacion.' idu='.$u->id_usuario.'>'.$co->contenido.'</a></h4>';
     echo "</td>";
-    echo '<td class="der">';
-        echo '<h4><a>Eliminar Comentario</a></h4>';
-    echo "</td>";
     echo "</tr>";
 
   } 
@@ -106,5 +102,10 @@ if($_SESSION['tipo_usuario']==3){
       $('#Moderador').attr('href','Control.php?c=Moderador&a=BloquearUsuario&id_usuario=".$id_usuario."');
       $('#Moderador').html('Bloquear Usuario');
     </script>";
+}
+$us = new UsuarioControlador();
+$u = $us->Usuario($id_usuario);
+if($u->tipo_usuario ==2){
+  echo "<script>$('.Publicacion').css('display','none');</script>";
 }
 ?>

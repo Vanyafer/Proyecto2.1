@@ -18,7 +18,8 @@
                      $F["fecha"],
                      $F["contenido"],
                      $F["id_forohilo"],
-                     $F["id_usuario"]
+                     $F["id_usuario"],
+                     $F["ocultar"]
 			                    );
                     $lista[] = $Res;
                 }
@@ -32,9 +33,16 @@
 				$cont = $_POST['contenido'];
 				$id_usuario = $_SESSION['id_usuario'];
 				$stmt = $this->pdo->prepare(
-	                           "INSERT INTO foro_respuesta VALUES (NULL, NOW(), '$cont', $id_hilo, $id_usuario)"
+	                           "INSERT INTO foro_respuesta VALUES (NULL, NOW(), '$cont', $id_hilo, $id_usuario,0)"
 	                        );
 	        	$stmt->execute();
+            
+            $Noti = new NotificacionesControlador();
+            $foro = new ForoControlador();
+            $f = $foro->HiloContenido($id_hilo);
+            
+            $Noti->Insert(3,$id_usuario,$id_hilo,$f->id_usuario);
+           
         	$this->stop();
 		}
 	}

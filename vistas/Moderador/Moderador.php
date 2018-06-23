@@ -29,7 +29,7 @@ echo '<div class="Foros">
                		echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id='.$u->id_usuario.'" id="usuario">'.$u->nombre_usuario.'</a></h3>';
             	echo "</td>";
            		echo '<td class="der">';
-                	echo '<a href="Control.php?c=Inicio&a=PublicacionSola&idp='.$P->id_publicacion.'" ><img src="'.$P->imagen.'"></a>';
+                	echo '<h4><a class="Abrir2"  name="'.$u->nombre_usuario.'" id='.$r->id_publicacion.' idu='.$u->id_usuario.'>Abrir publicacion</a></h4>';
             	echo "</td>";
               echo '<td class="der">';
                  echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id='.$ur->id_usuario.'" id="usuario">'.$ur->nombre_usuario.'</a></h3>';
@@ -38,8 +38,8 @@ echo '<div class="Foros">
                   echo '<h3>'.$r->razon.'</h3>';
               echo "</td>";
               echo '<td class="der">';
-                  echo '<a href="AprobarReporte.php">Sí</a>';
-                  echo '<a href="DenegarReporte.php">No</a>';
+                  echo '<a href="Control.php?c=ReportesPublicaciones&a=EstatusReporte&id_reporte='.$r->id_reporte.'&estatus=1" >Sí</a>';
+                  echo '<a href="Control.php?c=ReportesPublicaciones&a=EstatusReporte&id_reporte='.$r->id_reporte.'&estatus=2" >No</a>';
               echo "</td>";
         	echo "</tr>";
           }
@@ -69,7 +69,7 @@ echo '<div class="Foros">
                   echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id='.$u->id_usuario.'" id="usuario">'.$u->nombre_usuario.'</a></h3>';
               echo "</td>";
               echo '<td class="der">';
-                  echo '<h3>'.$C->contenido.'</h3>';
+                   echo '<h4><a class="Abrir2" name="'.$u->nombre_usuario.'" id='.$C->id_publicacion.' idu='.$u->id_usuario.'>'.$C->contenido.'</a></h4>';
               echo "</td>";
               echo '<td class="der">';
                   echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id='.$ur->id_usuario.'" id="usuario">'.$ur->nombre_usuario.'</a></h3>';
@@ -78,8 +78,8 @@ echo '<div class="Foros">
                   echo '<h3>'.$r->razon.'</h3>';
               echo "</td>";
               echo '<td class="der">';
-                  echo '<a href="AprobarReporte.php">Sí</a>';
-                  echo '<a href="DenegarReporte.php">No</a>';
+                  echo '<a href="Control.php?c=ReportesComentarios&a=EstatusReporte&id_reporte='.$r->id_reporte.'&estatus=1" >Sí</a>';
+                  echo '<a href="Control.php?c=ReportesComentarios&a=EstatusReporte&id_reporte='.$r->id_reporte.'&estatus=2" >No</a>';
               echo "</td>";
           echo "</tr>";
           }

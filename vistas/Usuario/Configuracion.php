@@ -10,55 +10,7 @@ $dia = date("d");
 	<script src="./assets/jscolor/jscolor.js"></script>
 	<script src="./assets/js/jquery.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="text/javascript">
-	function validarContrasena(){
-					var Contrasena = document.getElementById("Contrasena").value;
-								var Contrasena1 = document.getElementById("Contrasena1").value;
-								if(Contrasena.length < 8 || Contrasena.match(/[A-Z]/) == null || Contrasena.match(/[0-9]/) == null){
-									document.getElementById('valContra').innerHTML="*La contraseña debe de tener minimo 8 carateres, un número y una mayúscula";
-									x=0
-								}else{
-									document.getElementById('valContra').innerHTML="";
-									if(Contrasena1 != Contrasena){
-										document.getElementById('valCon').innerHTML='*Las contraseñas no coinciden';
-										x=0;
 
-									}else{
-										document.getElementById('valCon').innerHTML="";
-										x=1;
-									}
-								}
-
-				}
-	function validarUsuario(){
-		$.ajax({
-		 			type:  "POST", //método de envio
-	                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-	                url:   "Ajax.php?c=Usuario&a=ValidarUsuario", //archivo que recibe la peticion
-	                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-	        
-	                 if(res == 0){ 
-	                 	document.getElementById('valUsuario').innerHTML="Este nombre de usuario ya existe";
-	                                    $('#usuarioV').val(0);
-	                }if(res == 1 ){
-	                	document.getElementById('valUsuario').innerHTML="";
-	                                    $('#usuarioV').val(1) ;
-	                }
-	            }
-	        });
-	}
-function validarEdad(){
-					if($("#Edad").val()!=""){
-						$("#valEdad").html("");
-						v = 1;
-					}else{
-						$("#valEdad").html("Introduce una fecha");
-						v = 0;
-					}
-				}
-
-
-</script>
 <script type="text/javascript">
 	$(document).ready(function(){
 	    $(".Close").click(function(){
@@ -74,6 +26,7 @@ function validarEdad(){
 	$id_usuario = $_SESSION['id_usuario'];
 	$us = new UsuarioControlador();
 	$u = $us->Usuario($id_usuario);
+
 	if($_SESSION['tipo_usuario']==1){	
 		
 		$id_artista = $_SESSION['id_artista'];
@@ -95,7 +48,7 @@ function validarEdad(){
 ?>
 <div class="Configuracion">
 	<input type="hidden" id="usuarioV">
-<form id="formdata" >
+<form  id="formdata" >
 	<div class="General">
 							<h1>Configuraciones</h1>
 							<p>Nombre de usuario:</p>
@@ -118,8 +71,8 @@ function validarEdad(){
 								<select name="Pais">
 									<?php
 										$us = new UsuarioControlador();
-										$u = $us->Pais();
-          							foreach ($u as $pa) {
+										$x = $us->Pais();
+          							foreach ($x as $pa) {
           								echo "<option value=".$pa->id_pais.">".$pa->nombre_pais."</option>";
           							}
         						?>
@@ -127,9 +80,12 @@ function validarEdad(){
 			       				</select>
 								<br>
 								<p>Fecha de nacimiento:</p>
-								<input type="date" name="Edad" id="Edad" max="<?php echo $fecha; ?>" value="<?php echo $a->fn;?>">
+								<input type="date" name="Edad" id="Edad" max="<?php echo $fecha; ?>" value="<?php echo $u->fn; ?>">
 								<p id="valEdad"></p>
 								<br>
+
+						<input type="checkbox" name="permitir" id="permitir" > Permitir contenido explicito	
+						<input type="hidden" name="permitir_18" id="permitir_18">
 							</div>
 			                <br>
 			               
@@ -139,7 +95,7 @@ function validarEdad(){
 							<h1>Editar Perfil</h1>
 							<div>
 								Informacion:<br>
-								<textarea name="InformacionA"><?php echo $a->informacion_contacto?></textarea>
+								<textarea name="InformacionA"><?php echo $a->informacion_contacto ?></textarea>
 							</div>
 							<div>
 								Tecnica de interes:<br>
@@ -174,23 +130,23 @@ function validarEdad(){
 							<img src="imagenes/Perfil2.jpg"><input type="radio" name="Diseno" id="Diseno2" value="2">
 							<img src="imagenes/Perfil3.jpg"><input type="radio" name="Diseno" id="Diseno3" value="3">	
 							<h3>Paleta de colores:</h3>
-							<div><input type="radio" name="TipoP"> Blanco/Negro <br>
-							<input type="radio" name="TipoP"> Frio <br>
-							<input type="radio" name="TipoP"> Calido <br>
-							<input type="radio" name="TipoP"> Personalizado </div>	
+							<div><input type="radio" name="TipoP" value="BN" > Blanco/Negro <br>
+							<input type="radio" name="TipoP" value="Frio"> Frio <br>
+							<input type="radio" name="TipoP" value="Calido"> Calido <br>
+							<input type="radio" name="TipoP" checked> Personalizado </div>	
 							<div class="Columna">
 									<p>Color de Bordes:</p>
-									 <input class="jscolor" name="Bordes" value="<?php echo $d->color_bordes; ?>">
+									 <input class="jscolor" name="Bordes" id="Bordes"  value="<?php echo $d->color_bordes; ?>">
 									<p>Color Texto:</p>
-									 <input class="jscolor" name="Texto" value="<?php echo $d->color_titulos; ?>">
+									 <input class="jscolor" name="Texto" id="Texto" value="<?php echo $d->color_titulos; ?>">
 								</div>
 								<div class="Columna">
 									<p>Color de Fondo:</p>
-									<input class="jscolor" name="Fondo" value="<?php echo $d->color_fondo; ?>">
+									<input class="jscolor color" name="Fondo" id="Fondo" value="<?php echo $d->color_fondo; ?>">
 									<p>Color de botones:</p>
-									<input class="jscolor" name="Botones" value="<?php echo $d->color_botones; ?>">
+									<input class="jscolor" name="Botones" id="Botones" value="<?php echo $d->color_botones; ?>">
 
-								</div>		
+								</div>	
 						<a class="boton Aceptar">Aceptar</a>
 	</div>
 	<div class="Fan" id="Fan">
@@ -202,9 +158,11 @@ function validarEdad(){
 						<p>Foto de perfil:</p>
 						<input type="file" name="imagenF">
 						<br>
-						<input type="submit" name="subir" value="Aceptar">
+						
+						<a class="boton Aceptar">Aceptar</a>
 						
 	</div>
+
 	<div class="overlay2">
 		<div class="popup2">
 				<div class="Pop">
@@ -223,51 +181,8 @@ function validarEdad(){
 	</form>
 
 </div>	
-<script type="text/javascript">
-	$(document).ready(function(){
-			
-	    $(".Aceptar").click(function(){
-
-					//validarContrasena();
-					validarUsuario();
-					validarEdad();
-					y = $("#usuarioV").val();
-
-					//(v==1) && (w==1) && (x==1) && (y==1) && (z==1)
-					if((v==1) && (y==1)){
-						$(".overlay2").fadeIn(400);
-	        			$(".popup2").fadeIn(400);
-		  			}
-		    });
-
-	    $(".Contra").click(function(){
-				
-					$.ajax({
-		 			type:  "POST", //método de envio
-	                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-	                url:   "Ajax.php?c=Usuario&a=ValidarContrasena", //archivo que recibe la peticion
-	                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-	        			
-	                 	if(res == 1){ 
-	                 	document.getElementById('ContraA').innerHTML="La contrasena es incorrecta";
-	                 	}
-	                 	if( res== 0){
-	                 		$.ajax({
-				 					type:  "POST", //método de envio
-					                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-					                url:   "Ajax.php?c=Usuario&a=Configuracion", //archivo que recibe la peticion
-					                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-					        		location.reload();
-					            	}
-			        		});
-	                 	}
-	            	}
-	        	});
-		    });
-		$('#Diseno<?php echo $d->tipo_perfil;?>').attr('checked', true);
-});
-</script>
 	<?php
+	include ("Validacion.php");
 			if($_SESSION['tipo_usuario']==1){
 				echo "<script Language='JavaScript'>
 				document.getElementById('Artista').style.display='block';
@@ -282,3 +197,59 @@ function validarEdad(){
 				</script>";
 			}
 	?>
+<script type="text/javascript">
+	$(document).ready(function(){
+			
+	    $(".Aceptar").click(function(){
+					if($('#Contrasena').val() != ''){
+						validarContrasena();
+					}else{
+						x=1;
+					}
+					if($('#permitir').prop('checked')){
+							$('#permitir_18').val('1');
+						}else{
+							$('#permitir_18').val('0');
+						}
+						alert($('#permitir_18').val());
+					validarUsuario();
+					validarEdad();
+					y = $("#usuarioV").val();
+					//(v==1) && (w==1) && (x==1) && (y==1) && (z==1)
+					if((v==1) && (y==1) && (x==1)){
+						
+						$(".overlay2").fadeIn(400);
+	        			$(".popup2").fadeIn(400);
+		  			}
+		    });
+
+	    $(".Contra").click(function(){
+
+					$.ajax({
+		 			type:  "POST", //método de envio
+	                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
+	                url:   "Ajax.php?c=Usuario&a=ValidarContrasena", //archivo que recibe la peticion
+	                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+	                 	if(res == 1){ 
+	                 	document.getElementById('ContraA').innerHTML="La contrasena es incorrecta";
+	                 	}
+	                 	if( res== 0){
+	                 		$.ajax({
+				 					type:  "POST", //método de envio
+					                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
+					                url:   "Ajax.php?c=Usuario&a=Configuracion", //archivo que recibe la peticion
+					                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+					        		//location.reload();
+					            	}
+			        		});
+	                 	}
+	            	}
+	        	});
+		    });
+		$('#Diseno<?php echo $d->tipo_perfil;?>').attr('checked', true);
+		if(<?php echo $u->permitir_18 ?> == 1){
+			$('#permitir').attr('checked', true);
+		}
+});
+	
+</script>

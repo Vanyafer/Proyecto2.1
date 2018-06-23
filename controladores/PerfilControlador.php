@@ -40,7 +40,7 @@
         public function Update($Metas,$Exper,$Otro,$Estudios,$id_perfil){
             $this->start();
                 $stmt = $this->pdo->prepare(
-                    "UPDATE perfil SET metas= '$Metas', exper = '$Exper', otro ='$Otro', estudios ='$Estudios' where id_perfil = $id_perfil)"
+                    "UPDATE perfil SET metas= '$Metas', exper = '$Exper', otro ='$Otro', estudios ='$Estudios' where id_perfil = $id_perfil"
                 ); 
                 $stmt->execute();
                 $this->stop();

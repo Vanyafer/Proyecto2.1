@@ -62,9 +62,16 @@
                     "INSERT into comentario values(NULL,NOW(),'$comentario',$id_usuario,$id_publicacion,0)"
                 );
             $stmt->execute();
-             $this->stop();
+             
 
-           
+            $Noti = new NotificacionesControlador();
+            $publicacion = new InicioControlador();
+            $p = $publicacion->PublicacionInfo($id_publicacion);
+            $ar = new ArtistaControlador();
+            $a = $ar->Artista($p->id_artista);
+            $Noti->Insert(2,$id_usuario,$id_publicacion,$a->id_usuario);
+          
+            $this->stop();
 
 		}
 		public function ELiminarComentarioUsuario(){

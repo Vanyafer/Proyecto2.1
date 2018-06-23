@@ -12,11 +12,9 @@
                 $Artista = $stmt->fetch(PDO::FETCH_ASSOC);
                 $Artistas->set(
                 	$Artista["id_artista"],
-			        $Artista["fn"],
 			        $Artista["imagen_perfil"],
 			        $Artista["informacion_contacto"],
 			        $Artista["tecnica_interes"],
-			        $Artista["id_pais"],
 			        $Artista["id_usuario"],
 			        $Artista["id_diseno"],
 			        $Artista["id_portafolio"],
@@ -39,11 +37,9 @@
                 $Artista = $stmt->fetch(PDO::FETCH_ASSOC);
                 $Artistas->set(
                 	$Artista["id_artista"],
-			        $Artista["fn"],
 			        $Artista["imagen_perfil"],
 			        $Artista["informacion_contacto"],
 			        $Artista["tecnica_interes"],
-			        $Artista["id_pais"],
 			        $Artista["id_usuario"],
 			        $Artista["id_diseno"],
 			        $Artista["id_portafolio"],
@@ -55,10 +51,10 @@
             $this->stop();
             return $Artistas;
  			}
-            public function Insert($Edad,$imagen,$infomracion,$tecnica,$Pais,$id_usuario,$id_diseno,$id_portafolio,$id_perfil){
+            public function Insert($imagen,$infomracion,$tecnica,$id_usuario,$id_diseno,$id_portafolio,$id_perfil){
                 $this->start();
                 $stmt = $this->pdo->prepare(
-                            "INSERT into artista VALUES(NULL,'$Edad','$imagen','$informacion','$tecnica',$Pais,$id_usuario,$id_diseno,$id_portafolio,$id_perfil)"
+                            "INSERT into artista VALUES(NULL,'$imagen','$informacion','$tecnica',$id_usuario,$id_diseno,$id_portafolio,$id_perfil)"
                         );
                         $stmt->execute();
                          $stmt = $this->pdo->prepare(
@@ -69,10 +65,10 @@
                 $this->stop();
                 return $artista["id_artista"];
             }
-            public function Update($Edad,$imagen,$informacion,$tecnica,$Pais,$id_artista){
+            public function Update($imagen,$informacion,$tecnica,$id_artista){
                  $this->start();
                 $stmt = $this->pdo->prepare(
-                            "UPDATE artista set fn = '$Edad', imagen_perfil = '$imagen', informacion_contacto ='$informacion', tecnica_interes = '$tecnica', id_pais = $Pais where id_artista = $id_artista"
+                            "UPDATE artista set imagen_perfil = '$imagen', informacion_contacto ='$informacion', tecnica_interes = '$tecnica' where id_artista = $id_artista"
                         );
                         $stmt->execute();
                          
