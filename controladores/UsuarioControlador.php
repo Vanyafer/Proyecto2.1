@@ -152,6 +152,8 @@
                     $Edad = $_POST['Edad'];
                     $Pais = $_POST['Pais'];
                     $id_usuario = $_SESSION['id_usuario'];
+                    $permitir_18 = $_SESSION['permitir_18'];
+                   
                     if($contrasena != ''){
 
                         $stmt = $this->pdo->prepare(
@@ -161,7 +163,7 @@
 
                     }
                       $stmt = $this->pdo->prepare(
-                            "UPDATE usuario SET  nombre_usuario = '$usuario', fn = '$Edad', pais = $Pais where id_usuario = $id_usuario "
+                            "UPDATE usuario SET  nombre_usuario = '$usuario', fn = '$Edad', pais = $Pais, permitir_18 = $permitir_18 where id_usuario = $id_usuario "
                         );
                         $stmt->execute();
                     if($_FILES["imagenA"]["name"]==''){
@@ -185,17 +187,22 @@
                         $Fondo = $_POST['Fondo'];
                         $Diseno = $_POST['Diseno'];
 
+
                     $artista = new ArtistaControlador();
                     $a = $artista->ArtistaUsuario($id_usuario);
 
                     $artista->Update($imagen,$informacion,$tecnica,$a->id_artista);
 
+
+                    $per = new PerfilControlador();
+                    $per->Update($Metas,$Exper,$Otro,$Estudios,$a->id_perfil);
+
+
+
                     $di = new DisenoControlador();
                     $di->Update($Bordes,$Texto,$Botones,$Fondo,$Diseno,$a->id_diseno);
 
 
-                    $per = new PerfilControlador();
-                    $per->Update($Metas,$Exper,$Otro,$Estudios,$a->id_perfil);
 
                 }else{
 
@@ -302,15 +309,6 @@
                         $stmt->execute();
             $this->stop();
         }
-        public function MayoriaEdad(){
-            $this->start();
-                $stmt = $this->pdo->prepare(
-                            "SELECT * from  usuario where contenido_explicito = 0"
-                        );
-                $stmt->execute();
-
-            $thid->stop();
-
-        }
+       
     }
 ?>
