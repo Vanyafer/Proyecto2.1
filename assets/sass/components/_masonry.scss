@@ -1,0 +1,30 @@
+.masonry-layout {
+    --columns: 1;
+    margin: var(--padding) var(--padding) 0;
+    $columns: 5;
+
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-gap: var(--padding);
+
+    @for $i from 1 through $columns {
+        &.columns-#{$i} {
+            --columns: #{$i};
+        }
+    }
+
+    img {
+        width: 100%;
+        display: block;
+        @include transition;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    }
+    .mansory-item {
+        margin-bottom: var(--padding);
+        overflow: hidden;
+        border-radius: 5px;
+    }
+}

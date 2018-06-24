@@ -1,5 +1,11 @@
 @import "basics/fonts";
 @import "basics/vars";
+@import "basics/global";
 
+@import "components/mixins";
+@import "components/buttons";
+@import "components/modals";
+@import "components/masonry";
 @import "components/forms";
 @import "components/layouts";
+@import "components/navbar";

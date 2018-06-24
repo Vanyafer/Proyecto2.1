@@ -1,0 +1,14 @@
+nav {
+    background: var(--default-navbar);
+    ul {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding: calc(var(--padding) / 2);
+        li {
+            a {
+                margin-left: calc(var(--padding) / 2);
+            }
+        }
+    }
+}

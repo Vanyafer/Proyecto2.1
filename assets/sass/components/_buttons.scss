@@ -1,0 +1,22 @@
+.btn {
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    padding: .75rem 1rem;
+    display: inline-block;
+    font-size: .8rem;
+    background: var(--default-btn);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    @include transition;
+    // Agregar bordes
+    &.border {
+        border: 2px solid var(--default-btn);
+    }
+    &:hover {
+        cursor: pointer;
+        background: transparent;
+    }
+    svg {
+        margin-left: 0.5rem;
+    }
+}

@@ -21,7 +21,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    
+    <link rel="stylesheet" href="assets/css/styles.css">
 <body>
     <?php 
         require("./vistas/Compartido/BarraNavegacion.php");

@@ -1,47 +1,64 @@
 
-	<link rel="stylesheet" type="text/css" href="./assets/css/Diseno.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/Popup.css">
-	<script src="./assets/js/jquery.min.js"></script>
-	<script type="text/javascript">
+<link rel="stylesheet" type="text/css" href="./assets/css/Popup.css">
+<script type="text/javascript">
 	$(document).ready(function(){
-	    $(".Close").click(function(){
-	        $(".overlay").fadeOut(400);
-	         $(".popup").fadeOut(400);
+		$(window).click(e => {
+			if(e.target == $('.modal')[0]) {
+				$('.modal').fadeOut(400);
+			}
+		})
+	    $(".Abrir").click(() => {
+	        $(".modal").fadeIn(400).css('display','flex');
 	    });
-	    $(".Abrir").click(function(){
-	        $(".overlay").fadeIn(400);
-	        $(".popup").fadeIn(400);
-	    });
-});
+	});
 </script>
 
-	<nav id="Barra">
-		<a class="Abrir">Iniciar Sesion</a>
-	    <a href="usuario.php?c=Usuario&a=Registro">Registro</a>
-	</nav>
+<nav>
+	<ul>
+		<li>
+			<a class="Abrir btn border">
+				<span>Iniciar Sesión</span>
+				<i class="fa fa-sign-in-alt"></i>
+			</a>
+		</li>
+		<li>
+			<a href="usuario.php?c=Usuario&a=Registro" class="btn border">
+				<span>Registrarse</span>
+				<i class="fa fa-user-plus"></i>
+			</a>
+		</li>
+	</ul>
+</nav>
 
-<div class="overlay">
-	<div class="popup">
-	<div id="Sesion">
+<div class="modal">
 
-	        <h1>Iniciar sesion</h1>
+	<div class="body">
 
-	        <fieldset>
-
-	            <form action="usuario.php?c=Usuario&a=IniciarSesion" method="POST">
-
-	                <input type="email" name="Correo" value="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' "> 
-	                <!--input type="Text" name="Usuario" value="Usuario" onBlur="if(this.value=='')this.value='Usuario'" onFocus="if(this.value=='Usuario')this.value='' "-->
-	                <input type="password" name="Password" value="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' "><br>
-	                <a href="validarContrasena">No recuerdo mi contrasena</a><br>
-	                <input type="submit" value="Aceptar">
-	            </form>
-	            	<input type="submit" value="Cerrar" class="Close">
-	        </fieldset>
-
-
+		<h1 class="title">Iniciar Sesion</h1>
+		<form action="usuario.php?c=Usuario&a=IniciarSesion" method="POST">
+			<div class="input-group">
+				<label for="Correo">Correo electrónico:</label>
+				<div class="input-field">
+					<p><i class="fas fa-at"></i></p>
+					<input type="email" name="Correo" id="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' ">
+				</div>
+			</div>
+			<div class="input-group">
+				<label for="Password">Contraseña:</label>
+				<div class="input-field">
+					<p><i class="fas fa-key"></i></p>
+					<input type="password" name="Password" id="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' ">
+				</div>
+			</div>
+			<div class="right margin-top">
+				<button class="btn border">
+					<span>Continuar</span>
+					<i class="fa fa-angle-double-right"></i>
+				</button>
+			</div>
+		</form>
 	</div>
-	
+
 </div>
 
 </div>

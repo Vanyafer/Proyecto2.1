@@ -1,14 +1,8 @@
 	
-<html>
 <head>
 	<title>Inicio</title>
-	<!--link rel="stylesheet" type="text/css" href="./assets/css/Publicacion.css"-->
-	<link rel="stylesheet" type="text/css" href="./assets/css/InicioUsuario.css">
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="./assets/js/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./assets/css/InicioUsuario.css"/>
 	<script src="./assets/js/modernizr.custom.js"></script>
-	<script src="./assets/js/masonry.pkgd.min.js"></script>
 	<script src="./assets/js/imagesloaded.js"></script>
 	<script src="./assets/js/classie.js"></script>
 	<script src="./assets/js/AnimOnScroll.js"></script>
@@ -48,46 +42,50 @@
 		</script>
 
 </head>
-<body>		
-<div class="grid effect-3" id="grid">
-		<?php
-								$ini = new InicioControlador();
-								$publicacion = $ini->InicioUsuario();
-								foreach ($publicacion as $publi){
-											$art = new ArtistaControlador();
-											$a = $art->Artista($publi->id_artista);
-											$us = new UsuarioControlador();
-											$u = $us->Usuario($a->id_usuario);
-											if(isset($publi->imagen)){
-           									echo "<li><a ><img src='$publi->imagen' id='$publi->id_publicacion' class='Abrir2' idu='$a->id_usuario' name='$u->nombre_usuario'></a></li>";
-											}else{
-												echo "<li class='Abrir2 texto' name='$u->nombre_usuario' id='$publi->id_publicacion' idu='a->id_usuario'><a ><textbox  >$publi->contenido </textbox></a></li>";
-											}	
-											
-								}
-        						?>
+<div class="masonry-layout" id="gallery">
+	<?php
+
+		$ini = new InicioControlador();
+		$publicacion = $ini->InicioUsuario();
+		foreach ($publicacion as $publi){
+
+			$art = new ArtistaControlador();
+			$a = $art->Artista($publi->id_artista);
+			$us = new UsuarioControlador();
+			$u = $us->Usuario($a->id_usuario);
+			if(isset($publi->imagen)){ ?>
+
+				<li class="gallery-item">
+					<a>
+						<img src="<?php echo $publi->imagen;?>" class="Abrir2" name="<?php echo $u->nombre_usuario;?>" id="<?php $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
+					</a>
+				</li>		
+
+			<?php } else { ?>
+
+				<li class="Abrir2" name="<?php echo $u->nombre_usuario;?>" id="<?php $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
+					<a>
+						<textarea><?php $publi->contenido;?></textarea>
+					</a>
+				</li>
+
+			<?php }	
+		}
+	?>
 
 </div>
+
 <div class="overlay2">
-     			<input type="hidden" id="idp" name="idp">
-     		<div class="PopImagen">
-     		<h1 ><a href=""  class="usuario"></a><samp id="Close">x</samp></h1>
-     		<fieldset>
-     			
-     			<div class="Imagen">
-     			
-							
-     			</div>
-     		
-     		</fieldset>
+<input type="hidden" id="idp" name="idp">
+<div class="PopImagen">
+<h1 ><a href=""  class="usuario"></a><samp id="Close">x</samp></h1>
+<fieldset>
+
+<div class="Imagen">
+
+
 </div>
+
+</fieldset>
 </div>
-</body>
-</html>
-<script>
-			new AnimOnScroll( document.getElementById( 'grid' ), {
-				minDuration : 0.4,
-				maxDuration : 0.7,
-				viewportFactor : 0.2
-			} );
-		</script>
+<script src="assets/js/app/masonry.js"></script>

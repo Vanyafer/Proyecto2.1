@@ -15,11 +15,6 @@
 </script>
 </head>
 <body>
-	<nav id="Barra">
-		<a href="javascript:Inicio('show');" id="Inicio">Iniciar Sesion</a>
-	    <a href="usuario.php?c=Usuario&a=Registro">Registro</a>
-	</nav>
-
 	<div id="Sesion">
 
 	        <h1>Iniciar sesion</h1>

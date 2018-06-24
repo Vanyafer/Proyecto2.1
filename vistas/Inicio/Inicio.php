@@ -18,7 +18,6 @@
 <body>		
 <div class="grid effect-3" id="grid">
 		<?php
-								
 								foreach ($result->publicacion as $publi){
 											$art = new ArtistaControlador();
 											$a = $art->Artista($publi->id_artista);
@@ -33,7 +32,6 @@
 								}
         						?>
 </div>
-
 </body>
 </html>
 <script>

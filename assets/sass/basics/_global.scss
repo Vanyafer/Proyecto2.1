@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+}
+li {
+    list-style: none;
+}
+html {
+    background: var(--default-bg);
+}
+
+.margin-top {
+    margin-top: 2rem;
+}
+
+.left {
+    text-align: left;
+}
+.right {
+    text-align: right;
+}
