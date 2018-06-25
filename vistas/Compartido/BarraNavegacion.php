@@ -25,47 +25,53 @@
 	<ul>
 		<li>
 			<a href="Control.php?c=Inicio&a=Inicio" class="btn border" id="inicio">
-		 		<i class="fas fa-home"></i>
+				<i class="fas fa-home"></i>
 			</a>
 		</li>
 		<li>
 			<a href="Control.php?c=Foro&a=Foro" class="btn border">
-		 		<i class="fas fa-bullhorn"></i>
+				<i class="fas fa-bullhorn"></i>
 			</a>
 		</li>
 		<li>
 			<a id="reto" href="Control.php?c=Reto&a=Reto" class="btn border">
-		 		<i class="fas fa-pencil-alt"></i>
+				<i class="fas fa-pencil-alt"></i>
 			</a>
 		</li>
 		<li>
 			<a href="Control.php?c=Notificaciones&a=Notificaciones" class="btn border">
-		 		<i class="fas fa-newspaper"></i>
+				<i class="fas fa-newspaper"></i>
+				<?php $notificaciones = 1; if($notificaciones > 0): ?>
+		 		<i class="bubble">1</i>
+				<?php endif; ?>
 			</a>
 		</li>
 		<li>
 			<a class="btn border Abrir">
-		 		<i class="fas fa-edit"></i>
+				<i class="fas fa-edit"></i>
 			</a>
 		</li>
 		<li>
 			<a href="Control.php?c=Mensajes&a=BandejaEntrada" class="btn border">
-		 		<i class="far fa-comments"></i>
+				<i class="far fa-comments"></i>
+				<?php $notificaciones = 1; if($notificaciones > 0): ?>
+		 		<i class="bubble">20</i>
+				<?php endif; ?>
 			</a>
 		</li>
 		<li>
 			<a href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $id_usuario; ?>" class="btn border moderador">
-		 		<i class="fas fa-user"></i>
+				<i class="fas fa-user"></i>
 			</a>
 		</li>
 		<li>
 			<a href="Control.php?c=Usuario&a=Configuracion" class="btn border moderador">
-		 		<i class="fas fa-cogs"></i>
+				<i class="fas fa-cogs"></i>
 			</a>
 		</li>
 		<li>
 			<a href="Control.php?c=Usuario&a=Cerrarsesion" class="abajo btn border">
-		 		<i class="fas fa-sign-out-alt"></i>
+				<i class="fas fa-sign-out-alt"></i>
 			</a>
 		</li>
 	</ul>	

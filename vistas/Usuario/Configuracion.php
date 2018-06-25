@@ -1,8 +1,8 @@
 <?php 
-$dia = date("d");
-					$mes = date("m");
-					$ano = date("Y");
-					$fecha = "2004-".$mes."-".$dia;
+	$dia = date("d");
+	$mes = date("m");
+	$ano = date("Y");
+	$fecha = "2004-".$mes."-".$dia;
 ?>
 
 	<title>Configuraciones</title>

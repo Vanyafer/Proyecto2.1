@@ -13,41 +13,33 @@
 
 </head>
 <body>		
-<div class="home">
-	<div class="masonry-layout" id="gallery">
-		<?php
-			foreach ($result->publicacion as $publi){
+<div class="masonry-layout" id="gallery">
+	<?php
+		foreach ($result->publicacion as $publi){
 
-				$art = new ArtistaControlador();
-				$a = $art->Artista($publi->id_artista);
-				$us = new UsuarioControlador();
-				$u = $us->Usuario($a->id_usuario);
-				if(isset($publi->imagen)){ ?>
+			$art = new ArtistaControlador();
+			$a = $art->Artista($publi->id_artista);
+			$us = new UsuarioControlador();
+			$u = $us->Usuario($a->id_usuario);
+			if(isset($publi->imagen)){ ?>
 
-					<li class="gallery-item">
-						<a>
-							<img src="<?php echo $publi->imagen;?>" class="Abrir2" name="<?php echo $u->nombre_usuario;?>" id="<?php echo $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
-						</a>
-					</li>		
+				<li class="gallery-item">
+					<a>
+						<img src="<?php echo $publi->imagen;?>" class="Abrir2" name="<?php echo $u->nombre_usuario;?>" id="<?php echo $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
+					</a>
+				</li>		
 
-				<?php } else { ?>
+			<?php } else { ?>
 
-					<li class="Abrir2" name="<?php echo $u->nombre_usuario;?>" id="<?php $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
-						<a>
-							<textarea><?php $publi->contenido;?></textarea>
-						</a>
-					</li>
+				<li class="Abrir2" name="<?php echo $u->nombre_usuario;?>" id="<?php $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
+					<a>
+						<textarea><?php $publi->contenido;?></textarea>
+					</a>
+				</li>
 
-				<?php }	
-			}
-		?>
-	</div>
-	<div class="users">
-		<ul class="collection">
-			<li class="header">Usuarios Recomendados</li>
-			<li class="item"></li>
-		</ul>
-	</div>
+			<?php }	
+		}
+	?>
 </div>
 </body>
 </html>

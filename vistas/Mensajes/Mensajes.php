@@ -1,42 +1,38 @@
 <?php $id_usuario = $_GET["id"]; ?>
-<!DOCTYPE html>
-<html>
 <head>
 	<title>Mensajes</title>
 	<link rel="stylesheet" type="text/css" href="./assets/css/Mensajes.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-<div class="todo">
-<div class="Conversaciones">
-<input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
-	<p>Mensajes</p>
-	<div class="Todos">
 
+<div class="messages-container">
+	<div class="contacts">
+		<div class="contact header">
+			Bandeja de entrada
+		</div>
 		<?php
-				$Con = new ConversacionControlador();
-						$co = $Con->Conversaciones();
-		
-						foreach ($co as $c) {
-							
-						$us = new UsuarioControlador();
-								if($c->id_usuario1 == $_SESSION['id_usuario']){
-									$u = $us->Usuario($c->id_usuario2);
-								}
-								if($c->id_usuario2 == $_SESSION['id_usuario']){
-									$u = $us->Usuario($c->id_usuario1);
-								}
-							
-							echo "<div class='Usuarios' id='$u->id_usuario'><a href='Control.php?c=Mensajes&a=Mensajes&id=$u->id_usuario'>$u->nombre_usuario</a> </div>";
-						}	
-		?>
+			$Con = new ConversacionControlador();
+			$co = $Con->Conversaciones();
+
+			foreach ($co as $c) {
+				
+			$us = new UsuarioControlador();
+			if($c->id_usuario1 == $_SESSION['id_usuario']){
+				$u = $us->Usuario($c->id_usuario2);
+			}
+			if($c->id_usuario2 == $_SESSION['id_usuario']){
+				$u = $us->Usuario($c->id_usuario1);
+			} ?>
+			
+			<div class="contact" id="<?php echo $u->id_usuario;?>">		
+				<a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $u->id_usuario;?>"><?php echo $u->nombre_usuario;?></a>
+			</div>
+		<?php }	?>
 	</div>
-</div>
-<div class="Conversacion">
-<?php $us = new UsuarioControlador(); $u = $us->Usuario($id_usuario); echo "<p>$u->nombre_usuario</p>" ?>
-
-	<div class="Mensajes">
-		<?php
+	<div class="messages">
+		<?php $us = new UsuarioControlador(); $u = $us->Usuario($id_usuario);?>
+		<div class="contact"><?php echo $u->nombre_usuario;?></div>
+		<div class="content">
+			<?php
 						$Men = new MensajesControlador();
 						$me = $Men->Conversacion($id_usuario);
 		
@@ -49,21 +45,21 @@
 						}	
 					
 					?>
+		</div>
+		<div  class="new">
+			<form onSubmit="Enviar(); return false" id="Mensaje">
+				<input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo $_GET["id"]; ?>">
+				<div class="input-group">
+					<input name="Texto" id="Texto" autocomplete="off"/>
+					<button type="submit">
+						<i class="fas fa-location-arrow"></i>
+					</button>
+				</div>
+			</form>
+		</div>
 	</div>
-	
-	<div  class="MensajeNuevo">
-		<form onSubmit="Enviar(); return false" id="Mensaje">
-							<input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo $_GET["id"]; ?>">
-							<input type="text" name="Texto" id="Texto">
-							<input type="submit" name="" value=">" >
-		</form>
-	</div>
+</div>
 
-	
-</div>
-</div>
-</body>
-</html>
 <script type="text/javascript">
 	
 	function Enviar(){
@@ -80,7 +76,7 @@
 		    		method:'POST',
 		    		data: $("#id_usuario").serialize(),
 		    		 success: function(res){
-		    		 	$(".Mensajes").html(res);
+		    		 	$(".content").html(res);
 		    		 }	
 		    		});
 			    		$("#Texto").val("");
@@ -95,7 +91,7 @@ $.ajax({
 		    		method:'POST',
 		    		data: $("#id_usuario").serialize(),
 		    		 success: function(res){
-		    		 	$(".Mensajes").html(res);
+		    		 	$(".content").html(res);
 		    		 }	
 		    		});
 

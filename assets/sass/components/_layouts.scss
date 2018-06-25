@@ -50,3 +50,117 @@
         width: 320px;
     }
 }
+
+.messages-container {
+    display: flex;
+    >* {
+        height: 100vh;
+    }
+    .contacts {
+        overflow-y: auto;
+        width: 320px;
+        background: var(--default-btn);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        .contact {
+            width: 100%;
+            &.header {
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                height: 62px;
+                align-items: center;
+                color: white;
+                font-size: .8rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                background: var(--default-navbar);
+            }
+            a {
+                display: flex;
+                justify-content: flex-start;
+                padding-left: var(--padding);
+                height: 62px;
+                align-items: center;
+                color: white;
+                font-size: .8rem;
+                @include transition;
+                &:hover {
+                    color: var(--default-btn);
+                    background: var(--default-bg);
+                }
+            }
+        }
+    }
+    .messages {
+        flex-basis: 0;
+        flex-grow: 1;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        .contact {
+            display: flex;
+            justify-content: flex-start;
+            height: 62px;
+            padding-left: var(--padding);
+            align-items: center;
+            color: white;
+            font-size: .8rem;
+            font-weight: 700;            
+            background: var(--default-btn);
+        }
+        .content {
+            flex-basis: 0;
+            flex-grow: 1;
+            max-height: calc(100% - 124px);
+            overflow-y: auto;
+            &::-webkit-scrollbar {
+                width: 7px;
+                background: var(--default-btn);                
+            }
+            &::-webkit-scrollbar-thumb {
+                background: var(--default-navbar);
+                border-radius: 5px;
+            }
+        }
+        .new {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 62px;
+            width: 100%;
+            form {
+                padding: 0;
+            }
+            .input-group {
+                display: fleX;
+                > * {
+                    height: 100%;
+                }
+                input {
+                    font-family: 'Open Sans', Helvatica, sans-serif;
+                    width: 100%;
+                    background: white;
+                    padding: .5rem 1rem;
+                    height: 62px;
+                    font-size: .8rem;
+                    outline: none;
+                    border: none;
+                }
+                button {
+                    width: 62px;
+                    height: 62px;
+                    border: none;
+                    background: var(--default-btn);
+                    color: white;
+                    &:hover {
+                        background: var(--default-input);
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

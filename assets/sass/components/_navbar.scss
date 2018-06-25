@@ -31,25 +31,59 @@ nav {
         position: fixed;
         ul {
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: flex-start;            
             li {
-                margin-bottom: calc(var(--padding) / 2);
+                margin-bottom: calc(var(--padding) / 1);
+                &:first-child {
+                    margin-top: calc(var(--padding) / 2);
+                }
                 a {
                     margin-left: 0;
-                    padding: 0;
+                    padding: calc(var(--padding) / 2) 0;
                     width: 100%;
                     position: relative;
-                    &:after {
-                        content: '';
-                        padding-top: 100%;
-                        display: block;
-                    }
+                    border-radius: 0;
                     svg {
                         margin-left: 0;
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
+                    }
+                    $sides: 20;
+                    $con: $sides / 2;                    
+                    &:after, &:before {
+                        content: '';
+                        position: absolute;
+                        left: 50%;
+                        transform: translateX(-50%);
+                    }
+                    &:after {
+                        top: calc(100% + 2px);
+                        border-left: #{$sides + 'px'} solid transparent;
+                        border-right: #{$sides + 'px'} solid transparent;
+                        border-top: #{$con + 'px'} solid var(--default-btn);
+                    }
+                    &:before {
+                        bottom: calc(100% + 2px);
+                        border-left: #{$sides + 'px'} solid transparent;
+                        border-right: #{$sides + 'px'} solid transparent;
+                        border-bottom: #{$con + 'px'} solid var(--default-btn);
+                    }
+                    .bubble {
+                        position: absolute;
+                        border-radius: 50%;
+                        width: 16px;
+                        height: 16px;
+                        background: var(--error);
+                        color: white;
+                        top: -10px;
+                        right: -10px;
+                        font-size: .6rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-weight: 700;
                     }
                 }
             }
