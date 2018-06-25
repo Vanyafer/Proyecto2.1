@@ -1,0 +1,52 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    &.min {
+        max-width: 900px;
+        padding: var(--padding);
+    }
+}
+
+.grid {
+    $columns: 4;
+    display: grid;
+    @for $i from 1 through $columns {
+        &.columns-#{$i} {
+            grid-template-columns: repeat(#{$i}, 1fr);
+        }
+    }
+    grid-gap: var(--padding);
+}
+
+.login {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    .img {
+        width: 700px;
+        img {
+            max-width: 100%;
+            display: block;
+        }
+    }
+    form {
+        flex-grow: 1;
+        width: auto;
+    }
+}
+
+.space-left {
+    margin-left: 62px;
+}
+
+.home {
+    display: flex;
+    .masonry-layout {
+        flex-basis: 0;
+        flex-grow: 1;
+    }
+    .users {
+        width: 320px;
+    }
+}

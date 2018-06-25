@@ -11,17 +11,9 @@
     align-items: center;
     display: none;
     .body {
-        position: relative;
-        width: 100%;
-        max-width: 450px;
+        position: relative;        
         background: var(--default-bg);
-        padding: 1.5rem;
         border-radius: 5px;
         box-shadow: 0 50px 30px -30px rgba(0, 0, 0, .75);
-        h1.title {
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
     }
 }

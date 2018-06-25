@@ -13,7 +13,7 @@
 	});
 </script>
 
-<nav>
+<nav class="default">
 	<ul>
 		<li>
 			<a class="Abrir btn border">
@@ -32,10 +32,12 @@
 
 <div class="modal">
 
-	<div class="body">
-
-		<h1 class="title">Iniciar Sesion</h1>
-		<form action="usuario.php?c=Usuario&a=IniciarSesion" method="POST">
+	<div class="body login">
+		<div class="img">
+			<img src="assets/imgs/login.jpg" alt="">
+		</div>
+		<form action="usuario.php?c=Usuario&a=IniciarSesion" method="POST" class="default">
+			<h1 class="title">Iniciar Sesion</h1>
 			<div class="input-group">
 				<label for="Correo">Correo electrónico:</label>
 				<div class="input-field">
@@ -43,7 +45,7 @@
 					<input type="email" name="Correo" id="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' ">
 				</div>
 			</div>
-			<div class="input-group">
+			<div class="input-group margin-top">
 				<label for="Password">Contraseña:</label>
 				<div class="input-field">
 					<p><i class="fas fa-key"></i></p>

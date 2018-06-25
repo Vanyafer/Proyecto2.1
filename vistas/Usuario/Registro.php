@@ -13,6 +13,33 @@ $dia = date("d");
 
 </head>
 <body>
+
+	<form enctype="multipart/form-data"  action="usuario.php?c=Usuario&a=Registro" id="formdata" method="POST" class="default container min">
+		<h1 class="title">Registrarse</h1>
+		<div class="grid columns-2">
+			<div class="input-group">
+				<label for="Usuario">Nombre de Usuario:</label>
+				<div class="input-field">
+					<p><i class="fas fa-user"></i></p>
+					<input type="text" name="Usuario" id="Usuario" placeholder="donchingon" onFocus="if(this.value=='Usuario')this.value='' ">
+				</div>
+			</div>
+			<div class="input-group">
+				<label for="Password">País:</label>
+				<div class="input-field">
+					<p><i class="fas fa-key"></i></p>
+					<input type="password" name="Password" id="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' ">
+				</div>
+			</div>
+			<div class="input-group">
+				<label for="Correo">Correo:</label>
+				<div class="input-field">
+					<p><i class="fas fa-at"></i></p>
+					<input type="email" name="Correo" id="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' ">
+				</div>
+			</div>
+		</div>
+	</form>
 <Br>
 	<h1 id="titulo">Registrarse<hr style="color: #1c83a8;"></h1>
 	<div id="Datos">
@@ -136,7 +163,7 @@ $dia = date("d");
 					
 					
 					</div>
-					<div class="Subir Regreso"><a">Regresar</a></div>
+					<div class="Subir Regreso"><a>Regresar</a></div>
 					<input type="submit" value="Aceptar">
 				</div>
 				<div id="Fan">

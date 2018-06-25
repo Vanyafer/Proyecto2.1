@@ -21,13 +21,15 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/font-awesome/js/fontawesome-all.min.js"></script>
+    <script src="assets/resources/jquery-3.2.1.js"></script>
 <body>
-    <?php 
-        require("./vistas/Compartido/BarraNavegacion.php");
-        require($interfaz->render());
-       
-        include("./vistas/Compartido/Ocultar.php");
-    ?>
+    <?php require("./vistas/Compartido/BarraNavegacion.php"); ?>
+    <div class="space-left">
+        <?php require($interfaz->render()); ?>
+    </div>
+    <?php include("./vistas/Compartido/Ocultar.php");?>
 </body>
 </html>

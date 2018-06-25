@@ -1,9 +1,7 @@
 	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="./assets/css/BarraNavegacion.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/Popup.css">
     <link rel="stylesheet" href="./assets/css/icomoon/style.css">
-    	<script src="./assets/js/jquery.min.js"></script>
    <script type="text/javascript">
 	$(document).ready(function(){
 	    $(".Close").click(function(){
@@ -17,27 +15,60 @@
 });
 </script>
 
-<nav class="barra">
-<ul>
 	<?php
 		/* if ($_SESSION['tipo_usuario']==3){
 		 		echo '<li><a href="Moderador.php">M</a></li>';
 		 }*/
 		 $id_usuario = $_SESSION['id_usuario'];
 	?>
-	<li><a href="Control.php?c=Inicio&a=Inicio" id="inicio">Inicio</a></li>
-	<li><a href="Control.php?c=Foro&a=Foro" class="icon-bullhorn"></a></li>
-	<li><a id="reto" href="Control.php?c=Reto&a=Reto" class="icon-pen Artista"></a></li>
-	
-	<li><a href="Control.php?c=Notificaciones&a=Notificaciones" class="icon-newspaper"></a></li>
-	<li><a class="icon-quill Abrir Artista moderador"></a></li>
-	<li><a href="Control.php?c=Mensajes&a=BandejaEntrada" class="icon-bubbles4"></a></li>
-	<li><a href="Control.php?c=UsuarioR&a=UsuarioR">U</a></li>
-	<li><a href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $id_usuario; ?>" class="icon-user moderador"></a></li>
-	<li><a href="Control.php?c=Usuario&a=Configuracion" class="icon-cog moderador"></a></li>
-
-	<li><a href="Control.php?c=Usuario&a=Cerrarsesion" class="abajo">C</a></li>
-</ul>	
+<nav class=" sidebar">
+	<ul>
+		<li>
+			<a href="Control.php?c=Inicio&a=Inicio" class="btn border" id="inicio">
+		 		<i class="fas fa-home"></i>
+			</a>
+		</li>
+		<li>
+			<a href="Control.php?c=Foro&a=Foro" class="btn border">
+		 		<i class="fas fa-bullhorn"></i>
+			</a>
+		</li>
+		<li>
+			<a id="reto" href="Control.php?c=Reto&a=Reto" class="btn border">
+		 		<i class="fas fa-pencil-alt"></i>
+			</a>
+		</li>
+		<li>
+			<a href="Control.php?c=Notificaciones&a=Notificaciones" class="btn border">
+		 		<i class="fas fa-newspaper"></i>
+			</a>
+		</li>
+		<li>
+			<a class="btn border Abrir">
+		 		<i class="fas fa-edit"></i>
+			</a>
+		</li>
+		<li>
+			<a href="Control.php?c=Mensajes&a=BandejaEntrada" class="btn border">
+		 		<i class="far fa-comments"></i>
+			</a>
+		</li>
+		<li>
+			<a href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $id_usuario; ?>" class="btn border moderador">
+		 		<i class="fas fa-user"></i>
+			</a>
+		</li>
+		<li>
+			<a href="Control.php?c=Usuario&a=Configuracion" class="btn border moderador">
+		 		<i class="fas fa-cogs"></i>
+			</a>
+		</li>
+		<li>
+			<a href="Control.php?c=Usuario&a=Cerrarsesion" class="abajo btn border">
+		 		<i class="fas fa-sign-out-alt"></i>
+			</a>
+		</li>
+	</ul>	
 </nav>
 <div class="overlay">
 	<div class="popup">

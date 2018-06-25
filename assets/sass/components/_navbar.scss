@@ -11,4 +11,48 @@ nav {
             }
         }
     }
+    &.default {
+        background: #219ac6;
+        .btn {
+            background: #1c83a8!important;
+            &.border {
+                border: 2px solid #1c83a8!important;
+            }
+            &:hover {
+                background: transparent!important;
+            }
+        }
+    }
+    &.sidebar {
+        top: 0;
+        bottom: 0;
+        background: var(--default-navbar);
+        width: 62px;
+        position: fixed;
+        ul {
+            flex-direction: column;
+            justify-content: flex-start;
+            li {
+                margin-bottom: calc(var(--padding) / 2);
+                a {
+                    margin-left: 0;
+                    padding: 0;
+                    width: 100%;
+                    position: relative;
+                    &:after {
+                        content: '';
+                        padding-top: 100%;
+                        display: block;
+                    }
+                    svg {
+                        margin-left: 0;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+        }
+    }
 }

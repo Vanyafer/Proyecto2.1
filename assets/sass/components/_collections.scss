@@ -1,0 +1,15 @@
+ul.collection {
+    padding: var(--padding) var(--padding) var(--padding) 0;
+    max-height: 90vh;
+    overflow-y: auto;
+    li.header {
+        padding: calc(var(--padding) / 3);
+        text-align: center;
+        background: var(--default-btn);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+}
