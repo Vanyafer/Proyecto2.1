@@ -14,9 +14,9 @@
     .body {
         position: relative;        
         border-radius: 5px;
-        box-shadow: 0 50px 30px -30px rgba(0, 0, 0, .75);
-        > div, form {
+        form, .form {
             background: var(--default-bg);
+            box-shadow: 0 50px 30px -30px rgba(0, 0, 0, .75);
         }
     }
 }
