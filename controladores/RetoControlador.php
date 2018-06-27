@@ -1,11 +1,11 @@
 <?php
 	Class RetoControlador extends DBConexion{
-		 public function __construct(){}
+		 public function Reto1(){}
 
         public function Reto(){
         	$this->start();
         	 $stmt = $this->pdo->prepare(
-                    "SELECT * FROM retos where  fecha <= NOW() order by id_reto DESC"
+                    "SELECT * FROM retos where  fecha >= NOW()   order by fecha asc"
                 );
                 $stmt->execute();
                 $stmt->execute();

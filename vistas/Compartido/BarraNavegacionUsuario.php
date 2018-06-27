@@ -34,9 +34,9 @@
 
 	<div class="body login">
 		<div class="img">
-			<img src="assets/imgs/login.jpg" alt="">
+			<img src="assets/imgs/reto.png" alt="">
 		</div>
-		<form action="usuario.php?c=Usuario&a=IniciarSesion" method="POST" class="default">
+		<form action="usuario.php?c=Usuario&a=IniciarSesion" method="POST" >
 			<h1 class="title">Iniciar Sesion</h1>
 			<div class="input-group">
 				<label for="Correo">Correo electrónico:</label>

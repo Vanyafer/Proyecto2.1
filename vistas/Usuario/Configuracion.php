@@ -211,7 +211,6 @@
 						}else{
 							$('#permitir_18').val('0');
 						}
-						alert($('#permitir_18').val());
 					validarUsuario();
 					validarEdad();
 					y = $("#usuarioV").val();
@@ -239,7 +238,7 @@
 					                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
 					                url:   "Ajax.php?c=Usuario&a=Configuracion", //archivo que recibe la peticion
 					                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-					        		//location.reload();
+					        		location.reload();
 					            	}
 			        		});
 	                 	}

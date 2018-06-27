@@ -21,21 +21,21 @@ $dia = date("d");
 				<label for="Usuario">Nombre de Usuario:</label>
 				<div class="input-field">
 					<p><i class="fas fa-user"></i></p>
-					<input type="text" name="Usuario" id="Usuario" placeholder="donchingon" onFocus="if(this.value=='Usuario')this.value='' ">
+					<input type="text" name="Usuario" id="Usuario" placeholder="Usuario" onFocus="if(this.value=='Usuario')this.value='' ">
 				</div>
 			</div>
 			<div class="input-group">
-				<label for="Password">País:</label>
+				<label for="Password">Contraseña:</label>
 				<div class="input-field">
 					<p><i class="fas fa-key"></i></p>
-					<input type="password" name="Password" id="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' ">
+					<input type="password" name="Password" id="Password" value="password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' ">
 				</div>
 			</div>
 			<div class="input-group">
 				<label for="Correo">Correo:</label>
 				<div class="input-field">
 					<p><i class="fas fa-at"></i></p>
-					<input type="email" name="Correo" id="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' ">
+					<input type="email" name="Correo" id="Correo" placeholder="usuario@ejemplo.com" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' ">
 				</div>
 			</div>
 		</div>

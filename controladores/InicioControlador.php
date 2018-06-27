@@ -48,7 +48,7 @@
                 $stmt->execute();
 
                 $lista = array();
-                while($Publicacion = $stmt->fetch(PDO::FETCH_ASSOC)):
+                while($Publicacion = $stmt->fetch(PDO::FETCH_ASSOC)){
                 $Publicaciones = new PublicacionModelo();
                 $Publicaciones->set(
                     $Publicacion["id_publicacion"],
@@ -63,7 +63,7 @@
                 );
                 $lista[] = $Publicaciones;
 
-            endwhile;
+            }
            
 
             $this->stop();
@@ -157,6 +157,9 @@
 			if($_SERVER['REQUEST_METHOD']=='POST'){
 			$this->start();
 			$des = $_POST['des'];
+            
+            
+           
 			if(isset($_POST['edad'])){
 				$edad = 1;
 			
@@ -185,6 +188,8 @@
                     $this->stop();
     			}
 			 header("Location: Control.php?c=Inicio&a=Inicio");
+     
+            
 		}
         public function EliminarPublicacionUsuario(){
             $id_publicacion = $_GET['id'];

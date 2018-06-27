@@ -74,6 +74,9 @@
 				<i class="fas fa-sign-out-alt"></i>
 			</a>
 		</li>
+		<li>
+			<a href="Control.php?c=Usuario&a=UsuariosRecomendadosTecnica" class="abajo btn border"></a>
+		</li>
 	</ul>	
 </nav>
 <div class="overlay">

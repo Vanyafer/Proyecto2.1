@@ -4,7 +4,7 @@
 	<fieldset>
 		<form enctype="multipart/form-data" action="Control.php?c=Inicio&a=Publicar" method="POST">
 			<input type="text" name="des" id="des">
-			<input type="file" name="image">
+			<input type="file" name="image" accept=".png, .jpg, .jpeg">
 			<p>Tipo de usuario:</p>
 							<p><input type="radio" name="tipoP" value="0" checked> Publico </p>
 							<p><input type="radio" name="tipoP" value="1"> Solo amigos </p>

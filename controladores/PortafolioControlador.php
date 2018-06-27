@@ -1,8 +1,6 @@
 <?php 
 	Class PortafolioControlador extends DBConexion{
-		public function __construct()
-		{
-		}
+	
 		public function Portafolio($id_portafolio){
 				$this->start();
                 $stmt = $this->pdo->prepare(
@@ -12,7 +10,7 @@
                 $Portafolios = new PortafolioModelo;
                 $portafolio = $stmt->fetch(PDO::FETCH_ASSOC);
                 $Portafolios->set(
-                       	$portafolio['id_diseno'],
+                       	$portafolio['id_portafolio'],
 						$portafolio['descripcion']
                     );
                 $this->stop();
@@ -34,5 +32,15 @@
                 return $portafolio["id"];
 
 		}
+        public function Update(){
+            $this->start();
+                $id_portafolio =$_POST['id_portafolio'];
+                $descripcion = $_POST['descripcion'];
+                    $stmt = $this->pdo->prepare(
+                    "UPDATE portafolio set descripcion = $descripcion where id_portafolio = $id_portafolio"
+                    );
+                    $stmt->execute();
+            $this->stop();
+        }
 	}
 ?>

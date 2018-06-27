@@ -3,10 +3,7 @@
 		public $id_favs;
 		public $id_usuario;
 		public $id_forohilo;
-		
-		  public function __construct(){
 
-        }
 
         public function set($id_favs, $id_usuario, $id_forohilo){
         	$this->id_favs = $id_favs;

@@ -113,7 +113,7 @@
 
         }
         public function Agregar(){
-            $this->start();
+                $this->start();
                 $id_usuario1 = $_SESSION['id_usuario'];
                 $id_usuario2 = $_GET['id_usuario'];
                 $stmt = $this->pdo->prepare(
@@ -139,7 +139,7 @@
                 header("Location: Control.php?c=Perfiles&a=Perfiles&id=$id_usuario");
         }
         public function Aceptar(){
-                 $this->start();
+                $this->start();
                 $id_usuario = $_GET['id_usuario'];
                 $id_amigos = $_GET['id'];
                 $stmt = $this->pdo->prepare(
