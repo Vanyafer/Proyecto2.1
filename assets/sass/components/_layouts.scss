@@ -164,15 +164,3 @@
         }
     }
 }
-
-.grid {
-    padding: var(--padding);
-    $columns: 4;
-    display: grid;
-    @for $i from 1 through $columns {
-        &.columns-#{$i} {
-            grid-template-columns: repeat(#{$i}, 1fr);
-        }
-    }
-    grid-gap: var(--padding);
-}

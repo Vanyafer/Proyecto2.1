@@ -24,6 +24,6 @@
 		<?php }	?>
 	</div>
 	<div class="messages">
-		<div class="contact"></div>
+		<div class="contact">Hola</div>
 	</div>
 </div>
