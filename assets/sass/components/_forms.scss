@@ -28,13 +28,26 @@ form {
     }
 }
 
-input {
+input, select, textarea {
     font-family: 'Open Sans', Helvetica, sans-serif;
-    padding: .75rem 1rem;
+    padding: .5rem .75rem;
     outline: 1px solid transparent;
-    border: 1px solid gray;
+    border: 1px solid var(--default-btn);
     width: 100%;
     font-size: .8rem;
     @include transition;
 }
 
+.input-group {
+    .placeholder {
+        font-size: .8rem;
+        margin-bottom: 0.5rem;
+        svg {
+            margin-right: .5rem;
+        }
+    }
+    input, textarea, select {
+        border-radius: 5px; 
+        background: var(--default-input);
+    }    
+}

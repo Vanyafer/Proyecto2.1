@@ -13,7 +13,14 @@ $(document).ready(function() {
 
     }
 
-
+    $('.jscolor').change(function() {
+        setValueToRoot({
+            navbar: $("#navbar").val(),
+            bg: $("#bg").val(),
+            btn: $('#btn').val(),
+            input: $('#input').val()
+        });
+    })
     
     $("input:radio[name=TipoP]").click(function() {	 
 
@@ -61,8 +68,6 @@ $(document).ready(function() {
         $("#btn").focus()
         $("#input").focus()
         $("#navbar").focus()
-        
-
         
     });
 

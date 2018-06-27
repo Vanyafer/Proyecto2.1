@@ -175,6 +175,7 @@
                         $imagen = $folder.$_FILES["imagenA"]["name"];
                     }
                     if($_SESSION['tipo_usuario']==1){
+                        var_dump($_POST);
                         $informacion = $_POST['InformacionA'];
                         $tecnica = $_POST['Tecnica'];
                         $Metas = $_POST['Metas'];

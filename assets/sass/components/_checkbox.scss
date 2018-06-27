@@ -1,0 +1,23 @@
+.checkbox {
+    input[type=checkbox] {
+        display: none;
+        &:checked+label {
+            svg {
+                color: white;
+            }
+        }
+    }
+    label {
+        font-size: .8rem;
+        cursor: pointer;
+        .check {
+            padding: .25rem;
+            background: var(--default-btn);
+            border-radius: 5px;
+            margin-right: 1rem;
+        }
+        svg {
+            color: var(--default-btn);
+        }
+    }
+}
