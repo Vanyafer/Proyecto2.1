@@ -79,15 +79,9 @@
 		</li>
 	</ul>	
 </nav>
-<div class="overlay">
-	<div class="popup">
-		    		<?php 
-		    		
-		    		require("./vistas/Inicio/Publicar.php"); ?>
-	
-</div>
 
-</div>
+<?php require("./vistas/Inicio/Publicar.php"); ?>
+
 <script type="text/javascript">
 
 	bandera = 0;
@@ -106,14 +100,15 @@
 		    	$(".usuario").attr("href",direccion);
 		    	
 		    	usuario = $(this).attr("name");
-		    	$(".usuario").html(usuario);
-
+				
 		    	$.ajax({
-		    		url:'Ajax.php?c=Inicio&a=Publicacion',
+					url:'Ajax.php?c=Inicio&a=Publicacion',
 		    		method:'POST',
 		    		data: $("#idp").serialize(),
-		    		 success: function(res){
-		    		 	$(".Imagen").html(res);
+					success: function(res){
+						console.log(res);
+						$(".Imagen").html(res);
+						$(".name").html(usuario);
 		    		 }	
 		    		});
 		        $(".overlay2").fadeIn(400);
@@ -122,17 +117,7 @@
 		   
 		});
 		</script>
-<div class="overlay2">
-     			<input type="hidden" id="idp" name="idp">
-     		<div class="PopImagen">
-     		<h1 ><a href=""  class="usuario"></a><samp id="Close">x</samp></h1>
-     		<fieldset>
-     			
-     			<div class="Imagen">
-     			
-							
-     			</div>
-     		
-     		</fieldset>
-</div>
+<div>
+	<input type="hidden" id="idp" name="idp">     			
+	<div class="Imagen"></div>
 </div>

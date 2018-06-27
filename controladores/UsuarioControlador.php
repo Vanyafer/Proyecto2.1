@@ -201,10 +201,10 @@
                         $Estudios = $_POST['Estudios'];
                         $Exper = $_POST['Exper'];
                         $Otro = $_POST['Otro'];
-                        $Botones = $_POST['Botones'];
-                        $Texto = $_POST['Texto'];
-                        $Bordes = $_POST['Bordes'];
-                        $Fondo = $_POST['Fondo'];
+                        $Botones = $_POST['btn'];
+                        $Texto = $_POST['input'];
+                        $Bordes = $_POST['navbar'];
+                        $Fondo = $_POST['bg'];
                         $Diseno = $_POST['Diseno'];
 
 

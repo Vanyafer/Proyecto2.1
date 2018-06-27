@@ -9,11 +9,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
     display: none;
     .body {
         position: relative;        
-        background: var(--default-bg);
         border-radius: 5px;
-        box-shadow: 0 50px 30px -30px rgba(0, 0, 0, .75);
+        form, .form {
+            background: var(--default-bg);
+            box-shadow: 0 50px 30px -30px rgba(0, 0, 0, .75);
+        }
     }
 }
