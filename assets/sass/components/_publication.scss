@@ -1,0 +1,100 @@
+.publicacion {
+    border-radius: 5px;
+    width: 600px;
+    overflow-y: auto;
+    max-height: calc(100% - 4rem);
+    &::-webkit-scrollbar {
+        width: 7px;
+        background: var(--default-btn);
+    }
+    &::-webkit-scrollbar-thumb {
+        background: var(--default-navbar);
+        border-radius: 5px;
+    }
+    .photo {
+        box-shadow: 0 50px 30px -30px rgba(0, 0, 0, .75);
+        width: 95%;
+        margin: 0 auto 2rem;
+        position: relative;
+        &.container {
+            max-width: 600px;
+        }
+        img {
+            display: block;
+            object-fit: cover;
+            max-width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        &.active {
+            button {
+                display: block;
+            }
+        }
+        button {
+            display: none;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            border: none;
+            background: transparent;
+            @include transition;
+            svg {
+                font-size: 1.5rem;
+                @include transition;
+                color: black;
+                &:hover {
+                    cursor: pointer;
+                    color: var(--default-btn);
+                }
+            }
+        }
+    }
+    form {
+        border-radius: 5px;
+        width: 95%;
+        margin: 0 auto;
+        padding: 0;
+        .title {
+            margin: 0;
+            padding: var(--padding);
+            text-align: left;
+            color: white;
+            background: var(--default-navbar);
+            position: relative;
+            &:after {
+                content: '';
+                position: absolute;
+                border-left: 30px solid transparent;
+                border-right: 30px solid transparent;
+                border-bottom: 15px solid var(--default-navbar);
+                bottom: 100%;
+                left: 1rem;
+            }
+            input[type=file] {
+                display: none;
+            }
+            label {
+                position: absolute;
+                top: 50%;
+                right: 1.5rem;
+                transform: translateY(-50%);
+                &:hover {
+                    color: var(--default-btn);
+                    cursor: pointer;
+                }
+            }
+        }
+        .content,
+        .send {
+            padding: var(--padding);
+        }
+        .send {
+            .btn {
+                &:hover {
+                    color: var(--default-btn) !important;
+                }
+            }
+        }
+    }
+}

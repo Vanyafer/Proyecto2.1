@@ -66,7 +66,7 @@
 						<div class="input-group">
 							<div class="placeholder">
 								<i class="fas fa-lock"></i>
-								<label for="Contrasena1">Comfirmar contraseña:</label>
+								<label for="Contrasena1">Confirmar contraseña:</label>
 							</div>
 							<input type="password" name="Contrasena1" id="Contrasena1">
 						</div>

@@ -76,15 +76,9 @@
 		</li>
 	</ul>	
 </nav>
-<div class="overlay">
-	<div class="popup">
-		    		<?php 
-		    		
-		    		require("./vistas/Inicio/Publicar.php"); ?>
-	
-</div>
 
-</div>
+<?php require("./vistas/Inicio/Publicar.php"); ?>
+
 <script type="text/javascript">
 
 	bandera = 0;
