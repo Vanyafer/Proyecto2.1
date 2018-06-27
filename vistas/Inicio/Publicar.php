@@ -98,7 +98,7 @@
 			}
 		})
 	    $(".Abrir").click(() => {
-	        $(".modal").fadeIn(400).css('display','flex');
+	        $(".modal:not(.data)").fadeIn(400).css('display','flex');
 	    });
 	});
 	
