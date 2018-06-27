@@ -74,35 +74,6 @@ function validarCorreo(){
 						w = 0;
 					}
 				}
-$(document).ready(function(){
-			
 
-		$("input:radio[name=TipoP]").click(function () {	 
-			x = $('input:radio[name=TipoP]:checked').val();
-			if( x == "BN"){
-				$("#Bordes").val("000000");
-				$("#Botones").val("000000");
-				$("#Texto").val("000000");
-				$("#Fondo").val("FFFFFF");
-			}
-			if( x == "Frio"){
-				$("#Bordes").val("598392");
-				$("#Botones").val("124559");
-				$("#Texto").val("01161e");
-				$("#Fondo").val("aec3b0");
-			}
-			if( x == "Calido"){
-				$("#Bordes").val("ff841f");
-				$("#Botones").val("e50000");
-				$("#Texto").val("330808");
-				$("#Fondo").val("ffd162");
-			}
-			$("#Bordes").focus();
-			$("#Texto").focus();
-			$("#Fondo").focus();
-			$("#Botones").focus();
-			$("#Bordes").focus();
- 		});
-	
-});
 </script>
+

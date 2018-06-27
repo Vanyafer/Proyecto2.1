@@ -1,9 +1,27 @@
-<title>Configuraciones</title>
+<?php 
+	$dia = date("d");
+	$mes = date("m");
+	$ano = date("Y");
+	$fecha = "2004-".$mes."-".$dia;
+?>
 
-<script src="./assets/jscolor/jscolor.js"></script>
+	<title>Configuraciones</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/Configuracion.css">
+	<script src="./assets/jscolor/jscolor.js"></script>
+	<script src="./assets/js/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $(".Close").click(function(){
+	        $(".overlay2").fadeOut(400);
+	         $(".popup2").fadeOut(400);
+	    });
+	    
+});
+</script>
 
 <?php 
-
 	$id_usuario = $_SESSION['id_usuario'];
 	$us = new UsuarioControlador();
 	$u = $us->Usuario($id_usuario);
@@ -27,51 +45,12 @@
 	}
 
 ?>
-
-<div class="configuration">
-	<form id="formdata">
-		<div class="steps-bar">
-			<div class="left-btn btn-custom">
-				<i class="fas fa-angle-left"></i>
-			</div>
-			<div class="steps">
-				<div class="step active"></div>
-				<div class="step"></div>
-				<div class="step"></div>
-				<div class="step"></div>
-			</div>
-			<div class="right-btn btn-custom">
-				<i class="fas fa-angle-right"></i>
-			</div>
-		</div>
-		<div class="container-steps">
-			<div class="container-step">
-				<h1>Configuración de la cuenta</h1>
-				<div class="container min">
-					<div class="grid columns-2">
-						<div class="input-group">
-							<div class="placeholder active">
-								<i class="fas fa-user"></i>
-								<label for="Usuario">Nombre de Usuario:</label>
-							</div>
-							<input type="text" name="Usuario" id="Usuario" value="<?php echo $u->nombre_usuario;?>">
-						</div>
-						<div class="input-group">
-							<div class="placeholder">
-								<i class="fas fa-lock"></i>
-								<label for="Contrasena">Contraseña:</label>
-							</div>
-							<input type="password" name="Contrasena" id="Contrasena">
-						</div>
-						<div class="input-group">
-							<div class="placeholder">
-								<i class="fas fa-lock"></i>
-								<label for="Contrasena1">Comfirmar contraseña:</label>
-							</div>
-							<input type="password" name="Contrasena1" id="Contrasena1">
-						</div>
-
-					</div>
+<div class="Configuracion">
+	<input type="hidden" id="usuarioV">
+<form  id="formdata" >
+	<div class="General">
+							<h1>Configuraciones</h1>
+							<p>Nombre de usuario:</p>
 								<input type="text" name="Usuario" id="Usuario" value="<?php echo $u->nombre_usuario; ?>"></p>
 								<p id="valUsuario"></p>
 								<br>
@@ -107,11 +86,12 @@
 						<input type="checkbox" name="permitir" id="permitir" > Permitir contenido explicito	
 						<input type="hidden" name="permitir_18" id="permitir_18">
 							</div>
-				</div>
-			</div>
-			<div class="container-step">
-				<h1>Configuración general</h1>
-					<div class="container">
+			                <br>
+			               
+	</div>
+	<div class="Artista" id="Artista">
+		
+							<h1>Editar Perfil</h1>
 							<div>
 								Informacion:<br>
 								<textarea name="InformacionA"><?php echo $a->informacion_contacto ?></textarea>
@@ -140,102 +120,49 @@
 								<p>Foto de perfil:</p>
 								<input type="file" name="imagenA" value="<?php echo $a->imagen;?>">
 							</div>
-					</div>
-			</div>
-			<div class="container-step">
-				<h1>Diseño de la página</h1>
-				
-				<div class="container min">
-					<div class="grid columns-2">
-						<div class="radio">
-							<input type="radio" name="Diseno" id="Diseno1" value="1">
-							<label for="Diseno1">
-								<img src="imagenes/Perfil1.jpg">
-								<div class="icon">
-									<i class="fas fa-check"></i>
+							<!--div class="Columna">
+								<p>Foto de fondo:</p>
+								<input type="file" name="perfil">
+							</div-->
+							<h3>Escoge un diseño</h3>
+							<img src="imagenes/Perfil1.jpg"><input type="radio" name="Diseno" id="Diseno1" value="1">
+							<img src="imagenes/Perfil2.jpg"><input type="radio" name="Diseno" id="Diseno2" value="2">
+							<img src="imagenes/Perfil3.jpg"><input type="radio" name="Diseno" id="Diseno3" value="3">	
+							<h3>Paleta de colores:</h3>
+							<div><input type="radio" name="TipoP" value="BN" > Blanco/Negro <br>
+							<input type="radio" name="TipoP" value="Frio"> Frio <br>
+							<input type="radio" name="TipoP" value="Calido"> Calido <br>
+							<input type="radio" name="TipoP" checked> Personalizado </div>	
+							<div class="Columna">
+									<p>Color de Bordes:</p>
+									 <input class="jscolor" name="Bordes" id="Bordes"  value="<?php echo $d->color_bordes; ?>">
+									<p>Color Texto:</p>
+									 <input class="jscolor" name="Texto" id="Texto" value="<?php echo $d->color_titulos; ?>">
 								</div>
-							</label>
-						</div>
-						<div class="radio">
-							<input type="radio" name="Diseno" id="Diseno2" value="2">
-							<label for="Diseno2">
-								<img src="imagenes/Perfil2.jpg">
-								<div class="icon">
-									<i class="fas fa-check"></i>
-								</div>
-							</label>
-						</div>
-						<div class="radio">
-							<input type="radio" name="Diseno" id="Diseno3" value="3">
-							<label for="Diseno3">
-								<img src="imagenes/Perfil3.jpg">
-								<div class="icon">
-									<i class="fas fa-check"></i>
-								</div>
-							</label>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="container-step">
-				<h1>Paleta de colores</h1>
-				<div class="container">
-				<div class="grid columns-4">		
-					<input type="radio" name="TipoP" value="Y" > Amarillos 
-					<input type="radio" name="TipoP" value="C"> Frio 
-					<input type="radio" name="TipoP" value="W"> Calido
-					<input type="radio" name="TipoP"> Personalizado 
-						<p>Color de la Barra de navegación:</p>
-							<input class="jscolor" name="navbar" id="navbar"  value="<?php echo $d->color_bordes; ?>">
-						<p>Color de Fondo:</p>
-						<input class="jscolor color" name="bg" id="bg" value="<?php echo $d->color_fondo; ?>">
-						<p>Color de botones:</p>
-						<input class="jscolor" name="btn" id="btn" value="<?php echo $d->color_botones; ?>">
-						<p>Color de Inputs:</p>
-							<input class="jscolor" name="input" id="input" value="<?php echo $d->color_titulos; ?>">					
-							</div>	
-				</div>
-			</div>
-		</div>
-		<div class="save">
-			<a class="btn Aceptar">
-				Guardar cambios
-				<i class="fas fa-save"></i>
-			</a>
-		</div>
-	</form>
-</div>
+								<div class="Columna">
+									<p>Color de Fondo:</p>
+									<input class="jscolor color" name="Fondo" id="Fondo" value="<?php echo $d->color_fondo; ?>">
+									<p>Color de botones:</p>
+									<input class="jscolor" name="Botones" id="Botones" value="<?php echo $d->color_botones; ?>">
 
-<script>
+								</div>	
+						<a class="boton Aceptar">Aceptar</a>
+	</div>
+	<div class="Fan" id="Fan">
+						<p>Informacion de contacto</p>
+						<textarea name="DatosFan"><?php echo $f->informacion_contacto; ?>
+						</textarea>
+						<p>Perfil:</p>
+						<textarea name="PerfilFan"><?php echo $f->perfil; ?></textarea>
+						<p>Foto de perfil:</p>
+						<input type="file" name="imagenF">
+						<br>
+						
+						<a class="boton Aceptar">Aceptar</a>
+						
+	</div>
 
-	let left = 100;
-	let pos = 0;
-	let container = $('.container-steps');
-	
-	$('.left-btn').click(e => {
-		if($('.step.active').index() > 0) {
-			let current = $('.step.active')
-			let idx = current.index() - 1
-			pos = idx * left;
-			container.css('left',`-${pos}%`)
-			$('.step').eq(idx).addClass('active')
-			current.removeClass('active')
-		}
-	});
-
-	$('.right-btn').click(e => {
-		let current = $('.step.active')
-		let idx = current.index() + 1
-		if(idx < $('.step').length) {
-			pos = idx * left;
-			container.css('left',`-${pos}%`)
-			$('.step').eq(idx).addClass('active')
-			current.removeClass('active')
-		}
-	});
-</script>
-
-<div class="overlay2">
+	<div class="overlay2">
 		<div class="popup2">
 				<div class="Pop">
 					<h1>Confirmar contraseña actual</h1>
@@ -255,7 +182,19 @@
 </div>	
 	<?php
 	include ("Validacion.php");
-			
+			if($_SESSION['tipo_usuario']==1){
+				echo "<script Language='JavaScript'>
+				document.getElementById('Artista').style.display='block';
+				document.getElementById('Fan').style.display = 'none';
+				</script>";
+
+			}
+			if($_SESSION['tipo_usuario']==2){
+				echo "<script Language='JavaScript'>
+				document.getElementById('Artista').style.display = 'none';
+				document.getElementById('Fan').style.display = 'block';
+				</script>";
+			}
 	?>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -313,5 +252,3 @@
 });
 	
 </script>
-
-<script src="assets/js/app/app.color.js"></script>

@@ -1,0 +1,37 @@
+.radio {
+    input[type=radio] {
+        display: none;
+        &:checked + label {
+            border: 2px solid var(--default-btn);
+            .icon {
+                display: flex;
+            }
+        }
+    }
+    label {
+        position: relative;
+        display: block;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        .icon {
+            background: var(--default-btn);
+            color: white;
+            border-radius: 50%;
+            padding: .25rem;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: -13px;
+            right: -13px;
+            svg {
+                font-size: .8rem;
+            }
+        }
+    }
+    img {
+        max-width: 100%;
+        display: block;
+        border-radius: 5px;
+    }
+}
