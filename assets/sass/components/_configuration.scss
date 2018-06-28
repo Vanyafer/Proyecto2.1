@@ -100,7 +100,7 @@
     .color {
         input[type=radio] {
             display: none;
-            &:checked+label {                
+            &:checked+label {
                 .template {
                     border: 2px solid gray;
                 }
@@ -132,6 +132,19 @@
                 border: none;
                 text-align: center;
             }
+        }
+    }
+}
+
+.modal.confirmation {
+    .body {
+        padding: var(--padding);
+        background: var(--default-bg);
+        h1.title {
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 2rem;
         }
     }
 }

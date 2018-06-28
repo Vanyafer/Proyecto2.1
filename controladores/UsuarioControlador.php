@@ -152,7 +152,7 @@
                     $Edad = $_POST['Edad'];
                     $Pais = $_POST['Pais'];
                     $id_usuario = $_SESSION['id_usuario'];
-                    $permitir_18 = $_SESSION['permitir_18'];
+                    if(isset($_SESSION['permitir_18'])):$permitir_18 = $_SESSION['permitir_18'];else:$permitir_18 = 1;endif;
                    
                     if($contrasena != ''){
 
@@ -202,10 +202,10 @@
                     $di = new DisenoControlador();
                     $di->Update($Bordes,$Texto,$Botones,$Fondo,$Diseno,$a->id_diseno);
 
-
+                        echo "1";
 
                 }else{
-
+                    echo "1";
                 }
                    $this->stop();                     
 

@@ -29,7 +29,7 @@
 ?>
 
 <div class="configuration">
-	<form id="formdata">
+	<form id="formdata" enctype="multipart/form-data">
 		<div class="steps-bar">
 			<div class="left-btn btn-custom">
 				<i class="fas fa-angle-left"></i>
@@ -246,6 +246,25 @@
 				<i class="fas fa-save"></i>
 			</a>
 		</div>
+		<div class="modal confirmation">
+			<div class="body">
+				<h1 class="title">Guardar cambios</h1>
+				<div class="input-group">
+					<div class="placeholder">	
+						<i class="fas fa-lock"></i>
+						<label for="ContraA">Contraseña:</label>
+					</div>
+					<input type="password" name="ContraA" id="ContraA">
+				</div>
+				<div class="right margin-top">
+					<button class="btn border Contra">
+						<span>Aceptar</span>
+						<i class="fas fa-check"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
 
 <script>
@@ -275,29 +294,17 @@
 			current.removeClass('active')
 		}
 	});
-</script>
 
-<div class="overlay2">
-		<div class="popup2">
-				<div class="Pop">
-					<h1>Confirmar contraseña actual</h1>
-					<fieldset>
-							<input type="password" name="ContraA" >
-							<p id="ContraA"></p>
-							<a class ="boton Contra"> Aceptar </a>
-						<n>
-						<a class="boton Close">Cerrar</a>
-					</fieldset>
-				</div>
-		
-		</div>
-	</div>
-	</form>
-
-</div>	
+	$(window).click(e => {
+		if(e.target == $('.confirmation')[0]) {
+			$('.confirmation').fadeOut(400);
+		}
+	})
+	</script>
+	
 	<?php
 	include ("Validacion.php");
-			
+	
 	?>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -318,32 +325,39 @@
 					y = $("#Usuario").val();
 					//(v==1) && (w==1) && (x==1) && (y==1) && (z==1)
 					if((v==1) && (y!="") && (x==1)){
-						$(".overlay2").fadeIn(400);
-	        			$(".popup2").fadeIn(400);
+						$(".confirmation").fadeIn(400).css('display','flex');
 		  			}
 		    });
 
-	    $(".Contra").click(function(){
-
+	    $(".Contra").click(function(e){
+				e.preventDefault();
 					$.ajax({
 		 			type:  "POST", //método de envio
 	                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
 	                url:   "Ajax.php?c=Usuario&a=ValidarContrasena", //archivo que recibe la peticion
-	        	}).done(function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+				}).done(function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
 	                 	if(res == 1){ 
-	                 	document.getElementById('ContraA').innerHTML="La contrasena es incorrecta";
+	                 		document.getElementById('ContraA').innerHTML="La contrasena es incorrecta";
 	                 	}
 	                 	if( res== 0){
+							 var formData = $('#formdata')[0]
+							 var formDataFormat = new FormData(formData)
 	                 		$.ajax({
-				 					type:  "POST", //método de envio
-					                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-					                url:   "Ajax.php?c=Usuario&a=Configuracion", //archivo que recibe la peticion
-					                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-					        		//location.reload();
-					            	}
-			        		});
+								type:  "POST", //método de envio
+								data: formDataFormat, //datos que se envian a traves de ajax
+								url:   "Ajax.php?c=Usuario&a=Configuracion", //archivo que recibe la peticion
+								processData: false,
+								contentType: false
+			        		}).done(res => {
+								if(res == 1) {
+									updateColors();
+									location.reload(true);
+								}
+							}).fail(res => {
+								console.log(res);
+							})
 	                 	}
-	            	}).fail(function (re) {
+	            	}).fail(function (res) {
 						console.log(res);
 					})
 		    });
@@ -354,5 +368,3 @@
 });
 	
 </script>
-
-<script src="assets/js/app/app.color.js"></script>

@@ -78,8 +78,9 @@
             input[type=file] {
                 display: none;
             }
-            label {
+            label, a {
                 position: absolute;
+                color: white;
                 top: 50%;
                 right: 1.5rem;
                 transform: translateY(-50%);
@@ -89,7 +90,7 @@
                 }
             }
         }
-        .content,
+        .content-body,
         .send {
             padding: var(--padding);
         }
@@ -116,6 +117,25 @@
             padding-bottom: var(--padding);
             form {
                 display: flex;
+                input[type=text] {
+                    flex: 1;
+                    border-radius: 0;
+                    border-bottom-left-radius: 5px;
+                    border-top-left-radius: 5px;
+                    background: var(--default-input);
+                }
+                button {
+                    width: 40px;
+                    border: none;
+                    background: var(--default-btn);
+                    color: white;
+                    &:hover {
+                        background: var(--default-input);
+                        cursor: pointer;
+                    }
+                    border-bottom-right-radius: 5px;
+                    border-top-right-radius: 5px;
+                }
             }
         }
         .comments {
@@ -154,6 +174,23 @@
                         color: var(--error);
                     }
                 }
+            }
+        }
+        .actions-publication {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .reactions {
+
+            }
+            .actions {
+                text-align: right;
+                font-size: .6rem;
+                a {
+                    color: var(--error);
+                }
+                margin-bottom: 0.5rem;
             }
         }
     }

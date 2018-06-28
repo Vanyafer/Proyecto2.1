@@ -182,13 +182,24 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 									<?php }
 								}
 							?>
+						<div class="actions-publication">
+							<div class="reactions">
+								<a class="Like" id="0"><i class="far fa-thumbs-up"></i></a>
+								<a class="Like" id="2"><i class="far fa-thumbs-down"></i></a>
+							</div>
+							<div class="actions">
+								<a href="Control.php?c=Reportes&a=ReportarPublicacion&id=<?php echo $id;?>" id="Accion"></a>
+							</div>
+						</div>
 						<div class="ComentarioNuevo">
 							<form onSubmit="Enviar(); return false" id="ComentarioN">
 								<input type="hidden" name="id_c" id="id_c">
 								<input type="hidden" name="tipoLike" id="tipoLike">
 								<input type="hidden" id="publicacionC" name="publicacionC" value="<?php echo $id; ?>">
-								<input type="text" name="Comentario" id="Comentario">
-								<input type="submit" value=">">
+								<input type="text" name="Comentario" id="Comentario" autocomplete="off">
+								<button type="submit">
+									<i class="fas fa-location-arrow"></i>
+								</button>	
 							</form>
 						</div>
 					</div>
@@ -196,20 +207,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 			</div>
 
 		</div>
-
 	</div>
-
-	<div>
-		<?php  
-			echo '<a href="Control.php?c=Reportes&a=ReportarPublicacion&id='.$id.'" id="Accion">Reportar publicación</a>';
-		?>
-		
-	</div>
-			
-			
-	</div>
-	</div>
-
 
 
 

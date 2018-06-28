@@ -47,7 +47,7 @@
 			</a>
 		</li>
 		<li>
-			<a class="btn border Abrir">
+			<a class="btn border open">
 				<i class="fas fa-edit"></i>
 			</a>
 		</li>
@@ -103,7 +103,6 @@
 		    		method:'POST',
 		    		data: $("#idp").serialize(),
 					success: function(res){
-						console.log(res);
 						$(".Imagen").html(res);
 						$(".name").html(usuario);
 		    		 }	
