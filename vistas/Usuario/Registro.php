@@ -171,6 +171,29 @@
 					</label>
 				</div>
 			</div>
+			<div class="grid columns-2" id="fan">
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-font"></i>
+						<label for="DatosFan">Información de Contacto:</label>
+					</div>
+					<textarea name="DatosFan" id="DatosFan"></textarea>
+				</div>
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-user"></i>
+						<label for="PerfilFan">Perfil:</label>
+					</div>
+					<textarea name="PerfilFan" id="PerfilFan"></textarea>
+				</div>
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-image"></i>
+						<label for="imagenF">Foto de perfil:</label>
+					</div>
+					<input type="file" name="imagenF" id="imagenF">
+				</div>
+			</div>
 			<div class="grid columns-4 colors" id="final">	
 				<div class="color">
 					<input type="radio" name="TipoP" value="Y" id="Y">
@@ -234,6 +257,19 @@
 					</button>
 				</div>
 			</div>
+			<!-- Botón para la info del Fan -->
+			<div class="grid columns-1 pud">
+				<div class="space-between">
+					<button class="btn border back-begin hidden">
+						<i class="fa fa-angle-double-left"></i>
+						<span>Regresar</span>
+					</button>
+					<button class="btn border fan-final hidden">
+						<span>Registrarse</span>
+						<i class="fa fa-check"></i>
+					</button>
+				</div>
+			</div>
 			<!-- Botón del Segundo Paso -->
 			<div class="grid columns-1 pud">
 				<div class="space-between">
@@ -291,6 +327,15 @@
 				setTimeout(() => {
 					$('#second').slideDown(400).css('display', 'grid');
 				}, 400);
+			} else {
+				e.preventDefault();
+				$('.first').hide();
+				$('#first').slideUp(400);
+				$('.back-begin').fadeIn(600);
+				$('.fan-final').fadeIn(600);
+				setTimeout(() => {
+					$('#fan').slideDown(400).css('display', 'grid');
+				}, 400);
 			}
 		})
 		$('.second').click(e => {
@@ -321,6 +366,16 @@
 			$('#second').slideUp(400);
 			$('.back-first').fadeOut(600);
 			$('.second').fadeOut(600);
+			setTimeout(() => {
+				$('#first').slideDown(400).css('display', 'grid');
+			}, 400);
+		})
+		$('.back-begin').click(e => {
+			e.preventDefault();
+			$('.first').show();
+			$('#fan').slideUp(400);
+			$('.back-begin').fadeOut(600);
+			$('.fan-final').fadeOut(600);
 			setTimeout(() => {
 				$('#first').slideDown(400).css('display', 'grid');
 			}, 400);
