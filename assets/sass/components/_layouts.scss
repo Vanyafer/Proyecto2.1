@@ -176,3 +176,24 @@
     }
     grid-gap: var(--padding);
 }
+
+.full-screen {
+    height: 100vh;
+    width: 100%;
+    &.flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.no-navbar {
+            height: calc(100vh - 62px);
+        }
+        &.space {
+            padding: var(--padding);
+        }
+    }
+}
+
+.pud {
+    padding-top: 0;
+    padding-bottom: 0;
+}

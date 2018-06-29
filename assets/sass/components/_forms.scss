@@ -28,6 +28,10 @@ form {
     }
 }
 
+body.default {
+    background: var(--cold-bg);
+}
+
 input, select, textarea {
     font-family: 'Open Sans', Helvetica, sans-serif;
     padding: .5rem .75rem;
@@ -50,4 +54,21 @@ input, select, textarea {
         border-radius: 5px; 
         background: var(--default-input);
     }    
+}
+
+.scroll-y {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.small-form {
+    max-width: 400px;
+}
+
+.medium-form {
+    max-width: 800px;
+}
+
+#second, #third, #final {
+    display: none;
 }

@@ -51,7 +51,7 @@
             $this->stop();
             return $Artistas;
  			}
-            public function Insert($imagen,$infomracion,$tecnica,$id_usuario,$id_diseno,$id_portafolio,$id_perfil){
+            public function Insert($imagen,$informacion,$tecnica,$id_usuario,$id_diseno,$id_portafolio,$id_perfil){
                 $this->start();
                 $stmt = $this->pdo->prepare(
                             "INSERT into artista VALUES(NULL,'$imagen','$informacion','$tecnica',$id_usuario,$id_diseno,$id_portafolio,$id_perfil)"
@@ -63,7 +63,7 @@
                         $stmt->execute();
                         $artista = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->stop();
-                return $artista["id_artista"];
+                return $artista["id"];
             }
             public function Update($imagen,$informacion,$tecnica,$id_artista){
                  $this->start();

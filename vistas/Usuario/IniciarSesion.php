@@ -1,43 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Nombre de nuestra pagina</title>
-	<link rel="stylesheet" type="text/css" href="./assets/css/Diseno.css">
-	<script type="text/javascript">
+<title>Nombre de nuestra pagina</title>	
 
-	function Inicio(showhide){
-	if(showhide == "show"){
-    document.getElementById('Sesion').style.visibility="visible";
-	}else if(showhide == "hide"){
-    document.getElementById('Sesion').style.visibility="hidden"; 
-	}
-	}
-</script>
-</head>
-<body>
-	<div id="Sesion">
+<div class="full-screen flex no-navbar">
 
-	        <h1>Iniciar sesion</h1>
+	<form action="usuario.php?c=Usuario&a=IniciarSesion" method="POST" class="default small-form">
+		<h1 class="title">Iniciar Sesion</h1>
+		<div class="input-group">
+			<div class="placeholder">
+				<i class="fas fa-at"></i>
+				<label for="Correo">Correo electrónico:</label>
+			</div>
+			<input type="email" name="Correo" id="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' "/>
+		</div>
+		<div class="input-group margin-top">
+			<div class="placeholder">
+				<i class="fas fa-key"></i>
+				<label for="Password">Contraseña:</label>
+			</div>
+			<input type="password" name="Password" id="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' ">
+		</div>
+		<div class="right margin-top">
+			<button class="btn border">
+				<span>Continuar</span>
+				<i class="fa fa-angle-double-right"></i>
+			</button>
+		</div>
+	</form>
 
-	        <fieldset>
-
-	            <form action="usuario.php?c=Usuario&a=IniciarSesion" method="POST">
-
-	                <input type="email" name="Correo" value="Correo" onBlur="if(this.value=='')this.value='Correo'" onFocus="if(this.value=='Correo')this.value='' "> 
-	                <!--input type="Text" name="Usuario" value="Usuario" onBlur="if(this.value=='')this.value='Usuario'" onFocus="if(this.value=='Usuario')this.value='' "-->
-	                <input type="password" name="Password" value="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' ">  <br>
-	                <a href="validarContrasena">No recuerdo mi contrasena</a><br>
-	                <input type="submit" value="Aceptar">
-	            </form>
-	            	<input type="submit" value="Cerrar" onclick="Inicio('hide');">
-	        </fieldset>
-
-
-	</div>
-
-</body>
-</html>
-<script type="text/javascript">
-	
-	
-</script>
+</div>

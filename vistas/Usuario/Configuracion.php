@@ -79,11 +79,11 @@
 							</div>
 							<select name="Pais" id="Pais">
 								<?php
-										$us = new UsuarioControlador();
-										$x = $us->Pais();
-          								foreach ($x as $pa) {
-	          								echo "<option value=".$pa->id_pais.">".$pa->nombre_pais.	"</option>";
-          								}
+									$us = new UsuarioControlador();
+									$x = $us->Pais();
+									foreach ($x as $pa) {
+										echo "<option value=".$pa->id_pais.">".$pa->nombre_pais.	"</option>";
+									}
         						?>
 							</select>
 						</div>
@@ -112,7 +112,7 @@
 				<div class="container min">
 					<div class="grid columns-2">
 						<div class="input-group">
-							<div class="placeholder"><i class="fas fa-info"></i><label>Información:</label></div>
+							<div class="placeholder"><i class="fas fa-info"></i><label>Información de Contacto:</label></div>
 							<textarea name="InformacionA" id="InformacionA" cols="30" rows="5"><?php echo $a->informacion_contacto;?></textarea>
 						</div>
 						<div class="input-group">
@@ -215,7 +215,7 @@
 						<div class="hex">
 							<p>Color de la Barra de navegación:</p>
 							<label>
-								<input class="jscolor" name="navbar" id="navbar"  value="<?php echo $d->color_titulos; ?>">
+								<input class="jscolor" name="navbar" id="navbar"  value="<?php echo $d->color_bordes; ?>">
 							</label>
 						</div>
 						<div class="hex">
@@ -233,7 +233,7 @@
 						<div class="hex">
 							<p>Color de Inputs:</p>
 							<label>
-								<input class="jscolor" name="input" id="input" value="<?php echo $d->color_bordes; ?>">	
+								<input class="jscolor" name="input" id="input" value="<?php echo $d->color_titulos; ?>">	
 							</label>
 						</div>
 					</div>

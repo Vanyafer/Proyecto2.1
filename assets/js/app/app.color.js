@@ -27,6 +27,7 @@ $(document).ready(function() {
     })
     
     $("input:radio[name=TipoP]").click(function() {	 
+        console.log("Estoy entrando");
 
         let current = $('input:radio[name=TipoP]:checked').val();
 
