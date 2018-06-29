@@ -124,6 +124,28 @@
                 background: var(--default-navbar);
                 border-radius: 5px;
             }
+            .Mensaje {
+                padding: calc(var(--padding) / 2);
+                > a {
+                    color: var(--default-navbar);
+                    font-size: .9rem;
+                    font-weight: 700;
+                    @include transition;
+                    &:hover {
+                        color: var(--default-btn);
+                    }
+                }
+                > .contenido {
+                    font-size: .8rem;
+                    margin: .375rem 0;
+                    text-indent: 1rem;
+                }   
+                > .fecha {
+                    font-size: .6rem;
+                    color: var(--default-btn);
+                    text-align: right;
+                }
+            }
         }
         .new {
             position: absolute;

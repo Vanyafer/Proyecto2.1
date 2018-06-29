@@ -1,48 +1,31 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Perfil</title>
-	<link rel="stylesheet" type="text/css" href="./assets/css/PerfilInvitado.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
+<title>Perfil</title>
 <?php 
 $id_usuario = $_GET['id'];
 $us = new UsuarioControlador();
 $u = $us->Usuario($id_usuario);
 
 	?>
-<div class="Perfil">
-	<div class="Datos">
-		<div class="Box">
-			<div class="Foto"><img src="<? ?>"></div>
-			<div class="mensaje"><a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>" id="Bandeja">Enviar mensaje</a></div>
-			<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>" class="Dueno " id="Moderador">Reportar Usuario</a>
-				
-		</div>
-		
-		
-		<div class="Box">
-			<div class="Nombre"><?php echo $u->nombre_usuario; ?><hr></div>
-			<br>
-			<div class="Informacion">
-				<p>Informacion</p>
-				<div class="InformacionP"> <?php  ?></div>
+
+<div class="profile-1">
+	<div class="container min">
+		<div class="grid-profile-1">
+			<div class="img">
+				<img src="imagenes/imgPerfil/test2.jpeg">
 			</div>
-			<div class="Informacion">
-				<p>Informacion</p>
-				<div class="InformacionP"><?php ?></div>
+			<div class="details">
+				<div class="grid columns-1">
+					<div class="topbar">
+						<div class="name"><?php echo $u->nombre_usuario; ?></div>
+						<a href="Control.php?c=Mensajes&a=Mensajes&id=<?php echo $id_usuario ?>" id="Bandeja">Enviar mensaje</a>
+						<a href="Control.php?c=Reportes&a=ReportarUsuario&id=<?php echo $id_usuario ?>" class="Dueno " id="Moderador">Reportar Usuario</a>
+					</div>
+					<div class="info">
+						<div class="header">Información</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		
-		
 	</div>
-<?php include "ConfiguracionPerfil.php"; 
-
-?>
-
-
 </div>
-</body>
-</html>
+
+<?php include "ConfiguracionPerfil.php"; ?>
