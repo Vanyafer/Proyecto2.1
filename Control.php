@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="assets/font-awesome/js/fontawesome-all.min.js"></script>
     <script src="assets/resources/jquery-3.2.1.js"></script>
+    <script src="assets/js/app/app.cookies.js"></script>
+    <script src="assets/js/app/app.color.js"></script>
 <body>
     <?php require("./vistas/Compartido/BarraNavegacion.php"); ?>
     <div class="space-left">

@@ -124,6 +124,28 @@
                 background: var(--default-navbar);
                 border-radius: 5px;
             }
+            .Mensaje {
+                padding: calc(var(--padding) / 2);
+                > a {
+                    color: var(--default-navbar);
+                    font-size: .9rem;
+                    font-weight: 700;
+                    @include transition;
+                    &:hover {
+                        color: var(--default-btn);
+                    }
+                }
+                > .contenido {
+                    font-size: .8rem;
+                    margin: .375rem 0;
+                    text-indent: 1rem;
+                }   
+                > .fecha {
+                    font-size: .6rem;
+                    color: var(--default-btn);
+                    text-align: right;
+                }
+            }
         }
         .new {
             position: absolute;
@@ -175,4 +197,25 @@
         }
     }
     grid-gap: var(--padding);
+}
+
+.full-screen {
+    height: 100vh;
+    width: 100%;
+    &.flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.no-navbar {
+            height: calc(100vh - 62px);
+        }
+        &.space {
+            padding: var(--padding);
+        }
+    }
+}
+
+.pud {
+    padding-top: 0;
+    padding-bottom: 0;
 }

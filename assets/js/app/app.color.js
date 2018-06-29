@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    /**
+     * Control de Cookies
+     */
+
     const getValueFromRoot = name => {
         return getComputedStyle(document.documentElement, null).getPropertyValue(name);
     }
@@ -23,6 +27,7 @@ $(document).ready(function() {
     })
     
     $("input:radio[name=TipoP]").click(function() {	 
+        console.log("Estoy entrando");
 
         let current = $('input:radio[name=TipoP]:checked').val();
 
@@ -30,12 +35,12 @@ $(document).ready(function() {
             $("#navbar").val("7F7606");
             $("#bg").val("E5D53E");
             $("#btn").val("BFB20A");
-            $("#input").val("BFB20A");
+            $("#input").val("FFED0A");
             setValueToRoot({
-              navbar: "7F7606",
-              bg: "E5D53E",
-              btn: "BFB20A",
-              input: "BFB20A"
+                navbar: "7F7606",
+                bg: "E5D53E",
+                btn: "BFB20A",
+                input: "FFED0A"
             });
         }
         if( current == "C"){
@@ -71,5 +76,23 @@ $(document).ready(function() {
         
     });
 
+    updateColors = () => {
+        if (checkCookie('bg')) { updateCookie('bg', $("#bg").val()) } else { setCookie('bg', $("#bg").val(),30)}
+        if (checkCookie('navbar')) { updateCookie('navbar', $("#navbar").val()) } else { setCookie('navbar', $("#navbar").val(),30)}
+        if (checkCookie('input')) { updateCookie('input', $("#input").val()) } else { setCookie('input', $("#input").val(),30)}
+        if (checkCookie('btn')) { updateCookie('btn', $("#btn").val()) } else { setCookie('btn', $("#btn").val(),30)}
+    };
+
 })
+
+checkColors = () => {
+    if (checkCookie('bg')) {
+        document.documentElement.style.setProperty('--default-navbar',`#${getCookie('navbar')}`);
+        document.documentElement.style.setProperty('--default-bg',`#${getCookie('bg')}`);
+        document.documentElement.style.setProperty('--default-input',`#${getCookie('input')}`);
+        document.documentElement.style.setProperty('--default-btn',`#${getCookie('btn')}`);
+    }
+}
+
+checkColors();
 

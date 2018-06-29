@@ -15,7 +15,7 @@
 					<i class="fas fa-link"></i>
 				</label>
 			</h1>
-			<div class="content grid columns-1">
+			<div class="content-body grid columns-1">
 				<div class="input-group">
 					<div class="placeholder">
 						<i class="fas fa-font"></i>
@@ -93,12 +93,12 @@
 
 	$(document).ready(function(){
 		$(window).click(e => {
-			if(e.target == $('.modal')[0]) {
+			if(e.target == $('.modal:not(.data)')[0]) {
 				$('.modal').fadeOut(400);
 			}
 		})
-	    $(".Abrir").click(() => {
-	        $(".modal").fadeIn(400).css('display','flex');
+	    $(".open").click(() => {
+	        $(".modal:not(.data)").fadeIn(400).css('display','flex');
 	    });
 	});
 	

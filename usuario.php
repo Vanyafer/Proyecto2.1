@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="assets/font-awesome/js/fontawesome-all.min.js"></script>
     <script src="assets/resources/jquery-3.2.1.js"></script>
-<body>
+<body class="default">
     <?php 
 
         require("./vistas/Compartido/BarraNavegacionUsuario.php");

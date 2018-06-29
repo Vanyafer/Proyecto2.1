@@ -28,3 +28,13 @@ html {
 .right {
     text-align: right;
 }
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn.hidden {
+    display: none;
+}

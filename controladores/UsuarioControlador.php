@@ -59,6 +59,16 @@
            }  }
 
         public function cerrarSesion(){
+            // Borrar todas las cookies de colores
+            if (isset($_SERVER['HTTP_COOKIE'])) {
+                $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+                foreach($cookies as $cookie) {
+                    $parts = explode('=', $cookie);
+                    $name = trim($parts[0]);
+                    setcookie($name, '', time()-1000);
+                    setcookie($name, '', time()-1000, '/');
+                }
+            }
             session_destroy();
             header("Location: usuario.php");
         }
@@ -92,7 +102,7 @@
                         $imagen = null;
                     }else{
                         $folder="./Imagenes/imgPerfil/";
-                        $tmp_name = $_FILES["imageAn"]["tmp_name"];
+                        $tmp_name = $_FILES["imagenA"]["tmp_name"];
                         move_uploaded_file( $tmp_name,"$folder".$_FILES["imagenA"]["name"]);
                         $imagen = $folder.$_FILES["imagenA"]["name"];
                     }
@@ -102,10 +112,10 @@
                         $Estudios = $_POST['Estudios'];
                         $Exper = $_POST['Exper'];
                         $Otro = $_POST['Otro'];
-                        $Botones = $_POST['Botones'];
-                        $Texto = $_POST['Texto'];
-                        $Bordes = $_POST['Bordes'];
-                        $Fondo = $_POST['Fondo'];
+                        $Botones = $_POST['btn'];
+                        $Texto = $_POST['input'];
+                        $Bordes = $_POST['navbar'];
+                        $Fondo = $_POST['bg'];
                         $Diseno = $_POST['Diseno'];
                         $di = new DisenoControlador();
                         $id_diseno = $di->Insert($Bordes,$Texto,$Botones,$Fondo,$Diseno);
@@ -152,7 +162,7 @@
                     $Edad = $_POST['Edad'];
                     $Pais = $_POST['Pais'];
                     $id_usuario = $_SESSION['id_usuario'];
-                    $permitir_18 = $_SESSION['permitir_18'];
+                    if(isset($_SESSION['permitir_18'])):$permitir_18 = $_SESSION['permitir_18'];else:$permitir_18 = 1;endif;
                    
                     if($contrasena != ''){
 
@@ -202,10 +212,10 @@
                     $di = new DisenoControlador();
                     $di->Update($Bordes,$Texto,$Botones,$Fondo,$Diseno,$a->id_diseno);
 
-
+                        echo "1";
 
                 }else{
-
+                    echo "1";
                 }
                    $this->stop();                     
 

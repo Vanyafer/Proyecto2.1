@@ -1,62 +1,77 @@
-<div class="overlaySeguidores">
-     		
-	<div class="Pop">
-	<fieldset>
-	<div class="Box">
-	<h1>Seguidores</h1>
-	<?php
-	$se = new SeguidoresControlador();
-	$seg = $se->ListaSeguidores();
-		foreach ($seg as $s) {
-			$us = new UsuarioControlador();
-						$u = $us->Usuario($s->id_usuario1);
-			echo "<a href='Control.php?c=Perfiles&a=Perfiles&id=$s->id_usuario1'>$u->nombre_usuario</a> <br>";
-		}			
-	?>
-	</div>
-	<input type="submit" value="Cerrar" class="Close" id="CloseSeguidores">
-	</fieldset>
-	</div>
-</div>
 
-<div class="overlayAmigo">
-	<div class="Pop">
+<div class="modal listFriends data">
+
+	<div class="body">
 		
-		<fieldset>
-		<div class="Box">
-			<h1>Amigos</h1>
+		<div class="list">
+			<h1>Lista de Amigos</h1>
 			<?php
-			$am = new AmigosControlador();
-			$amig = $am->ListaAmigos();
-				foreach ($amig as $a) {
-					$us = new UsuarioControlador();
-						if($a->id_usuario1 == $_SESSION['id_usuario']){
-							$u = $us->Usuario($a->id_usuario2);
-						}
-						if($a->id_usuario2 == $_SESSION['id_usuario']){
-							$u = $us->Usuario($a->id_usuario1);
-						}
-								
 
-					echo "<a href='Control.php?c=Perfiles&a=Perfiles&id=$u->id_usuario'>$u->nombre_usuario</a> <a href='Control.php?c=Amigos&a=Eliminar&id=".$a->id_amigos."&id_usuario=".$id_usuario."'>Eliminar</a><br>";
+				$am = new AmigosControlador();
+				$amig = $am->ListaAmigos();
+				if(!empty($amig)):
+					foreach ($amig as $a) {
+						$us = new UsuarioControlador();
+							if($a->id_usuario1 == $_SESSION['id_usuario']){
+								$u = $us->Usuario($a->id_usuario2);
+							}
+							if($a->id_usuario2 == $_SESSION['id_usuario']){
+								$u = $us->Usuario($a->id_usuario1);
+							}
+									
+
+						echo "<a class='space-between' href='Control.php?c=Perfiles&a=Perfiles&id=$u->id_usuario'>$u->nombre_usuario<a href='Control.php?c=Amigos&a=Eliminar&id=".$a->id_amigos."&id_usuario=".$id_usuario."'><i class='fas fa-trash-alt'></i></a></a>";
+					}
+				else:
+					echo "<a>No tienes ningún amigo</a>";
+				endif;
+
+			?>
+			<h1>Solicitudes</h1>
+			<?php
+		
+				
+				$sol = $am->Solicitudes();
+				if(!empty($sol)):
+				foreach ($sol as $a) {
+					$us = new UsuarioControlador();
+					$u = $us->Usuario($a->id_usuario1);
+					echo "<a href='Control.php?c=Perfiles&a=Perfiles&id=$u->id_usuario'>$u->nombre_usuario</a><a href='Control.php?c=Amigos&a=Aceptar&id=".$a->id_amigos."&id_usuario=".$id_usuario."'>Aceptar</a><a href='Control.php?c=Amigos&a=Eliminar&id=".$a->id_amigos."'>Denegar</a><br>";
 				}
+				else:
+					echo "<a>No tienes solicitudes de amistad</a>";
+				endif;
+
 			?>
 		</div>
 
-		<div class="Box">
-		<h1>Solicitudes de amistad</h1>
-		<?php
-			$sol = $am->Solicitudes();
-			foreach ($sol as $a) {
-				$us = new UsuarioControlador();
-				$u = $us->Usuario($a->id_usuario1);
-				echo "<a href='Control.php?c=Perfiles&a=Perfiles&id=$u->id_usuario'>$u->nombre_usuario</a><a href='Control.php?c=Amigos&a=Aceptar&id=".$a->id_amigos."&id_usuario=".$id_usuario."'>Aceptar</a><a href='Control.php?c=Amigos&a=Eliminar&id=".$a->id_amigos."'>Denegar</a><br>";
-			}
-		?>
-		</div>
-		<input type="submit" value="Cerrar" class="Close" id="CloseAmigo">
-		</fieldset>
 	</div>
+
+</div>
+
+<div class="modal listFollowers data">
+	
+	<div class="body">
+		<div class="list">
+			<h1>Lista de Seguidores</h1>
+			<?php
+
+				$se = new SeguidoresControlador();
+				$seg = $se->ListaSeguidores();
+			
+				if(!empty($seg)):
+					foreach ($seg as $s) {
+						$us = new UsuarioControlador();
+									$u = $us->Usuario($s->id_usuario1);
+						echo "<a href='Control.php?c=Perfiles&a=Perfiles&id=$s->id_usuario1'>$u->nombre_usuario</a>";
+					}	
+				else:		
+					echo "<a>No tienes ningun seguidor</a>";
+				endif;
+			?>
+		</div>
+	</div>
+
 </div>
 
 <?php
@@ -118,20 +133,21 @@ if($id_usuario == $_SESSION['id_usuario']|| $_SESSION['tipo_usuario']==3 ){
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#CloseAmigo").click(function(){
-		       	$(".overlayAmigo").fadeOut(400);
-		    });
-		$("#CloseSeguidores").click(function(){
-		       	$(".overlaySeguidores").fadeOut(400);
-		    });
+
 		    $(".AbrirAmigo").click(function(){
-		    	
-		        $(".overlayAmigo").fadeIn(400);
+		    	$('.listFriends').fadeIn(400).css('display','flex');
 		    });
 		    $(".AbrirSeguidores").click(function(){
-		    	
-		        $(".overlaySeguidores").fadeIn(400);
-		    });
+				$('.listFollowers').fadeIn(400).css('display','flex');
+			});
+			
+			$(window).click(e => {
+				if(e.target == $('.modal.listFriends')[0]) {
+					$('.modal.listFriends').fadeOut(400)
+				} else if(e.target == $('.modal.listFollowers')[0]) {
+					$('.modal.listFollowers').fadeOut(400)
+				}
+			})
 
 	});
 </script>

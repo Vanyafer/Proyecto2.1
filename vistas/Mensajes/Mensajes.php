@@ -1,9 +1,5 @@
 <?php $id_usuario = $_GET["id"]; ?>
-<head>
-	<title>Mensajes</title>
-	<link rel="stylesheet" type="text/css" href="./assets/css/Mensajes.css">
-</head>
-
+<title>Mensajes</title>
 <div class="messages-container">
 	<div class="contacts">
 		<div class="contact header">
