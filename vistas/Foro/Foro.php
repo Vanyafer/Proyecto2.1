@@ -6,119 +6,86 @@
 	<link rel="stylesheet" type="text/css" href="./assets/css/Foro.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>		
+<body>
 
-<div class="Banner">
-<a class="Boton" href="Control.php?c=Foro&a=NuevoHilo">Crear nuevo hilo</a>
-<h1>Foro de discusión</h1>
-</div>
 
-<div class="Foros">
-  <?php
-  $For = new ForoControlador();
-  $fo = $For->ForoFavs($_SESSION['id_usuario']);
+  <div class="container">
+    <div class="space-between margin-top">
+      <h1>Foro de Discusión</h1>
+      <a href="Control.php?c=Foro&a=NuevoHilo" class="btn border">
+        Crear nuevo hilo
+        <i class="fas fa-plus"></i>
+      </a>
+    </div>
+    <div class="grid columns-2">
+      <ul class="collection">
+        <li class="header">Hilos Propios</li>
+        <?php
+          $For = new ForoControlador();
+          $fo = $For->ForoFavs($_SESSION['id_usuario']);
 
-  echo '<table> 
-  <tr>
-  <th class="cinta">Hilo</th>
-  <th class="cinta">Fecha</th>
-  <th class="cinta">Usuario</th>
-  </tr>';
+          foreach ($fo as $f) {
+            
+            $us = new UsuarioControlador();
+            $u = $us->Usuario($f->id_usuario);
+            $fa = $For->HiloContenido($f->id_forohilo); ?>
 
-  foreach ($fo as $f) {
-    
-    $us = new UsuarioControlador();
-    $u = $us->Usuario($f->id_usuario);
-    $fa = $For->HiloContenido($f->id_forohilo);
-    echo "<tr>";
-    echo'<td class="izq">'; 
-       echo '<h3><a href="Control.php?c=Foro&a=Hilo&id='.$fa->id_forohilo.'">'.$fa->titulo.'</a></h3>';
-    echo "</td>";
-    echo '<td class="der">';
-        echo date('d-m-Y', strtotime($fa->fecha));
-    echo "</td>";
-    echo '<td class="der">';
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id='.$fa->id_usuario.'">'.$u->nombre_usuario.'</a></h3>';
-    echo "</td>";
-    echo "</tr>";
+            <li class="item">
+              <a class="title" href="Control.php?c=Foro&a=Hilo&id=<?php echo $fa->id_forohilo;?>"><?php echo $fa->titulo;?></a>
+              <a>Fecha: <?php echo date('d-m-Y', strtotime($fa->fecha));?></a>
+              <div class="right margin-top">
+                <a class="author" href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $fa->id_usuario;?>"><?php echo $u->nombre_usuario;?></a>
+              </div>
+            </li>
 
-  } 
-  echo "</table>";
-?>
-</div>
+          <?php } ?>
+      </ul>
+      <ul class="collection" id="Ideas">
+        <li class="header">Hilos Ideas</li>
+        <?php
+        $For = new ForoControlador();
+        $fo = $For->Foros(1);
 
-<div class="Foros" id="Ideas">
-  <?php
-  $For = new ForoControlador();
-  $fo = $For->Foros(1);
 
-  echo '<table> 
-  <tr>
-  <th class="cinta">Hilo</th>
-  <th class="cinta">Fecha</th>
-  <th class="cinta">Usuario</th>
-  </tr>';
-
-  foreach ($fo as $f) {
-    
-    $us = new UsuarioControlador();
-    $u = $us->Usuario($f->id_usuario);
-  
-    echo "<tr>";
-    echo'<td class="izq">'; 
-      echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">'.$f->titulo.'</a></h3>';
-    echo "</td>";
-    echo '<td class="der">';
-        echo date('d-m-Y', strtotime($f->fecha));
-    echo "</td>";
-    echo '<td class="der">';
-
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
-      
-    echo "</td>";
-    echo "</tr>";
-
-  } 
-  echo "</table>";
-?>
-</div>
-
-<div class="Foros" id="Objetos">
-  <?php
-  $fo = $For->Foros(2);
-
-  echo '<table> 
-  <tr>
-  <th class="cinta">Hilo</th>
-  <th class="cinta">Fecha</th>
-  <th class="cinta">Usuario</th>
-  </tr>';
-
-  foreach ($fo as $f) {
-    
-    $us = new UsuarioControlador();
-    $u = $us->Usuario($f->id_usuario);
-  
-    echo "<tr>";
-    echo'<td class="izq">'; 
-        echo '<h3><a href="Control.php?c=Foro&a=Hilo&id=' . $f->id_forohilo. '">'.$f->titulo.'</a></h3>';
+        foreach ($fo as $f) {
+          
+          $us = new UsuarioControlador();
+          $u = $us->Usuario($f->id_usuario); ?>
         
-    echo "</td>";
-    echo '<td class="der">';
-        echo date('d-m-Y', strtotime($f->fecha));
-    echo "</td>";
-    echo '<td class="der">';
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $f->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
-    echo "</td>";
-    echo "</tr>";
+          <li class="item">
+            <a class="title" href="Control.php?c=Foro&a=Hilo&id=<?php echo $f->id_forohilo;?>"><?php echo $f->titulo;?></a>
+            <a>Fecha: <?php echo date('d-m-Y', strtotime($f->fecha));?></a>
+            <div class="right margin-top">
+              <a class="author" href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $f->id_usuario;?>"><?php echo $u->nombre_usuario;?></a>
+            </div>
+          </li>
+          
 
-  } 
-  echo "</table>";
-?>
-</div>
+        <?php }  ?>
+      </ul>
+      <ul class="collection" id="Objetos">
+        <li class="header">Objetos</li>
+        <?php
 
-</body>
-</html>
+          $fo = $For->Foros(2);
+
+          foreach ($fo as $f) {
+            
+            $us = new UsuarioControlador();
+            $u = $us->Usuario($f->id_usuario); ?>
+          
+            <li class="item">
+              <a class="title" href="Control.php?c=Foro&a=Hilo&id=<?php echo $f->id_forohilo;?>"><?php echo $f->titulo;?></a>
+              <a>Fecha: <?php echo date('d-m-Y', strtotime($f->fecha));?></a>
+              <div class="right margin-top">
+                <a class="author" href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $f->id_usuario;?>"><?php echo $u->nombre_usuario;?></a>
+              </div>
+            </li>
+
+          <?php } ?>
+      </ul>
+    </div>
+  </div>
 
 <?php
 			if($_SESSION['tipo_usuario']==1){

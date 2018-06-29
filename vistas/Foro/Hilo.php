@@ -13,48 +13,36 @@
 	<link rel="stylesheet" type="text/css" href="./assets/css/Foro.css">
 </head>
 <body>
-	<div class="Foros">
-	<p><?php echo $hi->titulo; ?></p>
-	<table>
-	<tr>
-	<th>Descripcion</th>
-	<th>Usuario</th>
-	</tr>
-	<tr>
-	<td class="izq"><?php echo $hi->contenido; ?></td>
-	<td class="der"><?php echo $u->nombre_usuario; ?></td>
-	</tr>
-	</table>
+
+<div class="container">
+	<div class="grid columns-1">
+		<h1 class="margin-top"><?php echo $hi->titulo.' - '.$u->nombre_usuario;?></h1>
+		<ul class="collection">
+			<li class="header">
+				<?php echo $hi->contenido;?>
+			</li>
+			<?php
+				$Res = new ForoRespuestaControlador();
+				$re = $Res->Respuestas($id_forohilo);
+
+				foreach ($re as $r) {
+					
+					$us = new UsuarioControlador();
+					$u = $us->Usuario($r->id_usuario); ?>
+				
+					<li class="item">
+						<div><a><?php echo 'Respuesta: '.$r->contenido;?></a></div>
+						<div><a class="author margin-top right" href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $r->id_usuario;?>"><?php echo 'Autor: '.$u->nombre_usuario;?></a></div>
+					</li>
+					
+
+				<?php } ?>
+		</ul>
 	</div>
+</div>
 
 	<div class="Foros">
-	<?php
-		$Res = new ForoRespuestaControlador();
-  		$re = $Res->Respuestas($id_forohilo); 
-
-  		echo '<table> 
-  <tr>
-  <th class="cinta">Usuario</th>
-  <th class="cinta">Respuesta</th>
-  </tr>';
-
-  foreach ($re as $r) {
-    
-    $us = new UsuarioControlador();
-    $u = $us->Usuario($r->id_usuario);
-  
-    echo "<tr>";
-    echo'<td class="izq">'; 
-        echo '<h3><a href="Control.php?c=Perfiles&a=Perfiles&id=' . $r->id_usuario. '">'.$u->nombre_usuario.'</a></h3>';
-    echo "</td>";
-    echo '<td class="der">';
-        echo '<h3>'.$r->contenido.'</h3>';
-    echo "</td>";
-    echo "</tr>";
-
-  } 
-  echo "</table>";
-	 ?>
+	
 	</div>
 
 	<div  class="Foros">

@@ -14,7 +14,7 @@ ul.collection {
     }
     li.item {
         padding: calc(var(--padding) / 2);
-        a {
+        >a {
             font-size: .8rem;
             color: black;
             &:last-child {
@@ -28,6 +28,27 @@ ul.collection {
             &:hover {
                 color: var(--default-input);
                 cursor: pointer;
+            }
+            &.title {
+                font-size: 1rem;
+                font-weight: 700;
+            }
+        }
+        div {
+            a {
+                font-size: .8rem;
+                color: black;
+                font-size: .8rem;
+                color: var(--default-btn);
+                display: block;
+                @include transition;
+                &:hover {
+                    color: var(--default-input);
+                    cursor: pointer;
+                }
+                &.author {
+                    font-weight: 700;
+                }
             }
         }
     }
