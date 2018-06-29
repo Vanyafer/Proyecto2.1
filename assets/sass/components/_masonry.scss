@@ -28,3 +28,13 @@
         border-radius: 5px;
     }
 }
+
+.post-item {
+    font-size: .8rem;
+    letter-spacing: .2px;
+    line-height: 1.5rem;
+    background: var(--default-input);
+    border: 1px solid var(--default-btn);
+    padding: var(--padding);
+    border-radius: 5px;
+}

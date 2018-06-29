@@ -3,7 +3,7 @@ ul.collection {
     max-height: 90vh;
     overflow-y: auto;
     li.header {
-        padding: calc(var(--padding) / 3);
+        padding: calc(var(--padding) / 2);
         text-align: center;
         background: var(--default-btn);
         border-top-left-radius: 5px;
@@ -11,5 +11,31 @@ ul.collection {
         color: white;
         text-transform: uppercase;
         font-weight: 700;
+    }
+    li.item {
+        padding: calc(var(--padding) / 2);
+        a {
+            font-size: .8rem;
+            color: black;
+            &:last-child {
+                width: 20px;
+                text-align: center;
+            }
+            font-size: .8rem;
+            color: var(--default-btn);
+            display: block;
+            @include transition;
+            &:hover {
+                color: var(--default-input);
+                cursor: pointer;
+            }
+        }
+    }
+    li {
+        border: 1px solid var(--default-btn);
+        border-bottom: none;
+        &:last-child {
+            border-bottom: 1px solid var(--default-btn);
+        }
     }
 }

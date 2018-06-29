@@ -57,18 +57,18 @@
 
 				<li class="gallery-item">
 					<a>
-						<img src="<?php echo $publi->imagen;?>" class="Abrir2" name="<?php echo $u->nombre_usuario;?>" id="<?php $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
+						<img src="<?php echo $publi->imagen;?>" class="Abrir2" name="<?php echo $u->nombre_usuario;?>" id="<?php echo $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
 					</a>
 				</li>		
 
 			<?php } else { ?>
 
-				<li class="Abrir2" name="<?php echo $u->nombre_usuario;?>" id="<?php $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
+				<li class="Abrir2 gallery-item" name="<?php echo $u->nombre_usuario;?>" id="<?php echo $publi->id_publicacion;?>" idu="<?php echo $a->id_usuario;?>">
 					<a>
-						<textarea><?php $publi->contenido;?></textarea>
+						<p class="post-item"><?php echo $publi->contenido;?></p>
 					</a>
 				</li>
-
+	
 			<?php }	
 		}
 	?>

@@ -20,7 +20,7 @@
 							}
 									
 
-						echo "<a class='space-between' href='Control.php?c=Perfiles&a=Perfiles&id=$u->id_usuario'>$u->nombre_usuario<a href='Control.php?c=Amigos&a=Eliminar&id=".$a->id_amigos."&id_usuario=".$id_usuario."'><i class='fas fa-trash-alt'></i></a></a>";
+						echo "<div class='space-between'><a href='Control.php?c=Perfiles&a=Perfiles&id=$u->id_usuario'>$u->nombre_usuario<a href='Control.php?c=Amigos&a=Eliminar&id=".$a->id_amigos."&id_usuario=".$id_usuario."'><i class='fas fa-trash-alt'></i></a></a></div>";
 					}
 				else:
 					echo "<a>No tienes ningún amigo</a>";

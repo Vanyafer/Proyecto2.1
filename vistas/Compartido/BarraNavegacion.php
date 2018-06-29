@@ -103,6 +103,7 @@
 		    		method:'POST',
 		    		data: $("#idp").serialize(),
 					success: function(res){
+						console.log($('#idp').val());
 						$(".Imagen").html(res);
 						$(".name").html(usuario);
 		    		 }	

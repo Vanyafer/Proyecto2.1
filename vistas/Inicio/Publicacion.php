@@ -126,7 +126,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 								<i class="fas fa-font"></i>
 								Descripción
 							</label>
-							<textarea readonly="readonly" ><?php echo $p->contenido; ?></textarea>
+							<p class="post-item" readonly="readonly" ><?php echo $p->contenido; ?></p>
 						</div>
 					<?php endif;?>
 					<div class="comments">

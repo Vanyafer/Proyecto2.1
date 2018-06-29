@@ -10,7 +10,7 @@ const balance = (elementsE) => {
         heights.push(height)
     }
     for(let i = 0; i < heights.length - 1; i++) {
-        if(heights[index] >= heights[i+1]) {
+        if(heights[index] > heights[i+1]) {
             index = i+1;
         }   
     }    

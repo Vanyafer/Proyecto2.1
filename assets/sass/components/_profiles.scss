@@ -131,7 +131,7 @@
             text-transform: uppercase;
         }
         a {
-            padding: calc(var(--padding) / 2) var(--padding);
+            padding: var(--padding) var(--padding);
             font-size: .8rem;
             color: var(--default-btn);
             display: block;
