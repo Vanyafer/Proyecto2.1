@@ -16,64 +16,59 @@ form {
     }
     &.default {
         .btn {
-            background: #1c83a8!important;
+            background: #1c83a8 !important;
             &.border {
-                border: 2px solid #1c83a8!important;
+                border: 2px solid #1c83a8 !important;
             }
             &:hover {
-                background: transparent!important;
+                background: transparent !important;
                 color: #1c83a8;
             }
         }
     }
 }
 
-input {
+body.default {
+    background: var(--cold-bg);
+}
+
+input, select, textarea {
     font-family: 'Open Sans', Helvetica, sans-serif;
-    padding: .75rem 1rem;
+    padding: .5rem .75rem;
     outline: 1px solid transparent;
-    border: 1px solid gray;
+    border: 1px solid var(--default-btn);
     width: 100%;
     font-size: .8rem;
     @include transition;
 }
 
 .input-group {
-    .input-field {
-        display: flex;
-        p {
-            width: 44px;
-            position: relative;
-            background: white;
-            border: 1px solid gray;
-            border-right: none;
-            background: var(--default-input);
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-            svg {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-            &:after {
-                content: '';
-                padding-top: 100%;
-            }
-        }
-        input {
-            flex-grow: 1;
-        }
-    }
-    input {
-        background: white;
-        border: 1px solid gray;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-    }
-    label {
-        display: block;
+    .placeholder {
         font-size: .8rem;
-        margin: .5rem 0;
+        margin-bottom: 0.5rem;
+        svg {
+            margin-right: .5rem;
+        }
     }
+    input, textarea, select {
+        border-radius: 5px; 
+        background: var(--default-input);
+    }    
+}
+
+.scroll-y {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.small-form {
+    max-width: 400px;
+}
+
+.medium-form {
+    max-width: 800px;
+}
+
+#second, #third, #final {
+    display: none;
 }

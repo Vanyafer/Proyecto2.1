@@ -11,7 +11,7 @@
                 $stmt->execute();
                 $lista = array();
             
-            while($Comentario = $stmt->fetch(PDO::FETCH_ASSOC)){
+            while($Comentario = $stmt->fetch(PDO::FETCH_ASSOC)):
                 $Comentarios = new ComentarioModelo();
                 $Comentarios->set(
                     $Comentario["id_comentario"],
@@ -23,7 +23,8 @@
 					);
                 $lista[] = $Comentarios;
 
-            }
+            endwhile;
+           
 
             $this->stop();
             return $lista;
@@ -35,6 +36,7 @@
                     "SELECT * FROM comentario WHERE  id_comentario = $id_comentario"
                 );
                 $stmt->execute();
+                $lista = array();
             
             $Comentario = $stmt->fetch(PDO::FETCH_ASSOC);
                 $Comentarios = new ComentarioModelo();
@@ -67,9 +69,8 @@
             $p = $publicacion->PublicacionInfo($id_publicacion);
             $ar = new ArtistaControlador();
             $a = $ar->Artista($p->id_artista);
-            if($id_usuario != $a->id_usuario){
             $Noti->Insert(2,$id_usuario,$id_publicacion,$a->id_usuario);
-          }
+          
             $this->stop();
 
 		}
@@ -110,6 +111,9 @@
                 	$this->stop();
             		echo "0";
                 }
+                
+
+            
 		}
 	}
  ?>

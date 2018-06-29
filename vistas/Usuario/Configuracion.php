@@ -1,28 +1,9 @@
-<?php 
-	$dia = date("d");
-	$mes = date("m");
-	$ano = date("Y");
-	$fecha = "2004-".$mes."-".$dia;
-?>
+<title>Configuraciones</title>
 
-	<title>Configuraciones</title>
-	<link rel="stylesheet" type="text/css" href="./assets/css/Configuracion.css">
-	<script src="./assets/jscolor/jscolor.js"></script>
-	<script src="./assets/js/jquery.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<script type="text/javascript">
-	$(document).ready(function(){
-	    $(".Close").click(function(){
-	        $(".overlay2").fadeOut(400);
-	         $(".popup2").fadeOut(400);
-	    });
-	    
-});
-</script>
-
+<script src="./assets/jscolor/jscolor.js"></script>
 
 <?php 
+
 	$id_usuario = $_SESSION['id_usuario'];
 	$us = new UsuarioControlador();
 	$u = $us->Usuario($id_usuario);
@@ -46,156 +27,300 @@
 	}
 
 ?>
-<div class="Configuracion">
-	<input type="hidden" id="usuarioV">
-<form  id="formdata" >
-	<div class="General">
-							<h1>Configuraciones</h1>
-							<p>Nombre de usuario:</p>
-								<input type="text" name="Usuario" id="Usuario" value="<?php echo $u->nombre_usuario; ?>"></p>
-								<p id="valUsuario"></p>
-								<br>
-							<div class="Columna">
-								
-			                	<br>
-			                	<p>Contrasena:</p>
-			                	<input type="password" id="Contrasena" name="Contrasena" >
-			                	<p id="valContra"></p>
-			                	<br>
-			                	<p>Confirme contrasena:</p>
-				                <input type="password" id="Contrasena1"  >
-				                <p id="valCon"></p>
-							</div>
-							<div class="Columna">
-								<p>Pais:</p>
-								<select name="Pais">
-									<?php
-										$us = new UsuarioControlador();
-										$x = $us->Pais();
-          							foreach ($x as $pa) {
-          								echo "<option value=".$pa->id_pais.">".$pa->nombre_pais."</option>";
-          							}
-        						?>
-	
-			       				</select>
-								<br>
-								<p>Fecha de nacimiento:</p>
-								<input type="date" name="Edad" id="Edad" max="<?php echo $fecha; ?>" value="<?php echo $u->fn; ?>">
-								<p id="valEdad"></p>
-								<br>
 
-						<input type="checkbox" name="permitir" id="permitir" > Permitir contenido explicito	
-						<input type="hidden" name="permitir_18" id="permitir_18">
-							</div>
-			                <br>
-			               
-	</div>
-	<div class="Artista" id="Artista">
-		
-							<h1>Editar Perfil</h1>
-							<div>
-								Informacion:<br>
-								<textarea name="InformacionA"><?php echo $a->informacion_contacto ?></textarea>
-							</div>
-							<div>
-								Tecnica de interes:<br>
-								<textarea name="Tecnica"><?php echo $a->tecnica_interes ?></textarea>
-							</div>
-							<div>
-								Metas:<br>
-								<textarea name="Metas"><?php echo $p->metas; ?></textarea>
-							</div>
-							<div>
-								Estudios:<br>
-								<textarea name="Estudios"><?php echo $p->estudios; ?></textarea>
-							</div>
-							<div>
-								Tiempo como Artista:<br>
-								<textarea name="Exper"><?php echo $p->exper; ?></textarea>
-							</div>
-							<div>
-								Algo mas para compartir:<br>
-								<textarea name="Otro"><?php echo $p->otro; ?></textarea>
-							</div>
-							<div class="Columna">
-								<p>Foto de perfil:</p>
-								<input type="file" name="imagenA" value="<?php echo $a->imagen;?>">
-							</div>
-							<!--div class="Columna">
-								<p>Foto de fondo:</p>
-								<input type="file" name="perfil">
-							</div-->
-							<h3>Escoge un diseño</h3>
-							<img src="imagenes/Perfil1.jpg"><input type="radio" name="Diseno" id="Diseno1" value="1">
-							<img src="imagenes/Perfil2.jpg"><input type="radio" name="Diseno" id="Diseno2" value="2">
-							<img src="imagenes/Perfil3.jpg"><input type="radio" name="Diseno" id="Diseno3" value="3">	
-							<h3>Paleta de colores:</h3>
-							<div><input type="radio" name="TipoP" value="BN" > Blanco/Negro <br>
-							<input type="radio" name="TipoP" value="Frio"> Frio <br>
-							<input type="radio" name="TipoP" value="Calido"> Calido <br>
-							<input type="radio" name="TipoP" checked> Personalizado </div>	
-							<div class="Columna">
-									<p>Color de Bordes:</p>
-									 <input class="jscolor" name="Bordes" id="Bordes"  value="<?php echo $d->color_bordes; ?>">
-									<p>Color Texto:</p>
-									 <input class="jscolor" name="Texto" id="Texto" value="<?php echo $d->color_titulos; ?>">
-								</div>
-								<div class="Columna">
-									<p>Color de Fondo:</p>
-									<input class="jscolor color" name="Fondo" id="Fondo" value="<?php echo $d->color_fondo; ?>">
-									<p>Color de botones:</p>
-									<input class="jscolor" name="Botones" id="Botones" value="<?php echo $d->color_botones; ?>">
-
-								</div>	
-						<a class="boton Aceptar">Aceptar</a>
-	</div>
-	<div class="Fan" id="Fan">
-						<p>Informacion de contacto</p>
-						<textarea name="DatosFan"><?php echo $f->informacion_contacto; ?>
-						</textarea>
-						<p>Perfil:</p>
-						<textarea name="PerfilFan"><?php echo $f->perfil; ?></textarea>
-						<p>Foto de perfil:</p>
-						<input type="file" name="imagenF">
-						<br>
-						
-						<a class="boton Aceptar">Aceptar</a>
-						
-	</div>
-
-	<div class="overlay2">
-		<div class="popup2">
-				<div class="Pop">
-					<h1>Confirmar contraseña actual</h1>
-					<fieldset>
-							<input type="password" name="ContraA" >
-							<p id="ContraA"></p>
-							<a class ="boton Contra"> Aceptar </a>
-						<n>
-						<a class="boton Close">Cerrar</a>
-					</fieldset>
-				</div>
-		
+<div class="configuration">
+	<form id="formdata" enctype="multipart/form-data">
+		<div class="steps-bar">
+			<div class="left-btn btn-custom">
+				<i class="fas fa-angle-left"></i>
+			</div>
+			<div class="steps">
+				<div class="step active"></div>
+				<div class="step"></div>
+				<div class="step"></div>
+				<div class="step"></div>
+			</div>
+			<div class="right-btn btn-custom">
+				<i class="fas fa-angle-right"></i>
+			</div>
 		</div>
-	</div>
-	</form>
+		<div class="container-steps">
+			<div class="container-step">
+				<h1>Configuración de la cuenta</h1>
+				<div class="container min">
+					<div class="grid columns-2">
+						<div class="input-group">
+							<div class="placeholder active">
+								<i class="fas fa-user"></i>
+								<label for="Usuario">Nombre de Usuario:</label>
+							</div>
+							<input type="text" name="Usuario" id="Usuario" value="<?php echo $u->nombre_usuario;?>">
+						</div>
+						<div class="input-group">
+							<div class="placeholder">
+								<i class="fas fa-lock"></i>
+								<label for="Contrasena">Contraseña:</label>
+							</div>
+							<input type="password" name="Contrasena" id="Contrasena">
+						</div>
+						<div class="input-group">
+							<div class="placeholder">
+								<i class="fas fa-lock"></i>
+								<label for="Contrasena1">Confirmar contraseña:</label>
+							</div>
+							<input type="password" name="Contrasena1" id="Contrasena1">
+						</div>
+						<div class="input-group">
+							<div class="placeholder">
+								<i class="fas fa-calendar-alt"></i>
+								<label for="Edad">Fecha de Nacimiento:</label>
+							</div>
 
-</div>	
+							<input type="date" name="Edad" id="Edad"  value="<?php echo $u->fn ?>">
+						</div>
+					</div>
+					<div class="grid columns-2">
+						<div class="input-group">
+							<div class="placeholder">
+								<i class="fas fa-globe"></i>
+								<label for="Pais">País:</label>
+							</div>
+							<select name="Pais" id="Pais">
+								<?php
+									$us = new UsuarioControlador();
+									$x = $us->Pais();
+									foreach ($x as $pa) {
+										echo "<option value=".$pa->id_pais.">".$pa->nombre_pais.	"</option>";
+									}
+        						?>
+							</select>
+						</div>
+						<div class="input-group">
+							<div class="placeholder">
+								<i class="fas fa-globe"></i>
+								<label for="Pais">Estado:</label>
+							</div>
+							<select name="Estado" id="Estado">
+								<?php
+									$es = $us->Estado();
+									foreach ($es as $e) {
+										echo "<option value=".$e->id_estado.">".$e->estado."</option>";
+
+									}
+        						?>
+							</select>
+						</div>
+						<div class="checkbox">
+							<input type="checkbox" name="permitir" id="permitir">
+							<label for="permitir">
+								<span class="check">
+									<i class="fas fa-check"></i>
+								</span>
+								<span>Permitir contenido explicito</span>
+							</label>
+							<input type="hidden" name="permitir_18" id="permitir_18">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-step">
+				<h1>Configuración general</h1>
+				<div class="container min">
+					<div class="grid columns-2">
+						<div class="input-group">
+							<div class="placeholder"><i class="fas fa-info"></i><label>Información de Contacto:</label></div>
+							<textarea name="InformacionA" id="InformacionA" cols="30" rows="5"><?php echo $a->informacion_contacto;?></textarea>
+						</div>
+						<div class="input-group">
+							<div class="placeholder"><i class="fas fa-crosshairs"></i><label>Técnica de Interés</label></div>
+							<textarea name="Tecnica" id="Tecnica" cols="30" rows="5"><?php echo $a->tecnica_interes;?></textarea>
+						</div>
+						<div class="input-group">
+							<div class="placeholder"><i class="fas fa-bookmark"></i><label>Metas:</label></div>
+							<textarea name="Metas" id="Metas" cols="30" rows="5"><?php echo $p->metas;?></textarea>
+						</div>
+						<div class="input-group">
+							<div class="placeholder"><i class="fas fa-graduation-cap"></i><label>Estudios</label></div>
+							<textarea name="Estudios" id="Estudios" cols="30" rows="5"><?php echo $p->estudios;?></textarea>
+						</div>
+						<div class="input-group">
+							<div class="placeholder"><i class="fas fa-clock"></i><label>Tiempo como artista:</label></div>
+							<textarea name="Exper" id="Exper" cols="30" rows="5"><?php echo $p->exper;?></textarea>
+						</div>
+						<div class="input-group">
+							<div class="placeholder"><i class="fas fa-plus"></i><label>Algo mas para compartir:</label></div>
+							<textarea name="Otro" id="Otro" cols="30" rows="5"><?php echo $p->otro;?></textarea>
+						</div>
+						<div class="input-group">
+							<div class="placeholder">
+								<i class="fas fa-image"></i>
+								<label for="imagenA">Foto de perfil:</label>
+							</div>
+							<input type="file" name="imagenA" id="imagenA" value="<?php echo $a->imagen;?>">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-step">
+				<h1>Diseño de la página</h1>
+				
+				<div class="container min">
+					<div class="grid columns-2">
+						<div class="radio">
+							<input type="radio" name="Diseno" id="Diseno1" value="1">
+							<label for="Diseno1">
+								<img src="imagenes/Perfil1.jpg">
+								<div class="icon">
+									<i class="fas fa-check"></i>
+								</div>
+							</label>
+						</div>
+						<div class="radio">
+							<input type="radio" name="Diseno" id="Diseno2" value="2">
+							<label for="Diseno2">
+								<img src="imagenes/Perfil2.jpg">
+								<div class="icon">
+									<i class="fas fa-check"></i>
+								</div>
+							</label>
+						</div>
+						<div class="radio">
+							<input type="radio" name="Diseno" id="Diseno3" value="3">
+							<label for="Diseno3">
+								<img src="imagenes/Perfil3.jpg">
+								<div class="icon">
+									<i class="fas fa-check"></i>
+								</div>
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-step">
+				<h1>Paleta de colores</h1>
+				<div class="container min">
+					<div class="grid columns-4 colors">	
+						<div class="color">
+							<input type="radio" name="TipoP" value="Y" id="Y">
+							<label for="Y">
+								Amarillos
+								<div class="template" style="background-image: linear-gradient(to right, #7F7606, #7F7606 25%, #E5D53E 25%, #E5D53E 50%, #BFB20A 50%, #BFB20A 75%, #FFED0A 75%, #FFED0A 100%);"></div>
+							</label>
+						</div>
+						<div class="color">
+							<input type="radio" name="TipoP" value="C" id="C">
+							<label for="C">
+								Frio
+								<div class="template" style="background-image: linear-gradient(to right, #121F27, #121F27 25%, #E4EEF0 25%, #E4EEF0 50%, #416275 50%, #416275 75%, #BBCFDA 75%, #BBCFDA 100%);"></div>
+							</label>
+						</div>
+						<div class="color">
+							<input type="radio" name="TipoP" value="W" id="W">
+							<label for="W">
+								Calido
+								<div class="template" style="background-image: linear-gradient(to right, #AA0000, #AA0000 25%, #F2F2F2 25%, #F2F2F2 50%, #D43600 50%, #D43600 75%, #FFCA00 75%, #FFCA00 100%);"></div>
+							</label>
+						</div>
+						<div class="color">
+							<input type="radio" name="TipoP" id="P">
+							<label for="P">
+								Personalizado
+								<div class="template"></div>
+							</label>
+						</div> 
+						<div class="hex">
+							<p>Color de la Barra de navegación:</p>
+							<label>
+								<input class="jscolor" name="navbar" id="navbar"  value="<?php echo $d->color_bordes; ?>">
+							</label>
+						</div>
+						<div class="hex">
+							<p>Color de Fondo:</p>
+							<label>
+								<input class="jscolor color" name="bg" id="bg" value="<?php echo $d->color_fondo; ?>">
+							</label>
+						</div>
+						<div class="hex">
+							<p>Color de botones:</p>
+							<label>
+								<input class="jscolor" name="btn" id="btn" value="<?php echo $d->color_botones; ?>">
+							</label>
+						</div>
+						<div class="hex">
+							<p>Color de Inputs:</p>
+							<label>
+								<input class="jscolor" name="input" id="input" value="<?php echo $d->color_titulos; ?>">	
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="save">
+			<a class="btn Aceptar">
+				Guardar cambios
+				<i class="fas fa-save"></i>
+			</a>
+		</div>
+		<div class="modal confirmation">
+			<div class="body">
+				<h1 class="title">Guardar cambios</h1>
+				<div class="input-group">
+					<div class="placeholder">	
+						<i class="fas fa-lock"></i>
+						<label for="ContraA">Contraseña:</label>
+					</div>
+					<input type="password" name="ContraA" id="ContraA">
+				</div>
+				<div class="right margin-top">
+					<button class="btn border Contra">
+						<span>Aceptar</span>
+						<i class="fas fa-check"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script>
+
+	let left = 100;
+	let pos = 0;
+	let container = $('.container-steps');
+	
+	$('.left-btn').click(e => {
+		if($('.step.active').index() > 0) {
+			let current = $('.step.active')
+			let idx = current.index() - 1
+			pos = idx * left;
+			container.css('left',`-${pos}%`)
+			$('.step').eq(idx).addClass('active')
+			current.removeClass('active')
+		}
+	});
+
+	$('.right-btn').click(e => {
+		let current = $('.step.active')
+		let idx = current.index() + 1
+		if(idx < $('.step').length) {
+			pos = idx * left;
+			container.css('left',`-${pos}%`)
+			$('.step').eq(idx).addClass('active')
+			current.removeClass('active')
+		}
+	});
+
+	$(window).click(e => {
+		if(e.target == $('.confirmation')[0]) {
+			$('.confirmation').fadeOut(400);
+		}
+	})
+	</script>
+	
 	<?php
 	include ("Validacion.php");
-			if($_SESSION['tipo_usuario']==1){
-				echo "<script Language='JavaScript'>
-				document.getElementById('Artista').style.display='block';
-				document.getElementById('Fan').style.display = 'none';
-				</script>";
-
-			}
-			if($_SESSION['tipo_usuario']==2){
-				echo "<script Language='JavaScript'>
-				document.getElementById('Artista').style.display = 'none';
-				document.getElementById('Fan').style.display = 'block';
-				</script>";
-			}
+	
 	?>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -213,37 +338,44 @@
 						}
 					validarUsuario();
 					validarEdad();
-					y = $("#usuarioV").val();
+					y = $("#Usuario").val();
 					//(v==1) && (w==1) && (x==1) && (y==1) && (z==1)
-					if((v==1) && (y==1) && (x==1)){
-						
-						$(".overlay2").fadeIn(400);
-	        			$(".popup2").fadeIn(400);
+					if((v==1) && (y!="") && (x==1)){
+						$(".confirmation").fadeIn(400).css('display','flex');
 		  			}
 		    });
 
-	    $(".Contra").click(function(){
-
+	    $(".Contra").click(function(e){
+				e.preventDefault();
 					$.ajax({
 		 			type:  "POST", //método de envio
 	                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
 	                url:   "Ajax.php?c=Usuario&a=ValidarContrasena", //archivo que recibe la peticion
-	                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+				}).done(function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
 	                 	if(res == 1){ 
-	                 	document.getElementById('ContraA').innerHTML="La contrasena es incorrecta";
+	                 		document.getElementById('ContraA').innerHTML="La contrasena es incorrecta";
 	                 	}
 	                 	if( res== 0){
+							 var formData = $('#formdata')[0]
+							 var formDataFormat = new FormData(formData)
 	                 		$.ajax({
-				 					type:  "POST", //método de envio
-					                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
-					                url:   "Ajax.php?c=Usuario&a=Configuracion", //archivo que recibe la peticion
-					                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-					        		location.reload();
-					            	}
-			        		});
+								type:  "POST", //método de envio
+								data: formDataFormat, //datos que se envian a traves de ajax
+								url:   "Ajax.php?c=Usuario&a=Configuracion", //archivo que recibe la peticion
+								processData: false,
+								contentType: false
+			        		}).done(res => {
+								if(res == 1) {
+									updateColors();
+									location.reload(true);
+								}
+							}).fail(res => {
+								console.log(res);
+							})
 	                 	}
-	            	}
-	        	});
+	            	}).fail(function (res) {
+						console.log(res);
+					})
 		    });
 		$('#Diseno<?php echo $d->tipo_perfil;?>').attr('checked', true);
 		if(<?php echo $u->permitir_18 ?> == 1){

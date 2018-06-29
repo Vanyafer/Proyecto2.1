@@ -5,6 +5,9 @@
         public $id_usuario1;
         public $id_usuario2;
 
+         public function __construct(){
+
+        }
 
         public function set( $id_conversacion, $id_usuario1, $id_usuario2){
         	$this->id_conversacion = $id_conversacion;

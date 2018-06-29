@@ -21,7 +21,6 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 		?>
 <script type="text/javascript">
 	function Enviar(){
-		
 			$.ajax({
 
 		    		url:'Ajax.php?c=Comentario&a=Comentar',
@@ -110,85 +109,105 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 	
 
 </script>
-	<div class="Contenedor">
-		<div class="Box">
-		<img src="<?php echo  $p->imagen ?>">
-		<input type="hidden" name="" id="idI" value="<?php echo $id;?>">
-	</div>
-	<div class="Box1">
-			<div><textarea readonly="readonly" ><?php echo $p->contenido; ?></textarea></div>
-			<div>
 
-					<a class="Like" id="0">Dislike</a>
+	<div class="modal data">
 
-					<a class="Like" id="2">like</a> 
+		<div class="body publicacion">
+
+			<div class="photo container active">
+				<img src="<?php echo  $p->imagen ?>">
 			</div>
-			<div class="Comentarios">
-				<div>
-					<?php
-						$Com = new ComentarioControlador();
-						$co = $Com->Comentarios($id);
-		
-						foreach ($co as $c) {
-							$us = new UsuarioControlador();
-						$u = $us->Usuario($c->id_usuario);
-						if($c->ocultar == 1){
-							echo "<div class='Comentario'>
-									<a href='Control.php?c=Perfiles&a=Perfiles&id=".$c->id_usuario."' id='usuario'>$u->nombre_usuario</a>
-									<div class='contenido' id=$c->id_comentario>Este comentario fue borrado</div>
-									<div class='fecha'>$c->fecha</div>
-								</div>";
-						}else{
-							$us = new UsuarioControlador();
-						$u = $us->Usuario($c->id_usuario);
-						if($c->id_usuario == $_SESSION['id_usuario'] || $_SESSION['tipo_usuario']==3){
-							$class = "EliminarComentario";
-							$x = "Eliminar Comentario";
-							$href = "";
-		
-						}else{
-							$class = "";
-							$x = "Reportar";
-							$href = "href='Control.php?c=Reportes&a=ReportarComentario&id=$c->id_comentario'";
-						}
-						
-							echo "<div class='Comentario'>
-							<a href='Control.php?c=Perfiles&a=Perfiles&id=".$c->id_usuario."' id='usuario'>$u->nombre_usuario</a>
-							<div class='contenido' id=$c->id_comentario>$c->contenido</div>
-							<div class='fecha'>$c->fecha</div>
-							<a  ".$href." id='$c->id_comentario' class='AccionComentario ".$class."'>$x</a>
-							</div>";
-						}
-						}
-							
-					
-					?>
+			<div class="form">
+				<h1 class="title name"></h1>
+				<div class="grid columns-1">
+					<?php if(!empty($p->contenido)): ?>
+						<div class="description">
+							<label class="subtitle">
+								<i class="fas fa-font"></i>
+								Descripción
+							</label>
+							<p class="post-item" readonly="readonly" ><?php echo $p->contenido; ?></p>
+						</div>
+					<?php endif;?>
+					<div class="comments">
+						<label class="subtitle">
+							<i class="fas fa-comments"></i>
+							Comentarios
+						</label>
+						<?php
 
+							$Com = new ComentarioControlador();
+							$co = $Com->Comentarios($id);
+			
+							foreach ($co as $c) {
+								$us = new UsuarioControlador();
+								$u = $us->Usuario($c->id_usuario);
+								if($c->ocultar == 1){ ?>
+								<div class="comment">
+									<div class="owner">
+										<a href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $c->id_usuario;?>" id="usuario"><?php echo $u->nombre_usuario;?></a>
+										<div class="date"><?php echo $c->fecha;?></div>
+									</div>
+									<div class="message" id="<?php echo $c->id_comentario;?>">
+										Este comentario fue borrado
+									</div>
+								</div>
+								<?php } else {
+									$us = new UsuarioControlador();
+									$u = $us->Usuario($c->id_usuario);
+									if($c->id_usuario == $_SESSION['id_usuario'] || $_SESSION['tipo_usuario']==3){
+										$class = "EliminarComentario";
+										$x = "Eliminar Comentario";
+										$href = "";
+									} else {
+										$class = "";
+										$x = "Reportar";
+										$href = "href='Control.php?c=Reportes&a=ReportarComentario&id=$c->id_comentario'";
+									} ?>
+									
+										<div class="comment">
+											<div class="owner">
+												<a href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $c->id_usuario;?>" id="usuario"><?php echo $u->nombre_usuario;?></a>
+												<div class="date"><?php echo $c->fecha;?></div>
+											</div>
+											<div class="message" id="<?php echo $c->id_comentario;?>">
+												<?php echo $c->contenido;?>
+											</div>
+											<div class="actions">
+												<a href="<?php echo $href;?>" class="AccionnComentario <?php echo $class; ?>" id="<?php echo $c->id_comentario;?>">
+													<?php echo $x;?>
+												</a>
+											</div>
+										</div>
+									<?php }
+								}
+							?>
+						<div class="actions-publication">
+							<div class="reactions">
+								<a class="Like" id="0"><i class="far fa-thumbs-up"></i></a>
+								<a class="Like" id="2"><i class="far fa-thumbs-down"></i></a>
+							</div>
+							<div class="actions">
+								<a href="Control.php?c=Reportes&a=ReportarPublicacion&id=<?php echo $id;?>" id="Accion"></a>
+							</div>
+						</div>
+						<div class="ComentarioNuevo">
+							<form onSubmit="Enviar(); return false" id="ComentarioN">
+								<input type="hidden" name="id_c" id="id_c">
+								<input type="hidden" name="tipoLike" id="tipoLike">
+								<input type="hidden" id="publicacionC" name="publicacionC" value="<?php echo $id; ?>">
+								<input type="text" name="Comentario" id="Comentario" autocomplete="off">
+								<button type="submit">
+									<i class="fas fa-location-arrow"></i>
+								</button>	
+							</form>
+						</div>
+					</div>
 				</div>
-				
 			</div>
-	<div  class="ComentarioNuevo">
-				<form onSubmit="Enviar(); return false" id="ComentarioN">
 
-					<input type="hidden" name="id_c" id="id_c">
-					<input type="hidden" name="tipoLike" id="tipoLike">
-					<input type="hidden" id="publicacionC" name="publicacionC" value="<?php echo $id; ?>">
-					<input type="text" name="Comentario" id="Comentario">
-					<input type="submit" name="" value=">" >
-			</form>
+		</div>
 	</div>
-
-	<div>
-		<?php  
-			echo '<a href="Control.php?c=Reportes&a=ReportarPublicacion&id='.$id.'" id="Accion">Reportar publicación</a>';
-		?>
-		
-	</div>
-			
-			
-	</div>
-	</div>
-
 
 
 
@@ -225,3 +244,14 @@ if($_SESSION['tipo_usuario']==3){
 
 	
 ?>
+
+<script>
+	$(document).ready(function(){
+		$(window).click(e => {
+			if(e.target == $('.data')[0]) {
+				$('.data').fadeOut(400);
+			}
+		})
+		$(".data").fadeIn(400).css('display','flex');
+	});
+</script>

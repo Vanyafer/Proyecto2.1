@@ -1,5 +1,8 @@
 <?php 
-class DisenoControlador extends DBConexion{
+	Class DisenoControlador extends DBConexion{
+		public function __construct()
+		{
+		}
 		public function Diseno($id_diseno){
 				$this->start();
                 $stmt = $this->pdo->prepare(
@@ -19,7 +22,7 @@ class DisenoControlador extends DBConexion{
                     );
                 $this->stop();
 				return $disenos;
-
+			
 		}
 		public function Insert($color_bordes,$color_titulos,$color_botones,$color_fondo,$tipo_perfil){
 				$this->start();

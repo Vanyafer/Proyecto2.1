@@ -1,0 +1,145 @@
+.profile-1,
+.profile-2,
+.profile-3 {
+    .grid {
+        padding: calc(var(--padding) / 2) 0;
+    }
+    .grid-profile-1 {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-gap: var(--padding);
+        .img {
+            width: 100%;
+            position: relative;
+            &:after {
+                content: '';
+                display: block;
+                padding-top: 100%;
+            }
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                object-fit: cover;
+                object-position: center center;
+                height: 100%;
+                max-width: 100%;
+                display: block;
+            }
+        }
+        .details {
+            .topbar {
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-start;
+                >* {
+                    margin: 0 .5rem;
+                }
+                .name {
+                    margin: 0;
+                    font-weight: 700;
+                    font-size: 1.75rem;
+                    color: var(--default-navbar);
+                }
+                >a {
+                    margin-bottom: 0.25rem;
+                    font-size: .8rem;
+                    color: var(--default-btn);
+                    @include transition;
+                    &:hover {
+                        color: var(--default-input);
+                        cursor: pointer;
+                    }
+                }
+            }
+            .info {
+                .header {
+                    background: var(--default-btn);
+                    color: white;
+                    padding: calc(var(--padding) / 2) var(--padding);
+                }
+            }
+        }
+    }
+}
+
+.profile-2 {
+    padding: var(--padding);
+    .flex-center {
+        display: flex;
+        justify-content: center;
+        padding: calc(var(--padding) / 2) 0;
+    }
+    .grid {
+        padding: calc(var(--padding) / 2) 0;
+    }
+    a {
+        margin-bottom: 0.25rem;
+        font-size: .8rem;
+        color: var(--default-btn);
+        @include transition;
+        &:hover {
+            color: var(--default-input);
+            cursor: pointer;
+        }
+    }
+    .info {
+        .header {
+            background: var(--default-btn);
+            color: white;
+            padding: calc(var(--padding) / 2) var(--padding);
+        }
+    }
+}
+
+.profile-3 {
+    padding: var(--padding);
+    .img {
+        img {
+            border-radius: 50%;
+        }
+    }
+    .grid {
+        padding: calc(var(--padding) / 2) 0;
+    }
+    .name {
+        text-align: center;
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.75rem;
+        color: var(--default-navbar);
+    }
+    .info {
+        .header {
+            background: var(--default-btn);
+            color: white;
+            padding: calc(var(--padding) / 2) var(--padding);
+        }
+    }
+}
+
+.listFriends,
+.listFollowers {
+    .list {
+        width: 400px;
+        background: var(--default-bg);
+        >h1 {
+            color: white;
+            padding: var(--padding);
+            margin: 0;
+            background: var(--default-navbar);
+            text-transform: uppercase;
+        }
+        a {
+            padding: var(--padding) var(--padding);
+            font-size: .8rem;
+            color: var(--default-btn);
+            display: block;
+            @include transition;
+            &:hover {
+                color: var(--default-input);
+                cursor: pointer;
+            }
+        }
+    }
+}

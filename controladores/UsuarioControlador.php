@@ -21,7 +21,7 @@
         }
         public function Estado(){
              $this->start();
-                $stmt = $this->pdo->prepare("SELECT * FROM estado where id_pais = $id_pais");
+                $stmt = $this->pdo->prepare("SELECT * FROM estado");
                 $stmt->execute();
                 $lista = array();
                 while($M = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -161,23 +161,23 @@
                         header("Location: Control.php?c=Inicio&a=Inicio");
             }
         }
-        public function Configuracion(){
+              public function Configuracion(){
               if($_SERVER['REQUEST_METHOD']=='POST'){
                     $this->start();
                     $usuario = $_POST['Usuario'];
                     $contrasena = $_POST['Contrasena'];
                     $Edad = $_POST['Edad'];
                     $Pais = $_POST['Pais'];
-                    $estado = 15;//$_POST['estado'];
+                    $Estado = $_POST['Estado'];
                     $id_usuario = $_SESSION['id_usuario'];
-                    $permitir_18 = $_POST['permitir_18'];
-                    if($_FILES["imagen"]["name"]==''){
+                    if(isset($_SESSION['permitir_18'])):$permitir_18 = $_SESSION['permitir_18'];else:$permitir_18 = 1;endif;
+                    if($_FILES["imagenA"]["name"]==''){
                         $imagen = null;
                     }else{
                         $folder="./Imagenes/imgPerfil/";
-                        $tmp_name = $_FILES["imagen"]["tmp_name"];
+                        $tmp_name = $_FILES["imageAn"]["tmp_name"];
                         move_uploaded_file( $tmp_name,"$folder".$_FILES["imagenA"]["name"]);
-                        $imagen = $folder.$_FILES["imagen"]["name"];
+                        $imagen = $folder.$_FILES["imagenA"]["name"];
                     }
 
                     if($contrasena != ''){
@@ -188,12 +188,11 @@
                         $stmt->execute();
 
                     }
-
                       $stmt = $this->pdo->prepare(
-                            "UPDATE usuario SET  nombre_usuario = '$usuario', imagen_perfil = '$imagen', fn = '$Edad', pais = $Pais, estado = $estado, permitir_18 = $permitir_18 where id_usuario = $id_usuario "
+                            "UPDATE usuario SET  imagen_perfil = '$imagen',nombre_usuario = '$usuario', fn = '$Edad', pais = $Pais, estado = $Estado, permitir_18 = $permitir_18 where id_usuario = $id_usuario "
                         );
                         $stmt->execute();
-                   
+                    
                     if($_SESSION['tipo_usuario']==1){
                         $informacion = $_POST['InformacionA'];
                         $tecnica = $_POST['Tecnica'];
@@ -201,10 +200,10 @@
                         $Estudios = $_POST['Estudios'];
                         $Exper = $_POST['Exper'];
                         $Otro = $_POST['Otro'];
-                        $Botones = $_POST['Botones'];
-                        $Texto = $_POST['Texto'];
-                        $Bordes = $_POST['Bordes'];
-                        $Fondo = $_POST['Fondo'];
+                        $Botones = $_POST['btn'];
+                        $Texto = $_POST['input'];
+                        $Bordes = $_POST['navbar'];
+                        $Fondo = $_POST['bg'];
                         $Diseno = $_POST['Diseno'];
 
 
@@ -221,14 +220,11 @@
 
                     $di = new DisenoControlador();
                     $di->Update($Bordes,$Texto,$Botones,$Fondo,$Diseno,$a->id_diseno);
-                }else{
-                        $DatosFan = $_POST['DatosFan'];
-                        $PerfilF = $_POST['PerfilFan'];
 
-                        $Fan = new FanControlador();
-                        
-                        
-                        $Fan->Update($DatosFan,$PerfilF);
+                        echo "1";
+
+                }else{
+                    echo "1";
                 }
                    $this->stop();                     
 
@@ -338,12 +334,12 @@
         }
 
         public function UsuariosRecomendadosEstado(){
-            $this->strat();
+            $this->start();
                 $us = new UsuarioControlador();
                 $u = $us->Usuario($_SESSION['id_usuario']);
 
                 $stmt = $this->pdo->prepare(
-                            "SELECT * from usuario where pais = $u->pais"//cambiar a estado
+                            "SELECT * from usuario where estado = $u->estado"//cambiar a estado
                         );
                 $stmt->execute();
                 $lista = array();

@@ -1,0 +1,150 @@
+.configuration {
+    form {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+    }
+    .save {
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .btn {
+            margin-right: var(--padding);
+            &:hover {
+                background: var(--default-btn);
+            }
+        }
+    }
+    .container-steps {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-height: calc(100% - 132px);
+        width: 400%;
+        position: relative;
+        left: 0%;
+        @include transition;
+        .container-step {
+            overflow-y: auto;
+            height: 100%;
+            float: left;
+            width: 25%;
+            >h1 {
+                text-align: center;
+            }
+        }
+    }
+    .steps-bar {
+        padding: var(--padding);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .btn-custom {
+            @include transition;
+            &:hover {
+                color: var(--default-navbar);
+                transform: scale(1.5);
+                cursor: pointer;
+            }
+        }
+        .steps {
+            display: flex;
+            align-items: center;
+            .step {
+                width: 20px;
+                height: 11px;
+                background: var(--default-input);
+                margin: 0 .5rem;
+                position: relative;
+                @include transition;
+                $sides: 10;
+                $con: $sides / 2;
+                &:after,
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    @include transition;
+                }
+                &:after {
+                    top: 100%;
+                    border-left: #{$sides + 'px'} solid transparent;
+                    border-right: #{$sides + 'px'} solid transparent;
+                    border-top: #{$con + 'px'} solid var(--default-input);
+                }
+                &:before {
+                    bottom: 100%;
+                    border-left: #{$sides + 'px'} solid transparent;
+                    border-right: #{$sides + 'px'} solid transparent;
+                    border-bottom: #{$con + 'px'} solid var(--default-input);
+                }
+                &.active {
+                    background: var(--default-btn);
+                    &:after {
+                        border-top-color: var(--default-btn);
+                    }
+                    &:before {
+                        border-bottom-color: var(--default-btn);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.colors {
+    .color {
+        input[type=radio] {
+            display: none;
+            &:checked+label {
+                .template {
+                    border: 2px solid gray;
+                }
+            }
+        }
+        label {
+            font-size: .8rem;
+            margin-bottom: 0.1rem;
+            .template {
+                height: 45px;
+                border: 2px solid transparent;
+                border: none;
+            }
+        }
+    }
+    .hex {
+        font-size: .8rem;
+        margin-bottom: 0.1rem;
+        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        label {
+            display: flex;
+            justify-content: center;
+            input {
+                width: 120px;
+                height: 60px;
+                border: none;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.modal.confirmation {
+    .body {
+        padding: var(--padding);
+        background: var(--default-bg);
+        h1.title {
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    }
+}
