@@ -1,8 +1,6 @@
 <?php 
 	Class PortafolioControlador extends DBConexion{
-		public function __construct()
-		{
-		}
+
 		public function Portafolio($id_portafolio){
 				$this->start();
                 $stmt = $this->pdo->prepare(
@@ -33,6 +31,16 @@
                 $this->stop();
                 return $portafolio["id"];
 
-		}
+        }
+        public function Update(){
+            $this->start();
+                $des = $_POST['des'];
+                $id_portafolio = $_POST['id'];
+                $stmt = $this->pdo->prepare(
+                    "UPDATE portafolio SET descripcion = '$des' WHERE id_portafolio = id_portafoli"
+                );
+                $stmt->execute();
+            $this->stop();
+        }
 	}
 ?>

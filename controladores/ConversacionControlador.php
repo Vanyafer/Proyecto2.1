@@ -3,8 +3,6 @@
     Class ConversacionControlador extends DBConexion {
 
 
-        public function __construct(){}
-
         public function Validar($id_usuario2){
         	$this->start();
         	$id_usuario1 = $_SESSION["id_usuario"];
@@ -40,7 +38,7 @@
             $stmt->execute();
             $lista = array();
             
-            while($Conversacion = $stmt->fetch(PDO::FETCH_ASSOC)):
+            while($Conversacion = $stmt->fetch(PDO::FETCH_ASSOC)){
                 $Conversaciones = new ConversacionModelo();
                 $Conversaciones->set(
                     $Conversacion["id_conversacion"],
@@ -49,7 +47,7 @@
 					);
                 $lista[] = $Conversaciones;
 
-            endwhile;
+            }
            
 
             $this->stop();

@@ -164,7 +164,11 @@
 	}
 	public function ElimiarForo(){
 		$this->start();
-			$id_forhilo=$_GETT['id_f'];
+			$id_forhilo=$_GET['id_f'];
+			$stmt = $this->pdo->prepare(
+				"DELETE FROM foro_favs WHERE  id_forohilo = $id_forohilo"
+			);
+			$stmt->execute();
             $stmt = $this->pdo->prepare(
                     "DELETE FROM foro_hilo WHERE  id_forohilo = $id_forohilo"
                 );

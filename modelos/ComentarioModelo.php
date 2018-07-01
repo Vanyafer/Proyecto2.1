@@ -7,9 +7,6 @@
 		public $id_publicacion;
 		public $ocultar;
 
-		  public function __construct(){
-
-        }
 
         public function set(  $id_comentario, $fecha, $contenido, $id_usuario, $id_publicacion,$ocultar){
         	$this->id_comentario = $id_comentario;

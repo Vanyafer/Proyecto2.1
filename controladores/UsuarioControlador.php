@@ -2,7 +2,6 @@
 
     Class UsuarioControlador extends DBConexion {
 
-
         public function Pais(){
             $this->start();
                 $stmt = $this->pdo->prepare("SELECT * FROM pais");
@@ -172,10 +171,12 @@
                     $id_usuario = $_SESSION['id_usuario'];
                     if(isset($_SESSION['permitir_18'])):$permitir_18 = $_SESSION['permitir_18'];else:$permitir_18 = 1;endif;
                     if($_FILES["imagenA"]["name"]==''){
-                        $imagen = null;
+                        $us = new UsuarioControlador();
+                        $u = $us->Usuario($_SESSION['id_usuario']);
+                        $imagen = $u->imagen_perfil;
                     }else{
                         $folder="./Imagenes/imgPerfil/";
-                        $tmp_name = $_FILES["imageAn"]["tmp_name"];
+                        $tmp_name = $_FILES["imagenA"]["tmp_name"];
                         move_uploaded_file( $tmp_name,"$folder".$_FILES["imagenA"]["name"]);
                         $imagen = $folder.$_FILES["imagenA"]["name"];
                     }

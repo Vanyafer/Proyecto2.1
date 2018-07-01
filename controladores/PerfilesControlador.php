@@ -1,8 +1,6 @@
 <?php 
 	Class PerfilesControlador extends DBConexion{
-		public function __construct()
-		{
-		}
+
 		public function Perfiles(){
 			$id_usuario=$_GET['id'];
 			$us = new UsuarioControlador();
@@ -37,7 +35,6 @@
 		public function Perfil3(){
 
 		}
-
 		public function PerfilInvitado(){
 
 		}

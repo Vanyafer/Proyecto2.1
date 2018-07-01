@@ -2,7 +2,6 @@
  class ForoRespuestaControlador extends DBConexion
  {
  	
- 	
 	public function Respuestas($id_forohilo){
 		$this->start();
 				$stmt = $this->pdo->prepare(
@@ -41,7 +40,9 @@
             $foro = new ForoControlador();
             $f = $foro->HiloContenido($id_hilo);
             
+             if($id_usuario != $f->id_usuario){
             $Noti->Insert(3,$id_usuario,$id_hilo,$f->id_usuario);
+           }
            
         	$this->stop();
 		}

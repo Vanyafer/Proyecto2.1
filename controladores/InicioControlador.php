@@ -3,38 +3,38 @@
 		public $publicacion;
 
 		public function Inicio(){
-                $con = 0;
+        
 				$this->start();
                 $Amigos = new AmigosControlador();
                 $am = $Amigos->ListaAmigos();
-                $listaU = array();
+                $listaA = array();
                 if(isset($_SESSION['id_artista'])){
-                     $listaU[$con] = $_SESSION['id_artista'];
+                     $listaA[] = $_SESSION['id_artista'];
 
                    }
                 foreach ($am as $a) {
-                    $con++;
                     $artista = new ArtistaControlador();
                    if($a->id_usuario1 == $_SESSION['id_usuario']){
                         $ar = $artista->ArtistaUsuario($a->id_usuario2);
-                        $listaU[$con] = $ar->id_usuario;
+                        $listaA[] = $ar->id_artista;
                    }
                    if($a->id_usuario1 == $_SESSION['id_usuario']){
                         $ar = $artista->ArtistaUsuario($a->id_usuario2);
-                        $listaU[$con] = $ar->id_usuario;
+                        $listaA[] = $ar->id_artista;
                    }
 
                 }
+                $listaS = array();
                 $Seguidores = new SeguidoresControlador();
                 $se  = $Seguidores->ListaSiguiendo();
                 foreach ($se as $s) {
-                        $con++;
                         $artista = new ArtistaControlador();
                         $ar = $artista->ArtistaUsuario($s->id_usuario2);
-                        $listaU[$con] = $ar->id_artista;
+                        $listaS[] = $ar->id_artista;
                    
                 }
-                 $x = implode(",", $listaU);
+                 $privados = implode(",", $listaA);
+                 $publicos = implode(",", $listaS);
                 $Usuarios = new UsuarioControlador();
                 $u = $Usuarios->Usuario($_SESSION['id_usuario']);
                 if($u->permitir_18==1){
@@ -43,7 +43,7 @@
                      $c = "0";
                 }
                $stmt = $this->pdo->prepare(
-                    "SELECT * FROM publicacion where ocultar = 0 and id_artista in ($x) and contenido_explicito in ($c) order by id_publicacion DESC"
+                    "SELECT * FROM publicacion where ocultar = 0 and ((id_artista in ($privados) and privacidad in (0,1)) or (id_artista in ($publicos) and privacidad in (0)))  and contenido_explicito in ($c) order by id_publicacion DESC"
                 );
                 $stmt->execute();
 
@@ -72,12 +72,15 @@
             //require_once ("./vistas/Inicio/Publicacion.php");
 		}
         public function PublicacionSola(){
-            
+            if($_SERVER['REQUEST_METHOD']=='POST'){
+              
+                  require_once "./vistas/Inicio/PublicacionSola.php";
+              }
         }
         public function InicioUsuario(){
             $this->start();
                 $stmt = $this->pdo->prepare(
-                    "SELECT * FROM publicacion where contenido_explicito = 0 and privacidad = 0 and imagen is not null and contenido_explicito = 0 order by id_publicacion DESC"
+                    "SELECT * FROM publicacion where ocultar = 0 and contenido_explicito = 0 and privacidad = 0 and imagen is not null order by id_publicacion DESC"
                 );
 
                 $stmt->execute();
@@ -218,6 +221,59 @@
                 );
                 $stmt->execute();
             $this->stop();
-		}
+        }
+        
+        public function PublicacionesUsuario($id_usuario)
+        {
+            $this->start();
+            $Artista = new ArtistaControlador();
+            $art = $Artista->ArtistaUsuario($id_usuario);
+            $id_artista = $art->id_artista;
+            if(isset($_SESSION['id_usuario'])){
+                
+                $Usuarios = new UsuarioControlador();
+                $u = $Usuarios->Usuario($_SESSION['id_usuario']);
+                if($u->permitir_18==1){
+                     $c = "0,1";
+                }else{
+                     $c = "0";
+                }
+                $amigo = new AmigosControlador();
+                $am = $amigo->Estado($id_usuario);
+                if($am == 1){
+                    $a = "0,1";
+                }else{
+                    $a = "0";
+                }
+                $stmt = $this->pdo->prepare(
+                    "SELECT * FROM publicacion where ocultar = 0 and contenido_explicito in ($c) and privacidad in ($a) and id_artista = $id_artista order by id_publicacion DESC"
+                );
+            }else{
+                $stmt = $this->pdo->prepare(
+                    "SELECT * FROM publicacion where ocultar = 0 and contenido_explicito = 0 and privacidad = 0 and id_artista = $id_artista order by id_publicacion DESC"
+                );
+            }
+            $stmt->execute();
+
+            $lista = array();
+            while($Publicacion = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $Publicaciones = new PublicacionModelo();
+                $Publicaciones->set(
+                    $Publicacion["id_publicacion"],
+                    $Publicacion["fecha"],
+                    $Publicacion["contenido_explicito"],
+                    $Publicacion["contenido"],
+                    $Publicacion["etiquetas"],
+                    $Publicacion["privacidad"],
+                    $Publicacion["imagen"],
+                    $Publicacion["id_artista"],
+                    $Publicacion["ocultar"]
+                );
+                $lista[] = $Publicaciones;
+            }      
+            $this->stop();
+            return $lista;
+            
+        }
 	}
 ?>

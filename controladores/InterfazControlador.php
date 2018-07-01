@@ -23,7 +23,7 @@
 
             if(!isset($_SESSION["correo"])):
                 if(!$this->controlador || !$this->accion):
-                       // header("Location: usuario.php?c=Usuario&a=IniciarSesion");
+                    //header("Location: usuario.php");
 
                 endif;
             else:

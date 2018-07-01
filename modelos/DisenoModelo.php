@@ -7,9 +7,6 @@
 		public $color_botones;
 		public $color_fondo;
 		public $tipo_perfil;
-		  public function __construct(){
-
-        }
 
         public function set(  $id_diseno, $imagen_fondo, $color_bordes, $color_titulos,$color_botones,$color_fondo,$tipo_perfil){
         	$this->id_diseno = $id_diseno;

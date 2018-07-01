@@ -13,7 +13,7 @@ $u = $us->Usuario($id_usuario);
 	<div class="container">
 		<div class="grid-profile-1">
 			<div class="img">
-				<img src="<?php echo $u->imagen_perfil; ?>">s
+				<img src="<?php echo $u->imagen_perfil; ?>">
 			</div>
 			<div class="details">
 				<div class="topbar">
@@ -39,11 +39,13 @@ $u = $us->Usuario($id_usuario);
 				</div>
 			</div>
 		</div>
+		
 	</div>
+	
 </div>
 
 
-</div>
+
 <?php include "ConfiguracionPerfil.php"; ?>
 </body>
 </html>

@@ -1,14 +1,11 @@
 <?php 
 	Class MensajesModelo{
-			public $id_mensaje;
-			public $fecha;
-			public $texto;
-			public $id_conversacion;
-			public $id_usuario;
+		public $id_mensaje;
+		public $fecha;
+		public $texto;
+		public $id_conversacion;
+		public $id_usuario;
 
-		public function __construct(){
-
-        }
 
         public function set($id_mensaje, $fecha, $texto, $id_conversacion, $id_usuario ){
         	$this->id_mensaje = $id_mensaje;

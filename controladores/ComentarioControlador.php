@@ -69,7 +69,9 @@
             $p = $publicacion->PublicacionInfo($id_publicacion);
             $ar = new ArtistaControlador();
             $a = $ar->Artista($p->id_artista);
+            if($id_usuario != $a->id_usuario){
             $Noti->Insert(2,$id_usuario,$id_publicacion,$a->id_usuario);
+          }
           
             $this->stop();
 

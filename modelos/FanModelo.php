@@ -4,9 +4,6 @@
 		public $informacion_contacto;
 		public $perfil;
 		public $id_usuario;
-		public function __construct(){
-
-        }
 
         public function set( $id_fan,  $informacion_contacto,$perfil,$id_usuario){
         	$this->id_fan = $id_fan;

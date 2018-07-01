@@ -39,11 +39,13 @@
 						<label for="Contrasena">Contraseña:</label>
 					</div>
 					<input type="password" name="Contrasena" id="Contrasena">
+					<p id="ContraVal"></p>
 				</div>
 				<div class="input-group">
 					<div class="placeholder">
 						<i class="fas fa-key"></i>
 						<label for="CContrasena">Confirmar contraseña:</label>
+						<p id="ContraVal"></p>
 					</div>
 					<input type="password" name="CContrasena" id="CContrasena">
 				</div>

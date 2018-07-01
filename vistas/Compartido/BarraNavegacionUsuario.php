@@ -64,3 +64,43 @@
 </div>
 
 </div>
+<div class="Overlay2">
+	<input type="hidden" id="idp" name="idp">     			
+	<div class="Imagen"></div>
+</div>
+
+<script type="text/javascript">
+
+bandera = 0;
+	$(document).ready(function(){
+		
+		$("#Close").click(function(){
+			   $(".overlay2").fadeOut(400);
+		});
+		$(".Abrir2").click(function(){
+			id=$(this).attr("id");
+
+			$("#idp").val(id);
+
+			usuario = $(this).attr("idu");
+			direccion = "Control.php?c=Perfiles&a=Perfiles&id="+usuario;
+			$(".usuario").attr("href",direccion);
+			
+			usuario = $(this).attr("name");
+			
+			$.ajax({
+				url:'Ajax.php?c=Inicio&a=PublicacionSola',
+				method:'POST',
+				data: $("#idp").serialize(),
+				success: function(res){
+					console.log($('#idp').val());
+					$(".Imagen").html(res);
+					$(".name").html(usuario);
+				 }	
+				});
+			$(".overlay2").fadeIn(400);
+		});
+
+	   
+	});
+	</script>

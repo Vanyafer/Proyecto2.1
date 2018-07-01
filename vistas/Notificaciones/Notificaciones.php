@@ -22,7 +22,7 @@
       $ux = $us->Usuario($N->id_usuario);
     if($N->tipo == 1 || $N->tipo == 2 ){
       
-      $x = "<a class='Abrir2'  name=".$u->nombre_usuario." id=".$N->id_evento." idu=".$u->id_usuario.">".$ux->nombre_usuario." ".$N->contenido."</a>";
+      $x = "<a class='Abrir2'  name='".$u->nombre_usuario."'' id='".$N->id_evento."'' idu='".$u->id_usuario."''>".$ux->nombre_usuario." ".$N->contenido."</a>";
       //
     }
     

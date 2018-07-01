@@ -34,17 +34,17 @@
                }else{
                	$stmt = $this->pdo->prepare(
                       "INSERT into me_gusta VALUES(NULL,$tipo_me_gusta,$id_publicacion,$id_usuario)"
-                      
+                   );
 
-                  );
-
-                  $stmt->execute();
-                  $Noti = new NotificacionesControlador();
-                  $publicacion = new InicioControlador();
-                  $p = $publicacion->PublicacionInfo($id_publicacion);
-                  $ar = new ArtistaControlador();
-                  $a = $ar->Artista($p->id_artista);
-                  $Noti->Insert(1,$id_usuario,$id_publicacion,$a->id_usuario);
+                $stmt->execute();
+                $Noti = new NotificacionesControlador();
+                $publicacion = new InicioControlador();
+                $p = $publicacion->PublicacionInfo($id_publicacion);
+                $ar = new ArtistaControlador();
+                $a = $ar->Artista($p->id_artista);
+                if($id_usuario != $f->id_usuario){
+                    $Noti->Insert(3,$id_usuario,$id_hilo,$f->id_usuario);
+                }
            }
             $this->stop();
     }

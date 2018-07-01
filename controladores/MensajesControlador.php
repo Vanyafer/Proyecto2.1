@@ -2,8 +2,6 @@
 
     Class MensajesControlador extends DBConexion {
 
-
-        public function __construct(){}
         public function BandejaEntrada(){
 
         }

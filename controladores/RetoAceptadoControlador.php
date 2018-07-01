@@ -1,6 +1,5 @@
 <?php
 	Class RetoAceptadoControlador extends DBConexion{
-		 public function __construct(){}
 
         public function RetoAceptado(){
         	$this->start();

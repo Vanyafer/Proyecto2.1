@@ -62,6 +62,7 @@
 								<label for="Contrasena">Contraseña:</label>
 							</div>
 							<input type="password" name="Contrasena" id="Contrasena">
+							<p id="ContraVal"></p>
 						</div>
 						<div class="input-group">
 							<div class="placeholder">
@@ -69,6 +70,7 @@
 								<label for="Contrasena1">Confirmar contraseña:</label>
 							</div>
 							<input type="password" name="Contrasena1" id="Contrasena1">
+							<p id="ContraVal1"></p>
 						</div>
 						<div class="input-group">
 							<div class="placeholder">
@@ -110,6 +112,13 @@
         						?>
 							</select>
 						</div>
+						<div class="input-group">
+							<div class="placeholder">
+								<i class="fas fa-image"></i>
+								<label for="imagenA">Foto de perfil:</label>
+							</div>
+							<input type="file" name="imagenA" id="imagenA" value="<?php echo $a->imagen;?>">
+						</div>
 						<div class="checkbox">
 							<input type="checkbox" name="permitir" id="permitir">
 							<label for="permitir">
@@ -120,6 +129,7 @@
 							</label>
 							<input type="hidden" name="permitir_18" id="permitir_18">
 						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -151,13 +161,7 @@
 							<div class="placeholder"><i class="fas fa-plus"></i><label>Algo mas para compartir:</label></div>
 							<textarea name="Otro" id="Otro" cols="30" rows="5"><?php echo $p->otro;?></textarea>
 						</div>
-						<div class="input-group">
-							<div class="placeholder">
-								<i class="fas fa-image"></i>
-								<label for="imagenA">Foto de perfil:</label>
-							</div>
-							<input type="file" name="imagenA" id="imagenA" value="<?php echo $a->imagen;?>">
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -271,6 +275,7 @@
 						<label for="ContraA">Contraseña:</label>
 					</div>
 					<input type="password" name="ContraA" id="ContraA">
+					<p id="ContraV"><p>
 				</div>
 				<div class="right margin-top">
 					<button class="btn border Contra">
@@ -353,9 +358,11 @@
 	                url:   "Ajax.php?c=Usuario&a=ValidarContrasena", //archivo que recibe la peticion
 				}).done(function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
 	                 	if(res == 1){ 
-	                 		document.getElementById('ContraA').innerHTML="La contrasena es incorrecta";
+	                 		document.getElementById('ContraV').innerHTML="La contraseña es incorrecta";
 	                 	}
 	                 	if( res== 0){
+							 
+							document.getElementById('ContraVal').innerHTML="";
 							 var formData = $('#formdata')[0]
 							 var formDataFormat = new FormData(formData)
 	                 		$.ajax({
@@ -378,6 +385,8 @@
 					})
 		    });
 		$('#Diseno<?php echo $d->tipo_perfil;?>').attr('checked', true);
+		$("#Estado option[value="+ <?php echo $u->estado; ?> +"]").attr("selected",true);
+		$("#Pais option[value="+ <?php echo $u->pais; ?> +"]").attr("selected",true);
 		if(<?php echo $u->permitir_18 ?> == 1){
 			$('#permitir').attr('checked', true);
 		}
