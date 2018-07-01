@@ -32,6 +32,7 @@
 						<label for="Correo">Correo:</label>
 					</div>
 					<input type="email" name="Correo" id="Correo">
+					<p id="CorreoVal"></p>
 				</div>
 				<div class="input-group">
 					<div class="placeholder">
@@ -45,31 +46,18 @@
 					<div class="placeholder">
 						<i class="fas fa-key"></i>
 						<label for="CContrasena">Confirmar contraseña:</label>
-						<p id="ContraVal"></p>
+						<p id="ContraVal1"></p>
 					</div>
 					<input type="password" name="CContrasena" id="CContrasena">
 				</div>
 				<div class="input-group">
 					<div class="placeholder">
-						<i class="fas fa-user"></i>
-						<label>Tipo de Usuario</label>
+						<i class="fas fa-image"></i>
+						<label for="imagen">Foto de perfil:</label>
 					</div>
-					<div class="radio-button">
-						<input type="radio" name="TipoU" id="tipoU1" value="1" checked>
-						<label for="tipoU1">
-							<div class="circle"></div>
-							Artista
-						</label>
-					</div>
-					<div class="radio-button">
-						<input type="radio" name="TipoU" id="tipoU2" value="2" >
-						<label for="tipoU2">
-							<div class="circle"></div>
-							Fan
-						</label>
-					</div>
+					<input type="file" name="imagen" id="imagen">
 				</div>
-								<div class="input-group">
+				<div class="input-group">
 					<div class="placeholder">
 						<i class="fas fa-globe"></i>
 						<label for="Pais">País:</label>
@@ -99,6 +87,27 @@
         						?>
 							</select>
 				</div>
+				
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-user"></i>
+						<label>Tipo de Usuario</label>
+					</div>
+					<div class="radio-button">
+						<input type="radio" name="TipoU" id="tipoU1" value="1" checked>
+						<label for="tipoU1">
+							<div class="circle"></div>
+							Artista
+						</label>
+					</div>
+					<div class="radio-button">
+						<input type="radio" name="TipoU" id="tipoU2" value="2" >
+						<label for="tipoU2">
+							<div class="circle"></div>
+							Fan
+						</label>
+					</div>
+				</div>
 				<div class="input-group">
 					<div class="checkbox-button">
 						<input type="checkbox" name="Terminos" id="Terminos">
@@ -106,6 +115,7 @@
 							<div class="circle"></div>
 							Acepto Términos y Condiciones
 						</label>
+						<p id="ValTermino"></p>
 					</div>
 				</div>
 			</div>
@@ -152,13 +162,7 @@
 					</div>
 					<textarea name="Otro" id="Otro"></textarea>
 				</div>
-				<div class="input-group">
-					<div class="placeholder">
-						<i class="fas fa-image"></i>
-						<label for="imagenA">Foto de perfil:</label>
-					</div>
-					<input type="file" name="imagenA" id="imagenA">
-				</div>
+
 			</div>
 			<div class="grid columns-2" id="third">
 				<div class="radio">
@@ -187,6 +191,22 @@
 							<i class="fas fa-check"></i>
 						</div>
 					</label>
+				</div>
+			</div>
+			<div class="grid columns-2" id="fan">
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-font"></i>
+						<label for="DatosFan">Información de Contacto:</label>
+					</div>
+					<textarea name="DatosFan" id="DatosFan"></textarea>
+				</div>
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-user"></i>
+						<label for="PerfilFan">Perfil:</label>
+					</div>
+					<textarea name="PerfilFan" id="PerfilFan"></textarea>
 				</div>
 			</div>
 			<div class="grid columns-4 colors" id="final">	
@@ -243,12 +263,26 @@
 					</label>
 				</div>
 			</div>
+
 			<!-- Botón del Primer Paso -->
 			<div class="grid columns-1 pud">
 				<div class="right">
 					<button class="btn border first">
 						<span>Continuar</span>
 						<i class="fa fa-angle-double-right"></i>
+					</button>
+				</div>
+			</div>
+			<!-- Botón para la info del Fan -->
+			<div class="grid columns-1 pud">
+				<div class="space-between">
+					<button class="btn border back-begin hidden">
+						<i class="fa fa-angle-double-left"></i>
+						<span>Regresar</span>
+					</button>
+					<button class="btn border fan-final hidden">
+						<span>Registrarse</span>
+						<i class="fa fa-check"></i>
 					</button>
 				</div>
 			</div>
@@ -291,14 +325,17 @@
 					</button>
 				</div>
 			</div>
+
 		</form>
 	</div>
 
 	<script src="assets/jscolor/jscolor.js"></script>
 	<script src="assets/js/app/app.cookies.js"></script>
 	<script src="assets/js/app/app.color.js"></script>
-
+	
+	<?php include ("Validacion.php"); ?>
 	<script>
+	$('#fan').hide();
 		$('.first').click(e => {
 			if($('[name=TipoU]:checked').val() === '1') {
 				e.preventDefault();
@@ -309,7 +346,17 @@
 				setTimeout(() => {
 					$('#second').slideDown(400).css('display', 'grid');
 				}, 400);
+			} else {
+				e.preventDefault();
+				$('.first').hide();
+				$('#first').slideUp(400);
+				$('.back-begin').fadeIn(600);
+				$('.fan-final').fadeIn(600);
+				setTimeout(() => {
+					$('#fan').slideDown(400).css('display', 'grid');
+				}, 400);
 			}
+					
 		})
 		$('.second').click(e => {
 			e.preventDefault();
@@ -343,6 +390,16 @@
 				$('#first').slideDown(400).css('display', 'grid');
 			}, 400);
 		})
+		$('.back-begin').click(e => {
+			e.preventDefault();
+			$('.first').show();
+			$('#fan').slideUp(400);
+			$('.back-begin').fadeOut(600);
+			$('.fan-final').fadeOut(600);
+			setTimeout(() => {
+				$('#first').slideDown(400).css('display', 'grid');
+			}, 400);
+		})
 		$('.back-second').click(e => {
 			e.preventDefault();
 			$('.second').show();
@@ -372,7 +429,6 @@
 		
 	</script>
 	
-<?php include ("Validacion.php"); ?>
 <script type="text/javascript">
 $(document).ready(function(){
 	    	$(".Aceptar").click(function(){

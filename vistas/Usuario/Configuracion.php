@@ -55,6 +55,7 @@
 								<label for="Usuario">Nombre de Usuario:</label>
 							</div>
 							<input type="text" name="Usuario" id="Usuario" value="<?php echo $u->nombre_usuario;?>">
+							<p id="UsuarioVal"></p>
 						</div>
 						<div class="input-group">
 							<div class="placeholder">
@@ -328,8 +329,9 @@
 	
 	?>
 <script type="text/javascript">
+
 	$(document).ready(function(){
-			
+
 	    $(".Aceptar").click(function(){
 					if($('#Contrasena').val() != ''){
 						validarContrasena();
@@ -343,7 +345,8 @@
 						}
 					validarUsuario();
 					validarEdad();
-					y = $("#Usuario").val();
+					y = $("#UsuarioVal").html();
+					alert(y);
 					//(v==1) && (w==1) && (x==1) && (y==1) && (z==1)
 					if((v==1) && (y!="") && (x==1)){
 						$(".confirmation").fadeIn(400).css('display','flex');
@@ -387,9 +390,7 @@
 		$('#Diseno<?php echo $d->tipo_perfil;?>').attr('checked', true);
 		$("#Estado option[value="+ <?php echo $u->estado; ?> +"]").attr("selected",true);
 		$("#Pais option[value="+ <?php echo $u->pais; ?> +"]").attr("selected",true);
-		if(<?php echo $u->permitir_18 ?> == 1){
-			$('#permitir').attr('checked', true);
-		}
+		
 });
 	
 </script>

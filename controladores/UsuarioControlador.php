@@ -225,6 +225,10 @@
                         echo "1";
 
                 }else{
+                    $DatosFan = $_POST['DatosFan'];
+                    $PerfilF = $_POST['PerfilFan'];
+                    $Fan = new FanControlador();
+                    $Fan->Update($DatosFan,$PerfilF);
                     echo "1";
                 }
                    $this->stop();                     
