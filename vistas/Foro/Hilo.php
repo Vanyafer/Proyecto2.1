@@ -51,23 +51,36 @@
 	</div>
 </div>
 
-	<div class="Foros">
-	
+
+<form class="container min" onSubmit="Enviar(); return false" id="RespuestaN">
+	<h1 class="title">Responder</h1>
+	<input type="hidden" id="id_forohilo" name="id_forohilo" value="<?php echo $id_forohilo; ?>">
+	<div class="grid columns-1">
+		<div class="input-group">
+			<div class="placeholder">
+				<i class="fas fa-font"></i>
+				<label for="contenido">Contenido:</label>
+			</div>
+			<input type="text" name="contenido" id="contenido">	
+		</div>
+		<div class="right">
+			<button type="submit" class="btn border">
+				Continuar
+				<i class="fa fa-angle-double-right"></i>
+			</button>
+		</div>
 	</div>
-
-	<div  class="Foros">
-		<form onSubmit="Enviar(); return false" id="RespuestaN">
-		<input type="hidden" id="id_forohilo" name="id_forohilo" value="<?php echo $id_forohilo; ?>">
-		<input type="text" name="contenido" id="contenido">
-		<input type="submit" name="" value="Responder">
-		</form>
-
-	<a href="Control.php?c=Foro&a=AgregarFavs&id=<?php echo $id_forohilo; ?>" id='fav'>Agregar a Favoritos</a>
-	<a href="" id="Accion"></a>
-	 </div>
-</body>
-</html>
-
+</form>
+<div class="container keep">
+	<div class="space-between">
+		<a href="Control.php?c=Foro&a=AgregarFavs&id=<?php echo $id_forohilo; ?>" id='fav' class="btn border">
+			Agregar a Favoritos
+			<i class="fas fa-star"></i>
+		</a>
+		<a href="" id="Accion" class="btn border"></a>
+	</div>
+</div>
+<br>
 <script type="text/javascript">
 	function Enviar(){
 		

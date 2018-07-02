@@ -1,5 +1,5 @@
 
-<div class="modal">
+<div class="modal publish">
 
 	<div class="body publicacion">
 
@@ -93,12 +93,12 @@
 
 	$(document).ready(function(){
 		$(window).click(e => {
-			if(e.target == $('.modal:not(.data)')[0]) {
-				$('.modal').fadeOut(400);
+			if(e.target == $('.publish:not(.data)')[0]) {
+				$('.publish').fadeOut(400);
 			}
 		})
 	    $(".open").click(() => {
-	        $(".modal:not(.data)").fadeIn(400).css('display','flex');
+	        $(".publish:not(.data)").fadeIn(400).css('display','flex');
 	    });
 	});
 	
