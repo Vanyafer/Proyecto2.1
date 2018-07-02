@@ -3,8 +3,7 @@
 <html>
 <head>
 	<title>Inicio</title>
-	<link rel="stylesheet" type="text/css" href="./assets/css/Inicio.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/Publicacion.css">
+	
 	<script src="./assets/js/modernizr.custom.js"></script>
 	<script src="./assets/js/masonry.pkgd.min.js"></script>
 	<script src="./assets/js/imagesloaded.js"></script>
@@ -16,11 +15,8 @@
 <body>		
    <script type="text/javascript">
 	$(document).ready(function(){
-	    $(".Close").click(function(){
-	        $(".overlay2").fadeOut(400);
-	    });
 	    $(".AbrirC").click(function(){
-	        $(".overlay2").fadeIn(400);
+	        $(".add").fadeIn(400).css('display','flex');
 	    });
 	    $(".Abrir22").click(function(){
 		    	img=$(this).attr("src");
@@ -31,15 +27,42 @@
 		        $(".overlay3").fadeIn(400);
 		    });
 	     $(".AbrirP").click(function(){
-	        $(".overlay").fadeIn(400);
+	        $(".updateColection").fadeIn(400).css('display','flex');
 	    });
+		$(window).click(e => {
+			if(e.target == $('.updateColection')[0]) {
+				$('.updateColection').fadeOut();
+			}
+			if(e.target == $('.add')[0]) {
+				$('.add').fadeOut();
+			}
+		})
 });
 </script>
 
-<a class="AbrirP">Editar descripcion</a><br>
-<a class="AbrirC">Agregar imagen</a><br> 
+<div class="container keep">
+	<div class="space-between margin-top">
+		<a class="btn border AbrirP">
+			Editar descripción
+			<i class="fas fa-pencil-alt"></i>
+		</a>
+		<a class="btn border AbrirC">
+			Nueva Imagen
+			<i class="fas fa-plus"></i>
+		</a>
+	</div>
+	<h1 class="margin-top">Colección</h1>
+</div>
 
-<a href="Control.php?c=Coleccion&a=EliminarColeccion&id=<?php echo $id_coleccion?>">Eliminar coleccion</a><br>
+<div class="container keep">
+	<div class="right">
+		<a class="btn border" href="Control.php?c=Coleccion&a=EliminarColeccion&id=<?php echo $id_coleccion?>">
+			Eliminar coleccion
+			<i class="fas fa-trash-alt"></i>
+		</a>
+	</div>
+</div>
+
 <div class="masonry-layout" id="gallery">
 	<?php
 		$col = new ColeccionControlador();
@@ -52,18 +75,16 @@
 						<img src="<?php echo $c->imagen;?>" id="<?php echo $c->id_imagencoleccion;?>" class="Abrir22">
 					</a>
 				</li>		
-<?php
+			<?php
 		}
 	?>
 </div>
 </body>
 </html>
 <script src="assets/js/app/masonry.js"></script>
-<link rel="stylesheet" type="text/css" href="./assets/css/Popup.css">
-<div class="overlay2">
-	<?php include "AgregarImagenes.php"; ?>
 
-</div>
+<?php include "AgregarImagenes.php"; ?>
+
 <div class="overlay3">
 <div class="Pop">
 	
@@ -71,16 +92,27 @@
 	<a href="" id="dir">Eliminar Imagen</a>
 </div>
 </div>
-<div class="overlay">
-<div class="Pop" >
-	<h1>Cambiar portafolio</h1>
-	<fieldset>
+
+<div class="modal updateColection">
+	<div class="body publicacion">
 		<form action="Control.php?c=Coleccion&a=UpdateColeccion" method="POST">
-			<input type="text" name="desc" id="desc">
-			<input type="hidden" name="id_coleccion" value="<?php echo $id_coleccion; ?>">
-			<input type="submit" name="Aceptar" value="Subir">
+			<h1 class="title">Hola</h1>
+			<div class="grid columns-1">
+				<input type="hidden" name="id_coleccion" value="<?php echo $id_coleccion; ?>">
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-font"></i>
+						<label for="desc">Descripción:</label>
+					</div>
+					<textarea type="text" name="desc" id="desc"></textarea>
+				</div>
+				<div class="right">
+					<button type="submit" class="btn border">
+						Aceptar
+						<i class="fas fa-pencil-alt"></i>
+					</button>
+				</div>
+			</div>
 		</form>
-		<input type="submit" value="Cerrar" class="Close">
-	</fieldset>
-</div>
+	</div>
 </div>

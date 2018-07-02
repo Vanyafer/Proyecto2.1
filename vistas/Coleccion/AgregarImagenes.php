@@ -1,13 +1,27 @@
-<link rel="stylesheet" type="text/css" href="./assets/css/Popup.css">
-<div class="Pop">
-	<h1>Publicar</h1>
-	<fieldset>
-		<form enctype="multipart/form-data" action="Control.php?c=Coleccion&a=AgregarImagen" method="POST">
-			<input type="hidden" name="id_coleccion" value="<?php echo $_GET['id'] ?>">
-			<input type="file" name="image[]" accept=".png, .jpg, .jpeg" multiple>
+<div class="modal add">
 
-			<input type="submit" name="">
+	<div class="body publicacion">
+
+		<form action="Control.php?c=Coleccion&a=AgregarImagen" method="POST" enctype="multipart/form-data">
+			<input type="hidden" name="id_coleccion" value="<?php echo $_GET['id'] ?>">
+			<h1 class="title">Agregar Imagen</h1>
+			<div class="grid columns-1">
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-file"></i>
+						<label for="image">Imagen:</label>
+					</div>
+					<input type="file" name="image" id="image">
+				</div>
+				<div class="right">
+					<button type="submit" class="btn border">
+						Aceptar
+						<i class="fas fa-check"></i>
+					</button>
+				</div>
+			</div>
 		</form>
-		<input type="submit" value="Cerrar" class="Close">
-	</fieldset>
+
+	</div>
+
 </div>

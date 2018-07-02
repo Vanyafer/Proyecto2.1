@@ -26,7 +26,7 @@ $u = $us->Usuario($id_usuario);
 			<div class="details">
 				<div class="grid columns-1">
 					<div class="topbar">
-						<a href="">Portafolio</a>
+						<a href="Control.php?c=Portafolio&a=Portafolio&id=<?php echo $a->id_portafolio?>">Portafolio</a>
 						<a href="Control.php?c=Seguidores&a=Seguir&id_usuario=<?php echo $id_usuario ?>" id="Seguir">Seguir</a>
 						<a href="Control.php?c=Amigos&a=Agregar&id_usuario=<?php echo $id_usuario ?>" id="Amigo" class="Amigo">Agregar Amigo</a>
 						

@@ -20,3 +20,11 @@
         margin-left: 0.5rem;
     }
 }
+
+.keep {
+    .btn {
+        &:hover {
+            color: var(--default-navbar);
+        }
+    }
+}
