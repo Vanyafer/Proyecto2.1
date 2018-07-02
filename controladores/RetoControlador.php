@@ -4,7 +4,7 @@
         public function Reto(){
         	$this->start();
         	 $stmt = $this->pdo->prepare(
-                    "SELECT * FROM retos where  fecha <= NOW() order by id_reto DESC"
+                    "SELECT * FROM retos where  fecha >= NOW() order by id_reto DESC"
                 );
                 $stmt->execute();
                 $stmt->execute();
@@ -32,10 +32,10 @@
                     $RetoA = new RetoAceptadoControlador();
                     $ra = $RetoA->AceptarReto($id_reto);
                     
-                    $id_aceptado = $ra->id_aceptado;
+                    $id_aceptado = $ra;
                     
                     $stmt = $this->pdo->prepare(
-                                "INSERT into imagen_reto VALUES(NULL,'$folder".$_FILES["image"]["name"]."',$id_aceptado)"
+                                "INSERT into imagen_reto VALUES(NULL,'$folder".$_FILES["image"]["name"]."', NULL ,$id_aceptado)"
                             );
                     $stmt->execute();
 

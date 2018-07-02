@@ -24,12 +24,8 @@
                             "UPDATE fan set informacion_contacto ='$DatosFan',perfil = '$Perfil' where id_usuario = $id_usuario"
                         );
                         $stmt->execute();
-                        $stmt = $this->pdo->prepare(
-                            "SELECT MAX(id_fan) as id FROM fan"
-                        );
 
             $this->stop();
-            return $fan;
         }
         public function Fan($id_usuario){
              $this->start();

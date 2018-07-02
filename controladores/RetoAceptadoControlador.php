@@ -19,7 +19,13 @@
                     "INSERT into retos_aceptados VALUES(NULL,$id_artista,$id_reto)"
                 );
             $stmt->execute();
-             $this->stop();
+            $stmt = $this->pdo->prepare(
+                            "SELECT MAX(id_aceptado) as id FROM retos_aceptados"
+                        );
+                        $stmt->execute();
+                         $R = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->stop();
+                return $R["id"];
         }
 
         public function RetosAceptados(){
