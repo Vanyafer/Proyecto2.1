@@ -24,7 +24,7 @@ class Correo {
 		$titulos = array("Bienvenido","Descubre el reto de la semana","Reportes");
 		$cuerpo = array("Bienvenido a la familia hivemind","¿Ya viste el reto de la semana? Te invitamos a que participes  <br> <a>Reto de la semana</a>","Has recibido un reporte, te invitamos a que lo revices");
 		$href = array("http://www.a-hivemind.com","http://www.a-hivemind.com/Control.php?c=Reto&a=Reto","http://www.a-hivemind.com/Control.php?c=Reportes&a=ReportesUsuarios");
-		$etiqueta = array("Inicio","")
+		$etiqueta = array("Inicio","");
 		$us = new UsuarioControlador(); 
 		$u = $ud->Usuario($id_usuario);
 
@@ -51,8 +51,6 @@ class Correo {
 	}
 
 	public function Contra($correo){
-
-		$etiqueta = array("Inicio","")
 		$us = new UsuarioControlador(); 
 		$u = $ud->Usuario($id_usuario);
 
