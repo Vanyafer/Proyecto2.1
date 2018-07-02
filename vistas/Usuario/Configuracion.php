@@ -19,6 +19,7 @@
 
 		$pe = new PerfilControlador();
 		$p = $pe->Perfil($a->id_perfil);
+		
 
 	}if($_SESSION['tipo_usuario']==2){	
 		$Fan = new FanControlador();
@@ -37,8 +38,9 @@
 			<div class="steps">
 				<div class="step active"></div>
 				<div class="step"></div>
+				<?php if($_SESSION['tipo_usuario']==1){?>
 				<div class="step"></div>
-				<div class="step"></div>
+			<div class="step"></div><?php } ?>
 			</div>
 			<div class="right-btn btn-custom">
 				<i class="fas fa-angle-right"></i>
@@ -134,6 +136,8 @@
 					</div>
 				</div>
 			</div>
+			<?php 
+			if($_SESSION['tipo_usuario'] == 1){ ?>
 			<div class="container-step">
 				<h1>Configuración general</h1>
 				<div class="container min">
@@ -259,7 +263,27 @@
 						</div>
 					</div>
 				</div>
+			</div> 
+			<?php }
+			
+			if($_SESSION['tipo_usuario']==2) {?>
+			<div class="container-step">
+				<h1>Configuración general</h1>
+				<div class="container min">
+					<div class="grid columns-2">
+						<div class="input-group">
+							<div class="placeholder"><i class="fas fa-info"></i><label>Información de Contacto:</label></div>
+							<textarea name="DatosFan" id="DatosFan" cols="30" rows="5"><?php echo $f->informacion_contacto;?></textarea>
+						</div>
+						<div class="input-group">
+							<div class="placeholder"><i class="fas fa-crosshairs"></i><label>Técnica de Interés</label></div>
+							<textarea name="PerfilFan" id="PerfilFan" cols="30" rows="5"><?php echo $f->perfil;?></textarea>
+						</div>
+						
+					</div>
+				</div>
 			</div>
+			<?php }?>
 		</div>
 		<div class="save">
 			<a class="btn Aceptar">
@@ -344,11 +368,11 @@
 							$('#permitir_18').val('0');
 						}
 					validarUsuario();
-					validarEdad();
 					y = $("#UsuarioVal").html();
 					alert(y);
+					validarEdad();
 					//(v==1) && (w==1) && (x==1) && (y==1) && (z==1)
-					if((v==1) && (y!="") && (x==1)){
+					if((v==1) && (y=="") && (x==1)){
 						$(".confirmation").fadeIn(400).css('display','flex');
 		  			}
 		    });
@@ -387,10 +411,23 @@
 						console.log(res);
 					})
 		    });
-		$('#Diseno<?php echo $d->tipo_perfil;?>').attr('checked', true);
+			
 		$("#Estado option[value="+ <?php echo $u->estado; ?> +"]").attr("selected",true);
 		$("#Pais option[value="+ <?php echo $u->pais; ?> +"]").attr("selected",true);
 		
+		if(<?php echo $us->Edad($id_usuario) ?> < 18){
+			$("#permitir").prop('disabled', true);
+		}
+		if(<?php echo $u->permitir_18 ?> == 1){
+			$('#permitir').attr('checked', true);
+		}
 });
 	
 </script>
+<?php 
+	if($_SESSION['tipo_usuario']==1){	
+		echo "<script>$('#Diseno".$d->tipo_perfil."').attr('checked', true);</script>";
+		
+
+	}
+?>

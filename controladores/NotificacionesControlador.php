@@ -7,7 +7,7 @@
 			$this->start();
                 $id_usuario = $_SESSION['id_usuario'];
 				$stmt = $this->pdo->prepare(
-                    "SELECT * FROM notificaciones where id_usuario1 = $id_usuario order by id_notificaciones desc"
+                    "SELECT * FROM notificaciones where id_usuario1 = $id_usuario order by id_notificacion desc"
                 );
 
                 $stmt->execute();

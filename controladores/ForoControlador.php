@@ -83,6 +83,31 @@
               $this->stop();
             return $lista;	
 	}
+	public function ForoPropios($id_usuario){
+		$this->start();
+				$stmt = $this->pdo->prepare(
+                           "SELECT * FROM foro_hilo where id_usuario = $id_usuario ORDER BY id_forohilo DESC"
+                        );
+        		$stmt->execute();
+
+				$lista = array();
+                while($F = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    $Foro = new ForoModelo();
+                    $Foro->set(
+                        $F['id_forohilo'],
+						$F['fecha'],
+						$F['contenido'],
+						$F['titulo'],
+						$F['id_forotipo'],
+						$F['id_usuario'],
+						$F['ocultar']
+			                    );
+                    $lista[] = $Foro;
+                }
+              $this->stop();
+              $this->stop();
+            return $lista;	
+	}
 	public function AgregarFavs(){
 			$this->start();
 				$id_hilo = $_GET['id'];
