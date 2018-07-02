@@ -18,6 +18,8 @@
                 $Noti = new NotificacionesControlador();
                 $Noti->Insert(7,$idreportado,$c->id_publicacion,$idreportado);
 
+                $Conrreo = new CorreoControlador();
+                $c->Correo(2,$idreportado);
                 $this->stop();
                 header("Location: Control.php?c=Inicio&a=Inicio");
 			}
@@ -37,6 +39,9 @@
                 $Noti = new NotificacionesControlador();
 	            $Noti->Insert(8,$idreportado,$idreporpub,$idreportado);
 
+	             $Conrreo = new CorreoControlador();
+                $c->Correo(2,$idreportado);
+
                 $this->stop();
                 header("Location: Control.php?c=Inicio&a=Inicio");
 	}
@@ -53,6 +58,9 @@
 
                 $Noti = new NotificacionesControlador();
                 $Noti->Insert(9,$idreporusu,$idreporusu,$idreporusu);
+
+                 $Conrreo = new CorreoControlador();
+                $c->Correo(2,$idreportado);
                 $this->stop();
                 header("Location: Control.php?c=Perfiles&a=Perfiles&id=".$idreporusu);
 			}

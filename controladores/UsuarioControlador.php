@@ -155,7 +155,8 @@
                     $_SESSION['Correo']=$correo;
                     $_SESSION['tipo_usuario']=$Tipo;
                     $_SESSION['id_usuario']=$id_usuario;
-        
+                     $Conrreo = new CorreoControlador();
+                    $c->Correo(0,$id_usuario);
                      $this->stop();
                         header("Location: Control.php?c=Inicio&a=Inicio");
             }
@@ -311,6 +312,39 @@
                 }
             $this->stop();
         }
+        public function Correo($corre){
+            $this->start();
+                $stmt = $this->pdo->prepare(
+                    "SELECT * FROM usuario where correo = '$correo'"
+                );
+                $stmt->execute();
+
+                $Usuarios = new UsuarioModelo;
+                $Usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+                $Usuarios->set(
+                        $Usuario["id_usuario"],
+                        $Usuario["contrasena"],
+                        $Usuario["correo"],
+                        $Usuario["nombre_usuario"],
+                        $Usuario["imagen_perfil"],
+                        $Usuario["fn"],
+                        $Usuario["pais"],
+                        $Usuario["estado"],
+                        $Usuario["bloqueado"],
+                        $Usuario["tipo_usuario"],
+                        $Usuario["permitir_18"],
+                        $Usuario["reset"],
+                        $Usuario["auto5"],
+                        $Usuario["auto10"],
+                        $Usuario["auto15"],
+                        $Usuario["auto20"]
+                    );
+
+           
+
+            $this->stop();
+            return $Usuarios;
+        }
         public function ValidarContrasena(){
             $this->start();
             $contrasena =$_POST['ContraA'];
@@ -328,6 +362,7 @@
             $this->stop();
         }
         public function CambiarContrasena(){
+            if($_SERVER['REQUEST_METHOD']=='POST'){
             $this->start();
                 $id_usuario = $_POST['id_usuario'];
                 $contrasena = $_POST['contrasena'];
@@ -336,6 +371,8 @@
                         );
                         $stmt->execute();
             $this->stop();
+            header("Location: usuario.php");
+        }
         }
 
         public function UsuariosRecomendadosEstado(){

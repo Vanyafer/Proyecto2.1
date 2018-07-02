@@ -54,17 +54,16 @@ function validarCorreo(){
 				                data: $("#formdata").serialize(), //datos que se envian a traves de ajax
 				                url:   "Ajax.php?c=Usuario&a=ValidarCorreo", //archivo que recibe la peticion
 				                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-				             
 				                if(res == 0){
 
 				                    document.getElementById('valCorreo').innerHTML="Este correo ya esta registrado";
-				                    $("#correoV").val(0);
 
-				              } if (res == 1) {
+				             	 } if (res == 1) {
 				              		document.getElementById('valCorreo').innerHTML="";
-				              		$("#correoV").val(1);
+				              		
 				              		
 				                }  
+				                $("#correoV").val(res);
 				                }
 				        });
 					

@@ -18,6 +18,10 @@
     endif;
 ?>
 <!DOCTYPE html>
+<head>
+     <link rel="icon" type="image/png" href="./Imagenes/hexagono.png" />
+    <title>Hivemind</title>
+</head>
 <html lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/styles.css">

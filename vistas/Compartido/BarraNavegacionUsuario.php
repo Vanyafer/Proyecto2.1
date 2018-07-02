@@ -34,7 +34,7 @@
 
 	<div class="body login">
 		<div class="img">
-			<img src="./Imagenes/reto.png" alt="">
+			<img src="./Imagenes/hexagono.png" alt="">
 		</div>
 		<form action="usuario.php?c=Usuario&a=IniciarSesion" method="POST" class="default">
 			<h1 class="title">Iniciar Sesion</h1>
@@ -52,6 +52,7 @@
 				</div>
 				<input type="password" name="Password" id="Password" onBlur="if(this.value=='')this.value=''" onFocus="if(this.value=='Password')this.value='' ">
 			</div>
+			<a href="usuario.php?c=Usuario&a=CambiarContrasena">Recuperar contraseña</a>
 			<div class="right margin-top">
 				<button class="btn border">
 					<span>Continuar</span>
