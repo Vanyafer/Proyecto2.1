@@ -19,7 +19,7 @@
     </div>
     <div class="grid columns-2">
       <ul class="collection">
-        <li class="header">Hilos Propios</li>
+        <li class="header">Foros Favoritos</li>
         <?php
           $For = new ForoControlador();
           $fo = $For->ForoFavs($_SESSION['id_usuario']);
@@ -28,8 +28,34 @@
             
             $us = new UsuarioControlador();
             $u = $us->Usuario($f->id_usuario);
-            $fa = $For->HiloContenido($f->id_forohilo); ?>
+            $fa = $For->HiloContenido($f->id_forohilo); 
+            
+            ?>
+            
+            <li class="item">
+              <a class="title" href="Control.php?c=Foro&a=Hilo&id=<?php echo $fa->id_forohilo;?>"><?php echo $fa->titulo;?></a>
+              <a>Fecha: <?php echo date('d-m-Y', strtotime($fa->fecha));?></a>
+              <div class="right margin-top">
+                <a class="author" href="Control.php?c=Perfiles&a=Perfiles&id=<?php echo $fa->id_usuario;?>"><?php echo $u->nombre_usuario;?></a>
+              </div>
+            </li>
 
+          <?php } ?>
+      </ul>
+      <ul class="collection">
+        <li class="header">Foros Propios</li>
+        <?php
+          $For = new ForoControlador();
+          $fo = $For->ForoPropios($_SESSION['id_usuario']);
+
+          foreach ($fo as $f) {
+            
+            $us = new UsuarioControlador();
+            $u = $us->Usuario($f->id_usuario);
+            $fa = $For->HiloContenido($f->id_forohilo); 
+            
+            ?>
+            
             <li class="item">
               <a class="title" href="Control.php?c=Foro&a=Hilo&id=<?php echo $fa->id_forohilo;?>"><?php echo $fa->titulo;?></a>
               <a>Fecha: <?php echo date('d-m-Y', strtotime($fa->fecha));?></a>

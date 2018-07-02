@@ -1,8 +1,6 @@
 <?php 
 	Class PerfilControlador extends DBConexion{
-		public function __construct()
-		{
-		}
+
 		public function Perfil($id_perfil){
 				$this->start();
                 $stmt = $this->pdo->prepare(
@@ -35,7 +33,6 @@
                 $perfil = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->stop();
                 return $perfil["id"];
-
 		}
         public function Update($Metas,$Exper,$Otro,$Estudios,$id_perfil){
             $this->start();

@@ -25,6 +25,38 @@
 					</div>
 					<input type="date" name="Edad" id="Edad" max="<?php echo $fecha; ?>" value="<?php echo $fecha; ?>">
 				</div>
+
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-at"></i>
+						<label for="Correo">Correo:</label>
+					</div>
+					<input type="email" name="Correo" id="Correo">
+					<p id="CorreoVal"></p>
+				</div>
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-key"></i>
+						<label for="Contrasena">Contraseña:</label>
+					</div>
+					<input type="password" name="Contrasena" id="Contrasena">
+					<p id="ContraVal"></p>
+				</div>
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-key"></i>
+						<label for="CContrasena">Confirmar contraseña:</label>
+						<p id="ContraVal1"></p>
+					</div>
+					<input type="password" name="CContrasena" id="CContrasena">
+				</div>
+				<div class="input-group">
+					<div class="placeholder">
+						<i class="fas fa-image"></i>
+						<label for="imagen">Foto de perfil:</label>
+					</div>
+					<input type="file" name="imagen" id="imagen">
+				</div>
 				<div class="input-group">
 					<div class="placeholder">
 						<i class="fas fa-globe"></i>
@@ -41,26 +73,21 @@
 					</select>
 				</div>
 				<div class="input-group">
-					<div class="placeholder">
-						<i class="fas fa-at"></i>
-						<label for="Correo">Correo:</label>
-					</div>
-					<input type="email" name="Correo" id="Correo">
+							<div class="placeholder">
+								<i class="fas fa-globe"></i>
+								<label for="Pais">Estado:</label>
+							</div>
+							<select name="Estado" id="Estado">
+								<?php
+									$es = $us->Estado();
+									foreach ($es as $e) {
+										echo "<option value=".$e->id_estado.">".$e->estado."</option>";
+
+									}
+        						?>
+							</select>
 				</div>
-				<div class="input-group">
-					<div class="placeholder">
-						<i class="fas fa-key"></i>
-						<label for="Contrasena">Contraseña:</label>
-					</div>
-					<input type="password" name="Contrasena" id="Contrasena">
-				</div>
-				<div class="input-group">
-					<div class="placeholder">
-						<i class="fas fa-key"></i>
-						<label for="CContrasena">Confirmar contraseña:</label>
-					</div>
-					<input type="password" name="CContrasena" id="CContrasena">
-				</div>
+				
 				<div class="input-group">
 					<div class="placeholder">
 						<i class="fas fa-user"></i>
@@ -88,6 +115,7 @@
 							<div class="circle"></div>
 							Acepto Términos y Condiciones
 						</label>
+						<p id="ValTermino"></p>
 					</div>
 				</div>
 			</div>
@@ -134,13 +162,7 @@
 					</div>
 					<textarea name="Otro" id="Otro"></textarea>
 				</div>
-				<div class="input-group">
-					<div class="placeholder">
-						<i class="fas fa-image"></i>
-						<label for="imagenA">Foto de perfil:</label>
-					</div>
-					<input type="file" name="imagenA" id="imagenA">
-				</div>
+
 			</div>
 			<div class="grid columns-2" id="third">
 				<div class="radio">
@@ -185,13 +207,6 @@
 						<label for="PerfilFan">Perfil:</label>
 					</div>
 					<textarea name="PerfilFan" id="PerfilFan"></textarea>
-				</div>
-				<div class="input-group">
-					<div class="placeholder">
-						<i class="fas fa-image"></i>
-						<label for="imagenF">Foto de perfil:</label>
-					</div>
-					<input type="file" name="imagenF" id="imagenF">
 				</div>
 			</div>
 			<div class="grid columns-4 colors" id="final">	
@@ -248,6 +263,10 @@
 					</label>
 				</div>
 			</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> no-quiero-matar-nada
 			<!-- Botón del Primer Paso -->
 			<div class="grid columns-1 pud">
 				<div class="right">
@@ -309,14 +328,17 @@
 					</button>
 				</div>
 			</div>
+
 		</form>
 	</div>
 
 	<script src="assets/jscolor/jscolor.js"></script>
 	<script src="assets/js/app/app.cookies.js"></script>
 	<script src="assets/js/app/app.color.js"></script>
-
+	
+	<?php include ("Validacion.php"); ?>
 	<script>
+	$('#fan').hide();
 		$('.first').click(e => {
 			if($('[name=TipoU]:checked').val() === '1') {
 				e.preventDefault();
@@ -337,6 +359,7 @@
 					$('#fan').slideDown(400).css('display', 'grid');
 				}, 400);
 			}
+					
 		})
 		$('.second').click(e => {
 			e.preventDefault();
@@ -409,7 +432,6 @@
 		
 	</script>
 	
-<?php include ("Validacion.php"); ?>
 <script type="text/javascript">
 $(document).ready(function(){
 	    	$(".Aceptar").click(function(){

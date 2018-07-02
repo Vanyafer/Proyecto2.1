@@ -1,8 +1,6 @@
 <?php 
 	Class DisenoControlador extends DBConexion{
-		public function __construct()
-		{
-		}
+
 		public function Diseno($id_diseno){
 				$this->start();
                 $stmt = $this->pdo->prepare(

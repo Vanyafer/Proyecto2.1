@@ -10,7 +10,7 @@ $u = $us->Usuario($id_usuario);
 	<div class="container min">
 		<div class="grid-profile-1">
 			<div class="img">
-				<img src="imagenes/imgPerfil/test2.jpeg">
+				<img src="<?php echo $u->imagen_perfil; ?>">
 			</div>
 			<div class="details">
 				<div class="grid columns-1">

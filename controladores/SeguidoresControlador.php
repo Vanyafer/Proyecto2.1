@@ -1,8 +1,6 @@
 <?php 
 	Class SeguidoresControlador extends DBConexion{
-		public function __construct()
-		{
-		}
+
 		public function ListaSeguidores(){
 			$this->start();
 				$id_usuario = $_SESSION['id_usuario'];

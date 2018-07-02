@@ -11,9 +11,6 @@
                 $stmt->execute();
                 $this->stop();
                 header("Location: Control.php?c=Inicio&a=Inicio");
-
-		
-		
 	}
 	public function ListaComentarios(){
  		$this->start();

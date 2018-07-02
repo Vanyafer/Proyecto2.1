@@ -6,8 +6,10 @@
         public $contrasena;
         public $correo;
         public $nombre_usuario;
+        public $imagen_perfil;
         public $fn;
         public $pais;
+        public $estado;
         public $bloqueado;
         public $tipo_usuario;
         public $permitir_18;
@@ -18,14 +20,16 @@
         public $auto20;
 
 
-        public function set( $id_usuario, $contrasena, $correo, $nombre_usuario,$fn, $pais,  $bloqueado , $tipo_usuario, $permitir_18, $reset, $auto5, $auto10, $auto15, $auto20){
+        public function set( $id_usuario, $contrasena, $correo, $nombre_usuario, $imagen_perfil, $fn, $pais, $estado, $bloqueado , $tipo_usuario, $permitir_18, $reset, $auto5, $auto10, $auto15, $auto20){
             $this->id_usuario = $id_usuario;
             $this->contrasena = $contrasena;
             $this->correo = $correo;
             $this->correo = $nombre_usuario;
             $this->nombre_usuario = $nombre_usuario;
+            $this->imagen_perfil = $imagen_perfil;
             $this->fn = $fn;
             $this->pais = $pais;
+            $this->estado = $estado;
             $this->bloqueado = $bloqueado;
             $this->tipo_usuario = $tipo_usuario;
             $this->permitir_18 = $permitir_18;

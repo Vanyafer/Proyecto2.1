@@ -36,7 +36,17 @@
 					</li>
 					
 
-				<?php } ?>
+				<?php /*
+				if($r->id_usuario == $_SESSION['id_usuario'] || $_SESSION['tipo_usuario']==3){
+					?>
+					<div class="actions">
+						<a class="AccionnComentario EliminarRespuesta">
+							Eliminar Respuesta
+						</a>
+					</div>
+					<?php
+				}*/
+			} ?>
 		</ul>
 	</div>
 </div>

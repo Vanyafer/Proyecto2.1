@@ -22,7 +22,7 @@
       $ux = $us->Usuario($N->id_usuario);
     if($N->tipo == 1 || $N->tipo == 2 ){
       
-      $x = "<a class='Abrir2'  name=".$u->nombre_usuario." id=".$N->id_evento." idu=".$u->id_usuario.">".$ux->nombre_usuario." ".$N->contenido."</a>";
+      $x = "<a class='Abrir2'  name='".$u->nombre_usuario."'' id='".$N->id_evento."'' idu='".$u->id_usuario."''>".$ux->nombre_usuario." ".$N->contenido."</a>";
       //
     }
     
@@ -48,8 +48,29 @@
         <div class="recommended">
           <ul class="collection">
             <li class="header">
-              Usuarios recomendados
+              Usuarios artista recomendados
             </li>
+            <?php
+                $usuario = new UsuarioControlador();
+                $us = $usuario->UsuariosRecomendadosTecnica();
+                //var_dump($us);
+                foreach ($us as $b) {
+                  echo "<li class='item space-between'><a href='Control.php?c=Perfiles&a=Perfiles&id=".$b->id_usuario."'>$b->nombre_usuario</a></li>";
+                }
+            ?>
+          </ul>
+          <ul class="collection">
+            <li class="header">
+              Usuarios en tu area recomendados
+            </li>
+            <?php
+                $usuario = new UsuarioControlador();
+                $us = $usuario->UsuariosRecomendadosEstado();
+                //var_dump($us);
+                foreach ($us as $b) {
+                  echo "<li class='item space-between'><a href='Control.php?c=Perfiles&a=Perfiles&id=".$b->id_usuario."' id='usuario'>$b->nombre_usuario</a></li>";
+                }
+            ?>
           </ul>
         </div>
     </div>

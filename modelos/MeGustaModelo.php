@@ -6,9 +6,6 @@
         public $id_publicacion;
         public $id_usuario;
 
-         public function __construct(){
-
-        }
 
         public function set( $id_megusta, $tipo_me_gusta, $id_publicacion, $id_usuario){
         	$this->id_megusta = $id_megusta;

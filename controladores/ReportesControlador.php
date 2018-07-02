@@ -1,10 +1,8 @@
 <?php 
 	Class ReportesControlador extends DBConexion{
-		public function ReportesUsuario(){
-			
-		}
-		public function ReportarComentario(){
+		public function ReportesUsuario(){}
 
+		public function ReportarComentario(){
 			if($_SERVER['REQUEST_METHOD']=='POST'){
 				$this->start();
 				$razon = $_POST['razon'];
@@ -13,8 +11,6 @@
 
 				$co = new ComentarioControlador();
 				$c = $co->Comentario($idreporcom);
-
-                
 
                 $re = new ReportesComentariosControlador();
                 $re->ReportarComentario($idreporcom, $idreportado, $razon);
@@ -34,6 +30,7 @@
 				$idreportado = $_POST['id_artista'];
 				$idreportero = $_SESSION['id_usuario'];
 				$idreporpub = $_POST['id_publicacion'];
+				
 				$re = new ReportesPublicacionesControlador();
                 $re->ReportarPublicacion($idreporpub, $idreportado, $razon);
 

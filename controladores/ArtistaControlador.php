@@ -12,7 +12,6 @@
                 $Artista = $stmt->fetch(PDO::FETCH_ASSOC);
                 $Artistas->set(
                 	$Artista["id_artista"],
-			        $Artista["imagen_perfil"],
 			        $Artista["informacion_contacto"],
 			        $Artista["tecnica_interes"],
 			        $Artista["id_usuario"],
@@ -37,7 +36,6 @@
                 $Artista = $stmt->fetch(PDO::FETCH_ASSOC);
                 $Artistas->set(
                 	$Artista["id_artista"],
-			        $Artista["imagen_perfil"],
 			        $Artista["informacion_contacto"],
 			        $Artista["tecnica_interes"],
 			        $Artista["id_usuario"],
@@ -51,10 +49,10 @@
             $this->stop();
             return $Artistas;
  			}
-            public function Insert($imagen,$informacion,$tecnica,$id_usuario,$id_diseno,$id_portafolio,$id_perfil){
+            public function Insert($informacion,$tecnica,$id_usuario,$id_diseno,$id_portafolio,$id_perfil){
                 $this->start();
                 $stmt = $this->pdo->prepare(
-                            "INSERT into artista VALUES(NULL,'$imagen','$informacion','$tecnica',$id_usuario,$id_diseno,$id_portafolio,$id_perfil)"
+                            "INSERT into artista VALUES(NULL,'$informacion','$tecnica',$id_usuario,$id_diseno,$id_portafolio,$id_perfil)"
                         );
                         $stmt->execute();
                          $stmt = $this->pdo->prepare(
@@ -65,10 +63,10 @@
                 $this->stop();
                 return $artista["id"];
             }
-            public function Update($imagen,$informacion,$tecnica,$id_artista){
+            public function Update($informacion,$tecnica,$id_artista){
                  $this->start();
                 $stmt = $this->pdo->prepare(
-                            "UPDATE artista set imagen_perfil = '$imagen', informacion_contacto ='$informacion', tecnica_interes = '$tecnica' where id_artista = $id_artista"
+                            "UPDATE artista set informacion_contacto ='$informacion', tecnica_interes = '$tecnica' where id_artista = $id_artista"
                         );
                         $stmt->execute();
                          

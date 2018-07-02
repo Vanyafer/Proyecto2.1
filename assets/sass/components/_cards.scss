@@ -1,0 +1,31 @@
+.card {
+    border-radius: 5px;
+    overflow: hidden;
+    margin: var(--padding) 0;
+    .header {
+        text-transform: uppercase;
+        color: white;
+        background: var(--default-navbar);
+        padding: calc(var(--padding) / 3) calc(var(--padding) / 1);
+    }
+    .body {
+        border: 1px solid var(--default-navbar);
+        padding: var(--padding);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        .txt {
+            margin: 1rem;
+            display: flex;
+            align-items: center;
+            font-size: .8rem;
+            svg {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+    .btn {
+        &:hover {
+            color: var(--default-navbar);
+        }
+    }
+}
