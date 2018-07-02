@@ -5,7 +5,8 @@ $id_usuario = $_GET['id'];
 $us = new UsuarioControlador();
 $u = $us->Usuario($id_usuario);
 
-
+$art = new ArtistaControlador();
+$a = $art->ArtistaUsuario($id_usuario);
 
 ?>
 
