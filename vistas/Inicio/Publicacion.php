@@ -174,7 +174,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 												<?php echo $c->contenido;?>
 											</div>
 											<div class="actions">
-												<a href="<?php echo $href;?>" class="AccionnComentario <?php echo $class; ?>" id="<?php echo $c->id_comentario;?>">
+												<a <?php echo $href;?> class="AccionnComentario <?php echo $class; ?>" id="<?php echo $c->id_comentario;?>">
 													<?php echo $x;?>
 												</a>
 											</div>
@@ -188,7 +188,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 								<a class="Like" id="2"><i class="far fa-thumbs-down"></i></a>
 							</div>
 							<div class="actions">
-								<a href="Control.php?c=Reportes&a=ReportarPublicacion&id=<?php echo $id;?>" id="Accion"></a>
+								<a href="Control.php?c=Reportes&a=ReportarPublicacion&id=<?php echo $id;?>" id="Accion">Reportar Publicacion</a>
 							</div>
 						</div>
 						<div class="ComentarioNuevo">

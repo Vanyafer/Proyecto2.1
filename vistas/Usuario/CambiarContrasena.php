@@ -10,10 +10,9 @@
 	</form>
 
 <script type="text/javascript">
-	$("form").submit(function(e){
+	$("#formContra").submit(function(e){
 		validarContrasena();
 		if(x == 1){
-			alert("Hola");
 		}else{
 			e.preventDefault();
 		}
@@ -34,7 +33,7 @@
 		
 
 <script type="text/javascript">
-	$("form").submit(function(e){
+	$("#formdata").submit(function(e){
 
      e.preventDefault();
 
@@ -53,7 +52,6 @@
 									                success: function(res) { //una vez que el archivo recibe el request lo procesa y lo devuelve
 									                	$('#val').html("");
 														$('#Confirmacion').html("El correo ha sido mandado");
-														alert(res);
 									                }
 									        });
  

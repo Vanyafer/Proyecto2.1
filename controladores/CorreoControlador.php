@@ -1,5 +1,5 @@
 <?php 
-class Correo  {
+class CorreoControlador  {
 
 
 	public function Correo($tipo,$id_usuario){
@@ -79,7 +79,7 @@ class Correo  {
 								
 								Hola parece existir un problema con la cuenta del usuario <b>'.$u->nombre_usuario.'<b>,
 								precione el siguiente boton para cambiar la contraseña<br>
-								<a href="http://www.a-hivemind.com/usuario.php?c=Usuario&a=CambiarContrasena&id='.$u->id.'" style=" border-radius: 5px; margin: 20px; background-color: #FFED0A; padding: 5px; color: black; text-decoration: none; font-family: Arial, sans-serif;" >Cambiar Contraseña</a>
+								<a href="http://www.a-hivemind.com/usuario.php?c=Usuario&a=CambiarContrasena&id='.$u->id_usuario.'" style=" border-radius: 5px; margin: 20px; background-color: #FFED0A; padding: 5px; color: black; text-decoration: none; font-family: Arial, sans-serif;" >Cambiar Contraseña</a>
 
 							</td>
 						</tr><tr>

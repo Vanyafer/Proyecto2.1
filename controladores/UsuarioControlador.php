@@ -312,7 +312,7 @@
                 }
             $this->stop();
         }
-        public function Correo($corre){
+        public function Correo($correo){
             $this->start();
                 $stmt = $this->pdo->prepare(
                     "SELECT * FROM usuario where correo = '$correo'"
