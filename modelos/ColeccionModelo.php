@@ -8,7 +8,7 @@
         public function set( $id_coleccion, $descripcion, $id_portafolio){
         	$this->id_coleccion = $id_coleccion;
         	$this->descripcion = $descripcion;
-        	$this->id_portafolio = $id_cportafolio;
+        	$this->id_portafolio = $id_portafolio;
         	
         }
 

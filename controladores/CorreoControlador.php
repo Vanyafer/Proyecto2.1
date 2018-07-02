@@ -51,8 +51,6 @@ class Correo {
 	}
 
 	public function Contra($correo){
-
-		$etiqueta = array("Inicio","");
 		$us = new UsuarioControlador(); 
 		$u = $ud->Usuario($id_usuario);
 
