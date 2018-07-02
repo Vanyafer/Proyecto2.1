@@ -11,7 +11,7 @@
 						<i class="fas fa-file"></i>
 						<label for="image">Imagen:</label>
 					</div>
-					<input type="file" name="image" id="image">
+					<input type="file" name="image[]" id="image" multiple>
 				</div>
 				<div class="right">
 					<button type="submit" class="btn border">

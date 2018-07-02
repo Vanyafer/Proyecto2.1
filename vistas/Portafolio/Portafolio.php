@@ -41,9 +41,10 @@
 </div>
 
 <div class="hexagons">
-	<?php foreach ($co as $c) { ?>
+	<?php foreach ($co as $c) { 
+		$x = $coleccion->ImagenesColeccion($c->id_coleccion); ?>
 		<div class="hexagon--item">
-			<a class="img-hexagon" style="background-image: url(https://images.unsplash.com/photo-1417436026361-a033044d901f?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;w=1080&amp;fit=max&amp;s=faa4e192f33e0d6b7ce0e54f15140e42)" href="Control.php?c=Coleccion&a=Coleccion&id=<?php echo $c->id_coleccion;?>"></a>
+			<a class="img-hexagon" style="background-image: url(<?php echo $x[0]->imagen ?>)" href="Control.php?c=Coleccion&a=Coleccion&id=<?php echo $c->id_coleccion;?>"></a>
 			<div class="content-hexagon">
 				<h2><?php echo $c->descripcion;?></h2>
 			</div>

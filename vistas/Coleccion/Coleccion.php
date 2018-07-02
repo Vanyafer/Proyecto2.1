@@ -24,7 +24,7 @@
 		    	$('#imagen').attr("src",img);
 		    	h = "Control.php?c=Coleccion&a=EliminarImagen&id_c=<?php echo $id_coleccion?>&id_i="+id;
 		    	$('#dir').attr("href",h);
-		        $(".overlay3").fadeIn(400);
+		       $(".image").fadeIn(400).css('display','flex');
 		    });
 	     $(".AbrirP").click(function(){
 	        $(".updateColection").fadeIn(400).css('display','flex');
@@ -35,6 +35,9 @@
 			}
 			if(e.target == $('.add')[0]) {
 				$('.add').fadeOut();
+			}
+			if(e.target == $('.image')[0]) {
+				$('.image').fadeOut();
 			}
 		})
 });
@@ -88,13 +91,23 @@
 <div class="overlay3">
 <div class="Pop">
 	
-	<img src="" id="imagen">
-	<a href="" id="dir">Eliminar Imagen</a>
+	
 </div>
+</div>
+<div class="modal image">
+	<div class="body publicacion">
+
+			<div class="photo container active">
+				<img src="" id="imagen">
+				
+				<a href="" id="dir">Eliminar Imagen</a>
+			</div>
+		
+	</div>
 </div>
 
 <div class="modal updateColection">
-	<div class="body publicacion">
+	<div class="body">
 		<form action="Control.php?c=Coleccion&a=UpdateColeccion" method="POST">
 			<h1 class="title">Hola</h1>
 			<div class="grid columns-1">
