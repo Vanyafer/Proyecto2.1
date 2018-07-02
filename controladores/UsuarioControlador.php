@@ -329,7 +329,7 @@
         }
         public function CambiarContrasena(){
             $this->start();
-                $id_usuario = $_POST['id_usuario'];
+                $id_usuario = $_GET['id_usuario'];
                 $contrasena = $_POST['contrasena'];
                 $stmt = $this->pdo->prepare(
                             "UPDATE usuario SET contrasena = sha('$contrasena') where id_usuario  = $id_usuario "
